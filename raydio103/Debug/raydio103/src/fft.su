@@ -1,0 +1,2 @@
+../raydio103/src/fft.c:8:6:fftInit	0	static
+../raydio103/src/fft.c:15:6:fftProcess	24	static

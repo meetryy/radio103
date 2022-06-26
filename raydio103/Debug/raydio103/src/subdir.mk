@@ -5,13 +5,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../raydio103/src/dsp.c 
+../raydio103/src/dsp.c \
+../raydio103/src/fft.c 
 
 OBJS += \
-./raydio103/src/dsp.o 
+./raydio103/src/dsp.o \
+./raydio103/src/fft.o 
 
 C_DEPS += \
-./raydio103/src/dsp.d 
+./raydio103/src/dsp.d \
+./raydio103/src/fft.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -21,7 +24,7 @@ raydio103/src/%.o raydio103/src/%.su: ../raydio103/src/%.c raydio103/src/subdir.
 clean: clean-raydio103-2f-src
 
 clean-raydio103-2f-src:
-	-$(RM) ./raydio103/src/dsp.d ./raydio103/src/dsp.o ./raydio103/src/dsp.su
+	-$(RM) ./raydio103/src/dsp.d ./raydio103/src/dsp.o ./raydio103/src/dsp.su ./raydio103/src/fft.d ./raydio103/src/fft.o ./raydio103/src/fft.su
 
 .PHONY: clean-raydio103-2f-src
 

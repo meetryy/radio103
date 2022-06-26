@@ -76,18 +76,26 @@ static void MX_TIM3_Init(void);
 #include <stdbool.h>
 #include "st7920.h"
 
-
+#include "fft.h"
 bool elseDone = 0;
 void everythingElse(void){
 	if (!elseDone){
+	//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
+		//ST7920_Clear();
+/*
+	 for (int i=0; i<FFT_LEN/2; i++){
+		 ClearLine(i, 63, i, 0);
+		 int h = 63 - magnitudes[i];
+		 if (h < 0) h = 0;
+		 DrawLine(i, 63, i, h);
+	 }
+*/
 
-//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
-	  GLCD_Font_Print(10, 3, "hello");
-	//  ST7920_Update();
 	//  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
-
+	 //ST7920_Update();
 	elseDone = 1;
 	}
+
 }
 
 /* USER CODE END 0 */
@@ -168,6 +176,9 @@ int main(void)
 
 	 dspProc();
 	 everythingElse();
+
+
+
 
   }
   /* USER CODE END 3 */
@@ -499,8 +510,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(PIN_LCD_CS_GPIO_Port, PIN_LCD_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14|GPIO_PIN_15|GPIO_PIN_3|GPIO_PIN_4
-                          |GPIO_PIN_5, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : PIN_LED_Pin */
   GPIO_InitStruct.Pin = PIN_LED_Pin;
@@ -515,13 +525,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(PIN_LCD_CS_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PB14 PB15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_14|GPIO_PIN_15;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB3 PB4 PB5 */
   GPIO_InitStruct.Pin = GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5;

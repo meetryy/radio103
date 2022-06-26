@@ -20,7 +20,7 @@
 
 #define INT_GAIN			10
 
-extern uint16_t  outBuf[ADC_BUFFER_LEN];
+extern uint16_t  outBuf[ADC_BUFFER_LEN/2]; // здусь не было /2, могут вознокнуть проблемы
 extern uint16_t  inBuf[ADC_BUFFER_LEN];
 
 void dspProc(void);
