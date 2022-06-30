@@ -27,11 +27,12 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Core/Inc/global.h D:/raydio103/raydio103/raydio103/inc/dsp.h \
- D:/raydio103/raydio103/raydio103/drivers/st7920.h \
- D:/raydio103/raydio103/raydio103/inc/fft.h \
- D:/raydio103/raydio103/raydio103/inc/dsp.h \
+ D:/raydio103/raydio103/raydio103/inc/agc.h \
  D:/raydio103/raydio103/Drivers/CMSIS/DSP/Include/arm_math.h \
- ../Drivers/CMSIS/Include/core_cm4.h
+ ../Drivers/CMSIS/Include/core_cm4.h \
+ D:/raydio103/raydio103/raydio103/inc/dsp.h \
+ D:/raydio103/raydio103/raydio103/drivers/st7920.h \
+ D:/raydio103/raydio103/raydio103/inc/fft.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -62,8 +63,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Core/Inc/global.h:
 D:/raydio103/raydio103/raydio103/inc/dsp.h:
-D:/raydio103/raydio103/raydio103/drivers/st7920.h:
-D:/raydio103/raydio103/raydio103/inc/fft.h:
-D:/raydio103/raydio103/raydio103/inc/dsp.h:
+D:/raydio103/raydio103/raydio103/inc/agc.h:
 D:/raydio103/raydio103/Drivers/CMSIS/DSP/Include/arm_math.h:
 ../Drivers/CMSIS/Include/core_cm4.h:
+D:/raydio103/raydio103/raydio103/inc/dsp.h:
+D:/raydio103/raydio103/raydio103/drivers/st7920.h:
+D:/raydio103/raydio103/raydio103/inc/fft.h:

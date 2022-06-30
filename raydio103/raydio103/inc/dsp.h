@@ -14,11 +14,14 @@
 #define ADC_MAX				((1<<ADC_BITS))
 #define ADC_HALF			(ADC_MAX/2)
 
-#define PWM_BITS			10
+#define PWM_BITS			11
 #define	PWM_MAX				((1 << PWM_BITS))
 #define PWM_HALF			(PWM_MAX/2)
 
 #define INT_GAIN			10
+
+#define FtoQ31(x) (q31_t)(x * 2147483648.0f)
+#define Q31toF(x) (float)(x / 2147483648.0f)
 
 extern uint16_t  outBuf[ADC_BUFFER_LEN/2]; // здусь не было /2, могут вознокнуть проблемы
 extern uint16_t  inBuf[ADC_BUFFER_LEN];
