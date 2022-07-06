@@ -22,16 +22,20 @@ raydio103/src/dsp.o: ../raydio103/src/dsp.c ../Core/Inc/global.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
- D:/raydio103/raydio103/raydio103/inc/dsp.h ../Core/Inc/main.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
+ D:/raydio103/raydio103/raydio103/inc/dsp.h \
  D:/raydio103/raydio103/Drivers/CMSIS/DSP/Include/arm_math.h \
- ../Drivers/CMSIS/Include/core_cm4.h \
+ ../Drivers/CMSIS/Include/core_cm4.h ../Core/Inc/main.h \
  D:/raydio103/raydio103/raydio103/inc/fft.h \
  D:/raydio103/raydio103/raydio103/inc/dsp.h \
- D:/raydio103/raydio103/raydio103/inc/agc.h
+ D:/raydio103/raydio103/raydio103/inc/agc.h \
+ D:/raydio103/raydio103/raydio103/inc/fir.h \
+ D:/raydio103/raydio103/raydio103/inc/audio.h
 ../Core/Inc/global.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -56,14 +60,18 @@ raydio103/src/dsp.o: ../raydio103/src/dsp.c ../Core/Inc/global.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 D:/raydio103/raydio103/raydio103/inc/dsp.h:
-../Core/Inc/main.h:
 D:/raydio103/raydio103/Drivers/CMSIS/DSP/Include/arm_math.h:
 ../Drivers/CMSIS/Include/core_cm4.h:
+../Core/Inc/main.h:
 D:/raydio103/raydio103/raydio103/inc/fft.h:
 D:/raydio103/raydio103/raydio103/inc/dsp.h:
 D:/raydio103/raydio103/raydio103/inc/agc.h:
+D:/raydio103/raydio103/raydio103/inc/fir.h:
+D:/raydio103/raydio103/raydio103/inc/audio.h:

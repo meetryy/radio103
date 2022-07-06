@@ -47,6 +47,7 @@ extern DMA_HandleTypeDef hdma_adc1;
 
 extern SPI_HandleTypeDef hspi1;
 
+
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
@@ -68,10 +69,32 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define PIN_LED_Pin GPIO_PIN_13
-#define PIN_LED_GPIO_Port GPIOC
-#define PIN_LCD_CS_Pin GPIO_PIN_6
-#define PIN_LCD_CS_GPIO_Port GPIOA
+#define LED_BUILTIN_Pin GPIO_PIN_13
+#define LED_BUILTIN_GPIO_Port GPIOC
+#define ADC_RX_I_Pin GPIO_PIN_0
+#define ADC_RX_I_GPIO_Port GPIOA
+#define ADC_RX_Q_Pin GPIO_PIN_1
+#define ADC_RX_Q_GPIO_Port GPIOA
+#define ADC_SWR_F_Pin GPIO_PIN_4
+#define ADC_SWR_F_GPIO_Port GPIOA
+#define ADC_SWR_R_Pin GPIO_PIN_5
+#define ADC_SWR_R_GPIO_Port GPIOA
+#define ADC_VIN_Pin GPIO_PIN_6
+#define ADC_VIN_GPIO_Port GPIOA
+#define ADC_RESERVED_Pin GPIO_PIN_7
+#define ADC_RESERVED_GPIO_Port GPIOA
+#define PIN_LCD_CS_Pin GPIO_PIN_0
+#define PIN_LCD_CS_GPIO_Port GPIOB
+#define PIN_LCD_DC_Pin GPIO_PIN_1
+#define PIN_LCD_DC_GPIO_Port GPIOB
+#define TX_Q_PWM_Pin GPIO_PIN_8
+#define TX_Q_PWM_GPIO_Port GPIOA
+#define PIN_CS_EXT_Pin GPIO_PIN_9
+#define PIN_CS_EXT_GPIO_Port GPIOA
+#define AUDIO_PWM_Pin GPIO_PIN_10
+#define AUDIO_PWM_GPIO_Port GPIOA
+#define TX_Q_PWMA11_Pin GPIO_PIN_11
+#define TX_Q_PWMA11_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
