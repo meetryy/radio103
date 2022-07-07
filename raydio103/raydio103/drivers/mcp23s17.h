@@ -58,6 +58,7 @@ void expanderPinMode(uint8_t pin, uint8_t mode);
 void pinMode8(uint8_t port, uint8_t value);
 void write8(uint8_t port, uint8_t value);
 int read8(uint8_t port);
+void write8(uint8_t port, uint8_t value);
 void setPolarity8(uint8_t port,  uint8_t mask);
 int getPolarity8(uint8_t port);
 void setPullup8(uint8_t port, uint8_t mask);

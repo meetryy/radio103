@@ -89,13 +89,30 @@ static void MX_I2C2_Init(void);
 #include <stdbool.h>
 #include "st7920.h"
 #include "si5351.h"
-
+#include "encoder.h"
 #include "fft.h"
+
+int time1 = 3000;
+
 bool elseDone = 0;
 void everythingElse(void){
+
+
+
+
+
 	if (!elseDone){
 	char str[64] = "hello!\n";
 
+	uint8_t	exRead = read8(1);
+	uint8_t encBtn = (exRead >> 2) & 0x01;
+
+
+	bool encA = (exRead >> 1) & 0x01;
+	bool encB = (exRead) & 0x01;
+
+	encInputProcess(0, encA, encB);
+	write8(0, 0x0ff * (encoder[0].phaseState >> 1));
 		//HAL_UART_Transmit_DMA(&huart1, str, sizeof(str)-1);
 	//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
 		//ST7920_Clear();
@@ -115,6 +132,13 @@ void everythingElse(void){
 		//  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
 	 //ST7920_Update();
 	elseDone = 1;
+
+
+	}
+
+	if (HAL_GetTick() >= (time1 + 1000)){
+		time1 = HAL_GetTick();
+
 	}
 
 }
@@ -159,17 +183,6 @@ int main(void)
   MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
 
-  //HAL_DMA_Abort(hdma)
- // TIM3->CCR1 = 65536/2;
-  //__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 65536/2);
- // HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-
- // HAL_DMA_RegisterCallback(&hdma_tim1_ch1, HAL_DMA_XFER_CPLT_CB_ID, dma_m2m_callback);
-/*
-  HAL_TIM_Base_Start(&htim2);
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-*/
-
 
 
   /* USER CODE END 2 */
@@ -177,10 +190,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-
-  //uint8_t d[3] = {0x55, 0x55, 0x55};
-  //uint8_t t[3] = {0};
-
+  HAL_Delay(1000);
 
   expanderInit();
   HAL_Delay(10);
@@ -189,7 +199,7 @@ int main(void)
   HAL_Delay(10);
 
   dspStart();
-
+  time1=HAL_GetTick();
 
   while (1)
   {
@@ -199,8 +209,6 @@ int main(void)
 
 	 dspProc();
 	 everythingElse();
-
-
 
 
   }

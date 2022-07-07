@@ -14,8 +14,16 @@ void expanderInit(void){
 	expanderDeselect();
 	HAL_Delay(100);
 
+	//expanderWriteReg(MCP23S17_IOCR, 0);
+
 	expanderWriteReg(MCP23S17_DDR_A, 0);
-	expanderWriteReg(MCP23S17_DDR_B, 0);
+	expanderWriteReg(MCP23S17_DDR_B, 0xFF);
+
+	expanderWriteReg(MCP23S17_PUR_A, 0);
+	expanderWriteReg(MCP23S17_PUR_B, 0xFF);
+
+	expanderWriteReg(MCP23S17_POL_A, 0);
+	expanderWriteReg(MCP23S17_POL_B, 0xFF);
 
 	uint8_t testVal = 0xBE;
 	setPolarity8(0, testVal);

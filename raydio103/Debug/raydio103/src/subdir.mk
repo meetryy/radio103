@@ -8,22 +8,28 @@ C_SRCS += \
 ../raydio103/src/agc.c \
 ../raydio103/src/audio.c \
 ../raydio103/src/dsp.c \
+../raydio103/src/encoder.c \
 ../raydio103/src/fft.c \
-../raydio103/src/fir.c 
+../raydio103/src/fir.c \
+../raydio103/src/radio.c 
 
 OBJS += \
 ./raydio103/src/agc.o \
 ./raydio103/src/audio.o \
 ./raydio103/src/dsp.o \
+./raydio103/src/encoder.o \
 ./raydio103/src/fft.o \
-./raydio103/src/fir.o 
+./raydio103/src/fir.o \
+./raydio103/src/radio.o 
 
 C_DEPS += \
 ./raydio103/src/agc.d \
 ./raydio103/src/audio.d \
 ./raydio103/src/dsp.d \
+./raydio103/src/encoder.d \
 ./raydio103/src/fft.d \
-./raydio103/src/fir.d 
+./raydio103/src/fir.d \
+./raydio103/src/radio.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -33,7 +39,7 @@ raydio103/src/%.o raydio103/src/%.su: ../raydio103/src/%.c raydio103/src/subdir.
 clean: clean-raydio103-2f-src
 
 clean-raydio103-2f-src:
-	-$(RM) ./raydio103/src/agc.d ./raydio103/src/agc.o ./raydio103/src/agc.su ./raydio103/src/audio.d ./raydio103/src/audio.o ./raydio103/src/audio.su ./raydio103/src/dsp.d ./raydio103/src/dsp.o ./raydio103/src/dsp.su ./raydio103/src/fft.d ./raydio103/src/fft.o ./raydio103/src/fft.su ./raydio103/src/fir.d ./raydio103/src/fir.o ./raydio103/src/fir.su
+	-$(RM) ./raydio103/src/agc.d ./raydio103/src/agc.o ./raydio103/src/agc.su ./raydio103/src/audio.d ./raydio103/src/audio.o ./raydio103/src/audio.su ./raydio103/src/dsp.d ./raydio103/src/dsp.o ./raydio103/src/dsp.su ./raydio103/src/encoder.d ./raydio103/src/encoder.o ./raydio103/src/encoder.su ./raydio103/src/fft.d ./raydio103/src/fft.o ./raydio103/src/fft.su ./raydio103/src/fir.d ./raydio103/src/fir.o ./raydio103/src/fir.su ./raydio103/src/radio.d ./raydio103/src/radio.o ./raydio103/src/radio.su
 
 .PHONY: clean-raydio103-2f-src
 

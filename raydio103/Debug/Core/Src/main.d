@@ -36,6 +36,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  D:/raydio103/raydio103/raydio103/drivers/mcp23s17.h \
  D:/raydio103/raydio103/raydio103/drivers/st7920.h \
  D:/raydio103/raydio103/raydio103/drivers/si5351.h \
+ D:/raydio103/raydio103/raydio103/inc/encoder.h \
  D:/raydio103/raydio103/raydio103/inc/fft.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -76,4 +77,5 @@ D:/raydio103/raydio103/raydio103/inc/dsp.h:
 D:/raydio103/raydio103/raydio103/drivers/mcp23s17.h:
 D:/raydio103/raydio103/raydio103/drivers/st7920.h:
 D:/raydio103/raydio103/raydio103/drivers/si5351.h:
+D:/raydio103/raydio103/raydio103/inc/encoder.h:
 D:/raydio103/raydio103/raydio103/inc/fft.h:
