@@ -20359,17 +20359,6 @@ Based on the following sources:
 </parts>
 <sheets>
 <sheet>
-<description>cpu</description>
-<plain>
-</plain>
-<instances>
-</instances>
-<busses>
-</busses>
-<nets>
-</nets>
-</sheet>
-<sheet>
 <description>mixer</description>
 <plain>
 <text x="27.94" y="19.05" size="1.778" layer="91">SWR FWD?</text>

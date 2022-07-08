@@ -2051,7 +2051,7 @@ Based on the following sources:
 <attribute name="POPULARITY" value="0" x="69.3625" y="41.2905" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="VALUE" x="80.0795" y="85.563" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="U$2" library="ub0baa" package="CJMCU-5351" value="CJMCU-5351" x="70.385" y="55.526" smashed="yes" rot="MR180"/>
+<element name="U$2" library="ub0baa" package="CJMCU-5351" value="CJMCU-5351" x="81.486" y="73.157" smashed="yes" rot="MR180"/>
 <element name="D1" library="diode" library_urn="urn:adsk.eagle:library:210" package="SOT23" package3d_urn="urn:adsk.eagle:package:43389/2" value="BAT54S" x="40.578" y="72.699" smashed="yes" rot="R270">
 <attribute name="NAME" x="42.483" y="74.604" size="1.27" layer="25" rot="R270"/>
 <attribute name="POPULARITY" value="6" x="40.578" y="72.699" size="1.778" layer="27" rot="R270" display="off"/>
@@ -2182,40 +2182,40 @@ Based on the following sources:
 <attribute name="SPICEPREFIX" value="R" x="46.248" y="86.0485" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="43.708" y="86.6835" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="C11" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" package3d_urn="urn:adsk.eagle:package:23681/2" value="100n" x="60.649" y="86.8305" smashed="yes">
-<attribute name="NAME" x="59.649" y="87.7055" size="1.016" layer="25"/>
-<attribute name="POPULARITY" value="52" x="60.649" y="86.8305" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="C" x="60.649" y="86.8305" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="59.649" y="84.9305" size="1.016" layer="27"/>
+<element name="C11" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" package3d_urn="urn:adsk.eagle:package:23681/2" value="100n" x="60.7125" y="85.116" smashed="yes">
+<attribute name="NAME" x="59.7125" y="85.991" size="1.016" layer="25"/>
+<attribute name="POPULARITY" value="52" x="60.7125" y="85.116" size="1.778" layer="27" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="60.7125" y="85.116" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="59.7125" y="83.216" size="1.016" layer="27"/>
 </element>
-<element name="R11" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="60.649" y="84.617" smashed="yes">
-<attribute name="NAME" x="60.014" y="85.887" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="86" x="60.649" y="84.617" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="60.649" y="84.617" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="60.014" y="82.077" size="1.27" layer="27"/>
+<element name="R11" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="63.6575" y="86.013" smashed="yes" rot="R270">
+<attribute name="NAME" x="64.9275" y="86.648" size="1.27" layer="25" rot="R270"/>
+<attribute name="POPULARITY" value="86" x="63.6575" y="86.013" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="63.6575" y="86.013" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="61.1175" y="86.648" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="R12" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="60.4955" y="91.096" smashed="yes" rot="R90">
-<attribute name="NAME" x="59.2255" y="90.461" size="1.27" layer="25" rot="R90"/>
-<attribute name="POPULARITY" value="86" x="60.4955" y="91.096" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="60.4955" y="91.096" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="63.0355" y="90.461" size="1.27" layer="27" rot="R90"/>
+<element name="R12" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="61.1485" y="90.1165" smashed="yes" rot="R90">
+<attribute name="NAME" x="59.8785" y="89.4815" size="1.27" layer="25" rot="R90"/>
+<attribute name="POPULARITY" value="86" x="61.1485" y="90.1165" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="61.1485" y="90.1165" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="63.6885" y="89.4815" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="R13" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="63.0355" y="91.096" smashed="yes" rot="R90">
-<attribute name="NAME" x="61.7655" y="90.461" size="1.27" layer="25" rot="R90"/>
-<attribute name="POPULARITY" value="86" x="63.0355" y="91.096" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="63.0355" y="91.096" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="65.5755" y="90.461" size="1.27" layer="27" rot="R90"/>
+<element name="R13" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="63.6885" y="90.1165" smashed="yes" rot="R90">
+<attribute name="NAME" x="62.4185" y="89.4815" size="1.27" layer="25" rot="R90"/>
+<attribute name="POPULARITY" value="86" x="63.6885" y="90.1165" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="63.6885" y="90.1165" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="66.2285" y="89.4815" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="C12" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" package3d_urn="urn:adsk.eagle:package:23681/2" value="100n" x="65.5755" y="91.096" smashed="yes" rot="R270">
-<attribute name="NAME" x="66.4505" y="92.096" size="1.016" layer="25" rot="R270"/>
-<attribute name="POPULARITY" value="52" x="65.5755" y="91.096" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="SPICEPREFIX" value="C" x="65.5755" y="91.096" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="63.6755" y="92.096" size="1.016" layer="27" rot="R270"/>
+<element name="C12" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" package3d_urn="urn:adsk.eagle:package:23681/2" value="100n" x="66.2285" y="90.1165" smashed="yes" rot="R270">
+<attribute name="NAME" x="67.1035" y="91.1165" size="1.016" layer="25" rot="R270"/>
+<attribute name="POPULARITY" value="52" x="66.2285" y="90.1165" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="66.2285" y="90.1165" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="64.3285" y="91.1165" size="1.016" layer="27" rot="R270"/>
 </element>
-<element name="SJ1" library="jumper" library_urn="urn:adsk.eagle:library:252" package="SJ" package3d_urn="urn:adsk.eagle:package:15471/1" value="" x="75.664" y="74.423" smashed="yes" rot="R270">
-<attribute name="NAME" x="76.807" y="76.074" size="1.27" layer="25" ratio="10" rot="R270"/>
-<attribute name="POPULARITY" value="33" x="75.664" y="74.423" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="75.664" y="74.0229" size="0.02" layer="27" rot="R270"/>
+<element name="SJ1" library="jumper" library_urn="urn:adsk.eagle:library:252" package="SJ" package3d_urn="urn:adsk.eagle:package:15471/1" value="" x="90.198" y="77.3995" smashed="yes" rot="R90">
+<attribute name="NAME" x="89.055" y="75.7485" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="POPULARITY" value="33" x="90.198" y="77.3995" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="90.198" y="77.7996" size="0.02" layer="27" rot="R90"/>
 </element>
 <element name="H1" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0" package3d_urn="urn:adsk.eagle:package:14277/1" value="MOUNT-HOLE3.0" x="-12.065" y="91.44" smashed="yes">
 <attribute name="POPULARITY" value="3" x="-12.065" y="91.44" size="1.778" layer="27" display="off"/>
@@ -2251,11 +2251,11 @@ Based on the following sources:
 <attribute name="SPICEPREFIX" value="C" x="24.13" y="65.405" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="23.13" y="63.505" size="1.016" layer="27"/>
 </element>
-<element name="C14" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" package3d_urn="urn:adsk.eagle:package:23681/2" value="100n" x="55.6005" y="68.8965" smashed="yes" rot="R90">
-<attribute name="NAME" x="54.7255" y="67.8965" size="1.016" layer="25" rot="R90"/>
-<attribute name="POPULARITY" value="52" x="55.6005" y="68.8965" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SPICEPREFIX" value="C" x="55.6005" y="68.8965" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="57.5005" y="67.8965" size="1.016" layer="27" rot="R90"/>
+<element name="C14" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" package3d_urn="urn:adsk.eagle:package:23681/2" value="100n" x="54.9475" y="67.917" smashed="yes" rot="R90">
+<attribute name="NAME" x="54.0725" y="66.917" size="1.016" layer="25" rot="R90"/>
+<attribute name="POPULARITY" value="52" x="54.9475" y="67.917" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="54.9475" y="67.917" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="56.8475" y="66.917" size="1.016" layer="27" rot="R90"/>
 </element>
 <element name="C15" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" package3d_urn="urn:adsk.eagle:package:23681/2" value="100n" x="67.945" y="34.29" smashed="yes" rot="R270">
 <attribute name="NAME" x="68.82" y="35.29" size="1.016" layer="25" rot="R270"/>
@@ -2263,11 +2263,11 @@ Based on the following sources:
 <attribute name="SPICEPREFIX" value="C" x="67.945" y="34.29" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="66.045" y="35.29" size="1.016" layer="27" rot="R270"/>
 </element>
-<element name="R16" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="69.85" y="34.29" smashed="yes" rot="R270">
-<attribute name="NAME" x="71.12" y="34.925" size="1.27" layer="25" rot="R270"/>
-<attribute name="POPULARITY" value="86" x="69.85" y="34.29" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="69.85" y="34.29" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="67.31" y="34.925" size="1.27" layer="27" rot="R270"/>
+<element name="R16" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="70.1675" y="34.3535" smashed="yes" rot="R270">
+<attribute name="NAME" x="71.4375" y="34.9885" size="1.27" layer="25" rot="R270"/>
+<attribute name="POPULARITY" value="86" x="70.1675" y="34.3535" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="70.1675" y="34.3535" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="67.6275" y="34.9885" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="C16" library="rcl" library_urn="urn:adsk.eagle:library:334" package="E2,5-6E" package3d_urn="urn:adsk.eagle:package:23430/1" value="" x="69.215" y="39.37" smashed="yes">
 <attribute name="NAME" x="71.882" y="40.894" size="1.27" layer="25" ratio="10"/>
@@ -2275,11 +2275,11 @@ Based on the following sources:
 <attribute name="SPICEPREFIX" value="C" x="69.215" y="39.37" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="71.882" y="36.83" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="C17" library="rcl" library_urn="urn:adsk.eagle:library:334" package="E2,5-6E" package3d_urn="urn:adsk.eagle:package:23430/1" value="" x="57.785" y="36.83" smashed="yes" rot="R90">
-<attribute name="NAME" x="56.261" y="39.497" size="1.27" layer="25" ratio="10" rot="R90"/>
-<attribute name="POPULARITY" value="27" x="57.785" y="36.83" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SPICEPREFIX" value="C" x="57.785" y="36.83" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="60.325" y="39.497" size="1.27" layer="27" ratio="10" rot="R90"/>
+<element name="C17" library="rcl" library_urn="urn:adsk.eagle:library:334" package="E2,5-6E" package3d_urn="urn:adsk.eagle:package:23430/1" value="" x="57.132" y="36.83" smashed="yes" rot="R90">
+<attribute name="NAME" x="55.608" y="39.497" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="POPULARITY" value="27" x="57.132" y="36.83" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="57.132" y="36.83" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="59.672" y="39.497" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
 <element name="R17" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="59.055" y="41.91" smashed="yes" rot="R270">
 <attribute name="NAME" x="60.325" y="42.545" size="1.27" layer="25" rot="R270"/>
@@ -2423,16 +2423,16 @@ Based on the following sources:
 <attribute name="TP_SIGNAL_NAME" value="" x="40.005" y="38.735" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="39.37" y="37.973" size="0.0254" layer="27"/>
 </element>
-<element name="IC8" library="linear" library_urn="urn:adsk.eagle:library:262" package="SO08" package3d_urn="urn:adsk.eagle:package:16404/2" value="LM833D" x="-28.732" y="-103.827" smashed="yes">
-<attribute name="NAME" x="-31.399" y="-105.732" size="1.27" layer="25" rot="R90"/>
-<attribute name="POPULARITY" value="0" x="-38.2005" y="-94.3585" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-24.795" y="-105.732" size="1.27" layer="27" rot="R90"/>
+<element name="IC8" library="linear" library_urn="urn:adsk.eagle:library:262" package="SO08" package3d_urn="urn:adsk.eagle:package:16404/2" value="LM833D" x="-42.445" y="-114.275" smashed="yes">
+<attribute name="NAME" x="-45.112" y="-116.18" size="1.27" layer="25" rot="R90"/>
+<attribute name="POPULARITY" value="0" x="-51.9135" y="-104.8065" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-38.508" y="-116.18" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="C28" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" package3d_urn="urn:adsk.eagle:package:23681/2" value="100n" x="-25.7935" y="-116.234" smashed="yes">
-<attribute name="NAME" x="-26.7935" y="-115.359" size="1.016" layer="25"/>
-<attribute name="POPULARITY" value="52" x="-40.8125" y="-100.8885" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="C" x="-40.8125" y="-100.8885" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-26.7935" y="-118.134" size="1.016" layer="27"/>
+<element name="C28" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" package3d_urn="urn:adsk.eagle:package:23681/2" value="100n" x="-46.6895" y="-114.275" smashed="yes" rot="R270">
+<attribute name="NAME" x="-45.8145" y="-113.275" size="1.016" layer="25" rot="R270"/>
+<attribute name="POPULARITY" value="52" x="-31.344" y="-99.256" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="-31.344" y="-99.256" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="-48.5895" y="-113.275" size="1.016" layer="27" rot="R270"/>
 </element>
 <element name="R34" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="-16.325" y="-117.2135" smashed="yes">
 <attribute name="NAME" x="-16.96" y="-115.9435" size="1.27" layer="25"/>
@@ -2440,11 +2440,11 @@ Based on the following sources:
 <attribute name="SPICEPREFIX" value="R" x="-40.486" y="-106.439" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="-16.96" y="-119.7535" size="1.27" layer="27"/>
 </element>
-<element name="R35" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="-31.344" y="-122.764" smashed="yes">
-<attribute name="NAME" x="-31.979" y="-121.494" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="86" x="-40.486" y="-110.6835" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-40.486" y="-110.6835" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-31.979" y="-125.304" size="1.27" layer="27"/>
+<element name="R35" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="-46.6895" y="-118.193" smashed="yes" rot="R270">
+<attribute name="NAME" x="-45.4195" y="-117.558" size="1.27" layer="25" rot="R270"/>
+<attribute name="POPULARITY" value="86" x="-34.609" y="-109.051" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="-34.609" y="-109.051" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="-49.2295" y="-117.558" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="R36" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="-26.12" y="-122.764" smashed="yes">
 <attribute name="NAME" x="-26.755" y="-121.494" size="1.27" layer="25"/>
@@ -2464,40 +2464,40 @@ Based on the following sources:
 <attribute name="SPICEPREFIX" value="C" x="-39.5065" y="-123.7435" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="-18.5555" y="-104.408" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="R38" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="-15.672" y="-122.764" smashed="yes">
-<attribute name="NAME" x="-16.307" y="-121.494" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="86" x="-40.486" y="-129.947" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-40.486" y="-129.947" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-16.307" y="-125.304" size="1.27" layer="27"/>
+<element name="R38" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="-35.5885" y="-122.764" smashed="yes">
+<attribute name="NAME" x="-36.2235" y="-121.494" size="1.27" layer="25"/>
+<attribute name="POPULARITY" value="86" x="-60.4025" y="-129.947" size="1.778" layer="27" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="-60.4025" y="-129.947" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-36.2235" y="-125.304" size="1.27" layer="27"/>
 </element>
-<element name="JP4" library="pinhead" library_urn="urn:adsk.eagle:library:325" package="1X02" package3d_urn="urn:adsk.eagle:package:22435/2" value="" x="-30.3645" y="-117.54" smashed="yes">
-<attribute name="NAME" x="-32.9807" y="-115.7112" size="1.27" layer="25" ratio="10"/>
-<attribute name="POPULARITY" value="98" x="-39.5065" y="-134.8445" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-32.9045" y="-120.715" size="1.27" layer="27"/>
+<element name="JP4" library="pinhead" library_urn="urn:adsk.eagle:library:325" package="1X02" package3d_urn="urn:adsk.eagle:package:22435/2" value="" x="-31.997" y="-111.9895" smashed="yes">
+<attribute name="NAME" x="-34.6132" y="-110.1607" size="1.27" layer="25" ratio="10"/>
+<attribute name="POPULARITY" value="98" x="-41.139" y="-129.294" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-34.537" y="-115.1645" size="1.27" layer="27"/>
 </element>
-<element name="C30" library="rcl" library_urn="urn:adsk.eagle:library:334" package="E2,5-6E" package3d_urn="urn:adsk.eagle:package:23430/1" value="" x="-30.3645" y="-111.01" smashed="yes">
-<attribute name="NAME" x="-27.6975" y="-109.486" size="1.27" layer="25" ratio="10"/>
-<attribute name="POPULARITY" value="27" x="-39.5065" y="-140.395" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="C" x="-39.5065" y="-140.395" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-27.6975" y="-113.55" size="1.27" layer="27" ratio="10"/>
+<element name="C30" library="rcl" library_urn="urn:adsk.eagle:library:334" package="E2,5-6E" package3d_urn="urn:adsk.eagle:package:23430/1" value="" x="-37.5475" y="-128.3145" smashed="yes" rot="R270">
+<attribute name="NAME" x="-36.0235" y="-130.9815" size="1.27" layer="25" ratio="10" rot="R270"/>
+<attribute name="POPULARITY" value="27" x="-66.9325" y="-119.1725" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="-66.9325" y="-119.1725" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="-40.0875" y="-130.9815" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="C31" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" package3d_urn="urn:adsk.eagle:package:23681/2" value="100n" x="-21.2225" y="-116.234" smashed="yes">
-<attribute name="NAME" x="-22.2225" y="-115.359" size="1.016" layer="25"/>
-<attribute name="POPULARITY" value="52" x="-40.8125" y="-145.619" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="C" x="-40.8125" y="-145.619" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-22.2225" y="-118.134" size="1.016" layer="27"/>
+<element name="C31" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" package3d_urn="urn:adsk.eagle:package:23681/2" value="100n" x="-43.4245" y="-120.4785" smashed="yes" rot="R180">
+<attribute name="NAME" x="-42.4245" y="-121.3535" size="1.016" layer="25" rot="R180"/>
+<attribute name="POPULARITY" value="52" x="-23.8345" y="-91.0935" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="-23.8345" y="-91.0935" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="-42.4245" y="-118.5785" size="1.016" layer="27" rot="R180"/>
 </element>
-<element name="R39" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="-31.344" y="-127.0085" smashed="yes">
-<attribute name="NAME" x="-31.979" y="-125.7385" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="86" x="-40.486" y="-151.1695" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-40.486" y="-151.1695" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-31.979" y="-129.5485" size="1.27" layer="27"/>
+<element name="R39" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="-43.4245" y="-122.764" smashed="yes" rot="R180">
+<attribute name="NAME" x="-42.7895" y="-124.034" size="1.27" layer="25" rot="R180"/>
+<attribute name="POPULARITY" value="86" x="-34.2825" y="-98.603" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="-34.2825" y="-98.603" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="-42.7895" y="-120.224" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="C32" library="rcl" library_urn="urn:adsk.eagle:library:334" package="E2,5-6E" package3d_urn="urn:adsk.eagle:package:23430/1" value="" x="-20.896" y="-111.01" smashed="yes">
-<attribute name="NAME" x="-18.229" y="-109.486" size="1.27" layer="25" ratio="10"/>
-<attribute name="POPULARITY" value="27" x="-39.5065" y="-155.7405" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="C" x="-39.5065" y="-155.7405" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-18.229" y="-113.55" size="1.27" layer="27" ratio="10"/>
+<element name="C32" library="rcl" library_urn="urn:adsk.eagle:library:334" package="E2,5-6E" package3d_urn="urn:adsk.eagle:package:23430/1" value="" x="-43.4245" y="-127.335" smashed="yes">
+<attribute name="NAME" x="-40.7575" y="-125.811" size="1.27" layer="25" ratio="10"/>
+<attribute name="POPULARITY" value="27" x="-62.035" y="-172.0655" size="1.778" layer="27" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="-62.035" y="-172.0655" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-40.7575" y="-129.875" size="1.27" layer="27" ratio="10"/>
 </element>
 <element name="R40" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="-26.12" y="-127.0085" smashed="yes">
 <attribute name="NAME" x="-26.755" y="-125.7385" size="1.27" layer="25"/>
@@ -2505,10 +2505,10 @@ Based on the following sources:
 <attribute name="SPICEPREFIX" value="R" x="-40.486" y="-161.944" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="-26.755" y="-129.5485" size="1.27" layer="27"/>
 </element>
-<element name="IC7" library="40xx" library_urn="urn:adsk.eagle:library:80" package="SO14" package3d_urn="urn:adsk.eagle:package:823/2" value="4066D" x="-26.773" y="-132.2325" smashed="yes">
-<attribute name="NAME" x="-31.472" y="-134.0105" size="1.27" layer="25" ratio="10" rot="R90"/>
-<attribute name="POPULARITY" value="1" x="-26.773" y="-133.212" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-30.329" y="-132.8675" size="1.27" layer="27" ratio="10"/>
+<element name="IC7" library="40xx" library_urn="urn:adsk.eagle:library:80" package="SO14" package3d_urn="urn:adsk.eagle:package:823/2" value="4066D" x="-14.366" y="-132.2325" smashed="yes">
+<attribute name="NAME" x="-19.065" y="-134.0105" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="POPULARITY" value="1" x="-14.366" y="-133.212" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-17.922" y="-132.8675" size="1.27" layer="27" ratio="10"/>
 </element>
 </elements>
 <signals>
@@ -2539,7 +2539,7 @@ Based on the following sources:
 <contactref element="JP3" pad="2"/>
 <contactref element="C18" pad="2"/>
 <contactref element="C19" pad="2"/>
-<polygon width="0.254" layer="1" isolate="0.254">
+<polygon width="0.4" layer="1" isolate="0.4">
 <vertex x="0" y="99.949"/>
 <vertex x="0" y="0"/>
 <vertex x="99.06" y="0"/>
@@ -2564,50 +2564,21 @@ Based on the following sources:
 <contactref element="JP4" pad="1"/>
 <contactref element="R40" pad="2"/>
 <contactref element="IC7" pad="11"/>
-<wire x1="71.7345" y1="86.959" x2="87.6759" y2="84.4705" width="0" layer="19" extent="1-1"/>
-<wire x1="69.8475" y1="86.959" x2="71.7345" y2="86.959" width="0" layer="19" extent="1-1"/>
-<wire x1="67.9605" y1="86.959" x2="69.8475" y2="86.959" width="0" layer="19" extent="1-1"/>
-<wire x1="65.734" y1="86.9495" x2="67.9605" y2="86.959" width="0" layer="19" extent="1-1"/>
+<wire x1="-25.17" y1="-127.0085" x2="-37.5475" y2="-129.5845" width="0" layer="19" extent="1-1"/>
+<wire x1="-25.17" y1="-122.764" x2="-25.17" y2="-127.0085" width="0" layer="19" extent="1-1"/>
+<wire x1="-14.366" y1="-129.1591" x2="-25.17" y2="-127.0085" width="0" layer="19" extent="1-1"/>
+<wire x1="-40.54" y1="-116.875" x2="-37.5475" y2="-129.5845" width="0" layer="19" extent="1-1"/>
+<wire x1="-46.6895" y1="-113.275" x2="-40.54" y2="-116.875" width="0" layer="19" extent="1-1"/>
+<wire x1="-33.267" y1="-111.9895" x2="-40.54" y2="-116.875" width="0" layer="19" extent="1-1"/>
+<wire x1="-32.065" y1="-54.61" x2="-33.267" y2="-111.9895" width="0" layer="19" extent="1-1"/>
+<wire x1="-30.75" y1="-48.895" x2="-32.065" y2="-54.61" width="0" layer="19" extent="1-1"/>
+<wire x1="-26.305" y1="-48.895" x2="-30.75" y2="-48.895" width="0" layer="19" extent="1-1"/>
+<wire x1="-0.365" y1="-15.875" x2="-26.305" y2="-48.895" width="0" layer="19" extent="1-1"/>
+<wire x1="-0.365" y1="-10.795" x2="-0.365" y2="-15.875" width="0" layer="19" extent="1-1"/>
+<wire x1="-0.365" y1="-7.62" x2="-0.365" y2="-10.795" width="0" layer="19" extent="1-1"/>
+<wire x1="10.16" y1="2.54" x2="-0.365" y2="-7.62" width="0" layer="19" extent="1-1"/>
 <wire x1="71.5475" y1="82.8635" x2="71.7345" y2="86.959" width="0" layer="19" extent="1-1"/>
-<wire x1="71.5475" y1="78.3135" x2="71.5475" y2="82.8635" width="0" layer="19" extent="1-1"/>
-<wire x1="65.5755" y1="92.096" x2="65.734" y2="86.9495" width="0" layer="19" extent="1-1"/>
-<wire x1="63.0355" y1="92.046" x2="65.5755" y2="92.096" width="0" layer="19" extent="1-1"/>
-<wire x1="65.6075" y1="78.9635" x2="71.5475" y2="78.3135" width="0" layer="19" extent="1-1"/>
-<wire x1="65.632" y1="74.5955" x2="65.6075" y2="78.9635" width="0" layer="19" extent="1-1"/>
-<wire x1="55.6005" y1="67.8965" x2="65.632" y2="74.5955" width="0" layer="19" extent="1-1"/>
-<wire x1="51.127" y1="84.822" x2="63.0355" y2="92.046" width="0" layer="19" extent="1-1"/>
-<wire x1="46.248" y1="86.9985" x2="51.127" y2="84.822" width="0" layer="19" extent="1-1"/>
-<wire x1="42.599" y1="83.1175" x2="46.248" y2="86.9985" width="0" layer="19" extent="1-1"/>
-<wire x1="43.879" y1="77.2215" x2="42.599" y2="83.1175" width="0" layer="19" extent="1-1"/>
-<wire x1="39.478" y1="73.649" x2="43.879" y2="77.2215" width="0" layer="19" extent="1-1"/>
-<wire x1="35.29" y1="67.31" x2="39.478" y2="73.649" width="0" layer="19" extent="1-1"/>
-<wire x1="23.13" y1="65.405" x2="35.29" y2="67.31" width="0" layer="19" extent="1-1"/>
-<wire x1="61.595" y1="46.72" x2="55.6005" y2="67.8965" width="0" layer="19" extent="1-1"/>
-<wire x1="64.135" y1="46.72" x2="61.595" y2="46.72" width="0" layer="19" extent="1-1"/>
-<wire x1="70.485" y1="44.45" x2="64.135" y2="46.72" width="0" layer="19" extent="1-1"/>
-<wire x1="65.405" y1="36.77" x2="70.485" y2="44.45" width="0" layer="19" extent="1-1"/>
-<wire x1="62.865" y1="36.77" x2="65.405" y2="36.77" width="0" layer="19" extent="1-1"/>
-<wire x1="69.85" y1="35.24" x2="65.405" y2="36.77" width="0" layer="19" extent="1-1"/>
-<wire x1="78.005" y1="55.526" x2="70.485" y2="44.45" width="0" layer="19" extent="1-1"/>
-<wire x1="20.701" y1="15.494" x2="62.865" y2="36.77" width="0" layer="19" extent="1-1"/>
-<wire x1="20.701" y1="12.954" x2="20.701" y2="15.494" width="0" layer="19" extent="1-1"/>
-<wire x1="7.214" y1="7.061" x2="20.701" y2="12.954" width="0" layer="19" extent="1-1"/>
-<wire x1="10.16" y1="2.54" x2="7.214" y2="7.061" width="0" layer="19" extent="1-1"/>
-<wire x1="2.159" y1="12.954" x2="7.214" y2="7.061" width="0" layer="19" extent="1-1"/>
-<wire x1="2.159" y1="15.494" x2="2.159" y2="12.954" width="0" layer="19" extent="1-1"/>
-<wire x1="-0.365" y1="-7.62" x2="10.16" y2="2.54" width="0" layer="19" extent="1-1"/>
-<wire x1="-0.365" y1="-10.795" x2="-0.365" y2="-7.62" width="0" layer="19" extent="1-1"/>
-<wire x1="-0.365" y1="-15.875" x2="-0.365" y2="-10.795" width="0" layer="19" extent="1-1"/>
-<wire x1="-26.305" y1="-48.895" x2="-0.365" y2="-15.875" width="0" layer="19" extent="1-1"/>
-<wire x1="-30.75" y1="-48.895" x2="-26.305" y2="-48.895" width="0" layer="19" extent="1-1"/>
-<wire x1="-32.065" y1="-54.61" x2="-30.75" y2="-48.895" width="0" layer="19" extent="1-1"/>
-<wire x1="-26.827" y1="-106.427" x2="-32.065" y2="-54.61" width="0" layer="19" extent="1-1"/>
-<wire x1="-29.0945" y1="-111.01" x2="-26.827" y2="-106.427" width="0" layer="19" extent="1-1"/>
-<wire x1="-26.7935" y1="-116.234" x2="-29.0945" y2="-111.01" width="0" layer="19" extent="1-1"/>
-<wire x1="-31.6345" y1="-117.54" x2="-26.7935" y2="-116.234" width="0" layer="19" extent="1-1"/>
-<wire x1="-25.17" y1="-122.764" x2="-26.7935" y2="-116.234" width="0" layer="19" extent="1-1"/>
-<wire x1="-25.17" y1="-127.0085" x2="-25.17" y2="-122.764" width="0" layer="19" extent="1-1"/>
-<wire x1="-26.773" y1="-129.1591" x2="-25.17" y2="-127.0085" width="0" layer="19" extent="1-1"/>
+<wire x1="65.6075" y1="78.9635" x2="65.632" y2="74.5955" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="3V3">
 <contactref element="U1" pad="16"/>
@@ -2626,17 +2597,17 @@ Based on the following sources:
 <contactref element="C22" pad="2"/>
 <wire x1="65.632" y1="76.5955" x2="65.6075" y2="76.62" width="0.4064" layer="1"/>
 <wire x1="65.6075" y1="76.62" x2="65.6075" y2="78.3135" width="0.4064" layer="1"/>
-<wire x1="81.5291" y1="76.8505" x2="65.6075" y2="78.3135" width="0" layer="19" extent="1-1"/>
-<wire x1="75.465" y1="55.526" x2="65.632" y2="76.5955" width="0" layer="19" extent="1-1"/>
-<wire x1="33.29" y1="67.31" x2="75.465" y2="55.526" width="0" layer="19" extent="1-1"/>
-<wire x1="25.13" y1="65.405" x2="33.29" y2="67.31" width="0" layer="19" extent="1-1"/>
-<wire x1="60.4955" y1="92.046" x2="25.13" y2="65.405" width="0" layer="19" extent="1-1"/>
-<wire x1="39.478" y1="71.749" x2="60.4955" y2="92.046" width="0" layer="19" extent="1-1"/>
-<wire x1="43.8945" y1="70.955" x2="39.478" y2="71.749" width="0" layer="19" extent="1-1"/>
-<wire x1="48.46" y1="86.962" x2="43.8945" y2="70.955" width="0" layer="19" extent="1-1"/>
+<wire x1="9.525" y1="7.061" x2="9.525" y2="13.259" width="0.4" layer="1"/>
+<wire x1="81.5291" y1="76.8505" x2="86.566" y2="73.157" width="0" layer="19" extent="1-1"/>
+<wire x1="65.632" y1="76.5955" x2="81.5291" y2="76.8505" width="0" layer="19" extent="1-1"/>
+<wire x1="61.1485" y1="91.0665" x2="65.6075" y2="78.3135" width="0" layer="19" extent="1-1"/>
+<wire x1="48.46" y1="86.962" x2="61.1485" y2="91.0665" width="0" layer="19" extent="1-1"/>
 <wire x1="42.599" y1="81.2175" x2="48.46" y2="86.962" width="0" layer="19" extent="1-1"/>
+<wire x1="39.478" y1="71.749" x2="42.599" y2="81.2175" width="0" layer="19" extent="1-1"/>
+<wire x1="43.8945" y1="70.955" x2="39.478" y2="71.749" width="0" layer="19" extent="1-1"/>
+<wire x1="33.29" y1="67.31" x2="39.478" y2="71.749" width="0" layer="19" extent="1-1"/>
+<wire x1="25.13" y1="65.405" x2="33.29" y2="67.31" width="0" layer="19" extent="1-1"/>
 <wire x1="9.525" y1="13.259" x2="25.13" y2="65.405" width="0" layer="19" extent="1-1"/>
-<wire x1="9.525" y1="7.061" x2="9.525" y2="13.259" width="0" layer="19" extent="1-1"/>
 <wire x1="1.635" y1="-10.795" x2="9.525" y2="7.061" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SCL">
@@ -2709,11 +2680,11 @@ Based on the following sources:
 <contactref element="IC8" pad="8"/>
 <contactref element="R35" pad="1"/>
 <contactref element="R38" pad="1"/>
-<wire x1="-24.7935" y1="-116.234" x2="-32.294" y2="-122.764" width="0" layer="19" extent="1-1"/>
-<wire x1="-16.622" y1="-122.764" x2="-24.7935" y2="-116.234" width="0" layer="19" extent="1-1"/>
-<wire x1="-30.637" y1="-101.227" x2="-24.7935" y2="-116.234" width="0" layer="19" extent="1-1"/>
-<wire x1="55.6005" y1="69.8965" x2="-30.637" y2="-101.227" width="0" layer="19" extent="1-1"/>
-<wire x1="54.937" y1="79.622" x2="55.6005" y2="69.8965" width="0" layer="19" extent="1-1"/>
+<wire x1="-46.6895" y1="-115.275" x2="-46.6895" y2="-117.243" width="0" layer="19" extent="1-1"/>
+<wire x1="-44.35" y1="-111.675" x2="-46.6895" y2="-115.275" width="0" layer="19" extent="1-1"/>
+<wire x1="-36.5385" y1="-122.764" x2="-46.6895" y2="-117.243" width="0" layer="19" extent="1-1"/>
+<wire x1="54.9475" y1="68.917" x2="-44.35" y2="-111.675" width="0" layer="19" extent="1-1"/>
+<wire x1="54.937" y1="79.622" x2="54.9475" y2="68.917" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$5">
 <contactref element="R1" pad="2"/>
@@ -2789,7 +2760,7 @@ Based on the following sources:
 <wire x1="53.667" y1="78.239" x2="54.0345" y2="77.8715" width="0.4064" layer="1"/>
 <wire x1="54.0345" y1="76.89" x2="54.0345" y2="75.0815" width="0.4064" layer="1"/>
 <wire x1="54.0345" y1="75.0815" x2="53.971" y2="75.018" width="0.4064" layer="1"/>
-<wire x1="48.201" y1="74.1715" x2="53.667" y2="79.622" width="0" layer="19" extent="1-1"/>
+<wire x1="48.201" y1="74.1715" x2="53.971" y2="75.018" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="ADC_I1">
 <contactref element="C8" pad="1"/>
@@ -2798,9 +2769,9 @@ Based on the following sources:
 <contactref element="D1" pad="3"/>
 <contactref element="R14" pad="1"/>
 <wire x1="43.879" y1="75.3215" x2="46.201" y2="74.1715" width="0" layer="19" extent="1-1"/>
+<wire x1="41.508" y1="75.7405" x2="43.879" y2="75.3215" width="0" layer="19" extent="1-1"/>
 <wire x1="43.8945" y1="72.855" x2="43.879" y2="75.3215" width="0" layer="19" extent="1-1"/>
 <wire x1="41.678" y1="72.699" x2="43.8945" y2="72.855" width="0" layer="19" extent="1-1"/>
-<wire x1="41.508" y1="75.7405" x2="41.678" y2="72.699" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="ADC_Q1">
 <contactref element="C9" pad="1"/>
@@ -2808,10 +2779,10 @@ Based on the following sources:
 <contactref element="R10" pad="2"/>
 <contactref element="D3" pad="3"/>
 <contactref element="R15" pad="1"/>
-<wire x1="43.9175" y1="85.0995" x2="46.5275" y2="82.915" width="0" layer="19" extent="1-1"/>
-<wire x1="48.46" y1="85.062" x2="43.9175" y2="85.0995" width="0" layer="19" extent="1-1"/>
-<wire x1="46.248" y1="85.0985" x2="43.9175" y2="85.0995" width="0" layer="19" extent="1-1"/>
-<wire x1="44.799" y1="82.1675" x2="46.248" y2="85.0985" width="0" layer="19" extent="1-1"/>
+<wire x1="46.248" y1="85.0985" x2="48.46" y2="85.062" width="0" layer="19" extent="1-1"/>
+<wire x1="46.5275" y1="82.915" x2="46.248" y2="85.0985" width="0" layer="19" extent="1-1"/>
+<wire x1="44.799" y1="82.1675" x2="46.5275" y2="82.915" width="0" layer="19" extent="1-1"/>
+<wire x1="43.9175" y1="85.0995" x2="46.248" y2="85.0985" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$11">
 </signal>
@@ -2819,12 +2790,13 @@ Based on the following sources:
 <contactref element="U1" pad="9"/>
 <contactref element="C11" pad="2"/>
 <contactref element="R11" pad="2"/>
-<wire x1="61.649" y1="86.8305" x2="61.7085" y2="86.771" width="0.4064" layer="1"/>
-<wire x1="61.649" y1="86.8305" x2="61.649" y2="84.667" width="0.4064" layer="1"/>
-<wire x1="61.649" y1="84.667" x2="61.599" y2="84.617" width="0.4064" layer="1"/>
+<wire x1="61.7125" y1="85.116" x2="61.772" y2="85.0565" width="0.4064" layer="1"/>
 <wire x1="65.6075" y1="82.8635" x2="64.7145" y2="82.8635" width="0.4064" layer="1"/>
-<wire x1="62.911" y1="84.667" x2="61.649" y2="84.667" width="0.4064" layer="1"/>
-<wire x1="64.7145" y1="82.8635" x2="62.911" y2="84.667" width="0.4064" layer="1"/>
+<wire x1="61.7125" y1="85.116" x2="63.6045" y2="85.116" width="0.4" layer="1"/>
+<wire x1="63.6045" y1="85.116" x2="63.6575" y2="85.063" width="0.4" layer="1"/>
+<wire x1="65.6075" y1="82.8635" x2="64.388" y2="82.8635" width="0.4" layer="1"/>
+<wire x1="63.6575" y1="83.594" x2="63.6575" y2="85.063" width="0.4" layer="1"/>
+<wire x1="64.388" y1="82.8635" x2="63.6575" y2="83.594" width="0.4" layer="1"/>
 </signal>
 <signal name="RX">
 <contactref element="C11" pad="1"/>
@@ -2834,26 +2806,28 @@ Based on the following sources:
 <contactref element="C12" pad="2"/>
 <contactref element="R13" pad="1"/>
 <contactref element="R12" pad="1"/>
-<wire x1="60.4955" y1="90.146" x2="59.699" y2="84.617" width="0" layer="19" extent="1-1"/>
-<wire x1="63.0355" y1="90.146" x2="60.4955" y2="90.146" width="0" layer="19" extent="1-1"/>
-<wire x1="65.5755" y1="90.096" x2="63.0355" y2="90.146" width="0" layer="19" extent="1-1"/>
+<wire x1="61.1485" y1="89.1665" x2="63.6885" y2="89.1665" width="0.4" layer="1"/>
+<wire x1="63.6885" y1="89.1665" x2="63.7385" y2="89.1165" width="0.4" layer="1"/>
+<wire x1="63.7385" y1="89.1165" x2="66.2285" y2="89.1165" width="0.4" layer="1"/>
+<wire x1="63.6575" y1="86.963" x2="63.6575" y2="89.1355" width="0.4" layer="1"/>
+<wire x1="63.6575" y1="89.1355" x2="63.6885" y2="89.1665" width="0.4" layer="1"/>
 </signal>
 <signal name="N$13">
 <contactref element="U1" pad="2"/>
 <contactref element="U$2" pad="1"/>
-<wire x1="65.305" y1="55.526" x2="71.5475" y2="78.9635" width="0" layer="19" extent="1-1"/>
+<wire x1="76.406" y1="73.157" x2="71.5475" y2="78.9635" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$15">
 <contactref element="U1" pad="14"/>
 <contactref element="U$2" pad="0"/>
-<wire x1="62.765" y1="55.526" x2="65.6075" y2="79.6135" width="0" layer="19" extent="1-1"/>
+<wire x1="65.6075" y1="79.6135" x2="73.866" y2="73.157" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="ADC_RX_I">
 <contactref element="R14" pad="2"/>
 <contactref element="IC7" pad="9"/>
 <contactref element="IC7" pad="2"/>
-<wire x1="-24.233" y1="-129.1591" x2="-29.313" y2="-135.3059" width="0" layer="19" extent="1-1"/>
-<wire x1="39.608" y1="75.7405" x2="-24.233" y2="-129.1591" width="0" layer="19" extent="1-1"/>
+<wire x1="-11.826" y1="-129.1591" x2="-16.906" y2="-135.3059" width="0" layer="19" extent="1-1"/>
+<wire x1="39.608" y1="75.7405" x2="-11.826" y2="-129.1591" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$17">
 <contactref element="IC3" pad="8"/>
@@ -2866,7 +2840,7 @@ Based on the following sources:
 <signal name="N$18">
 <contactref element="U1" pad="5"/>
 <contactref element="IC3" pad="11"/>
-<wire x1="81.5291" y1="80.6605" x2="71.5475" y2="80.9135" width="0" layer="19" extent="1-1"/>
+<wire x1="71.5475" y1="80.9135" x2="81.5291" y2="80.6605" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="TX_Q">
 <contactref element="IC3" pad="9"/>
@@ -2890,21 +2864,27 @@ Based on the following sources:
 <signal name="N$19">
 <contactref element="IC5" pad="1"/>
 <contactref element="C17" pad="+"/>
-<wire x1="57.785" y1="35.56" x2="61.595" y2="36.77" width="0" layer="19" extent="1-1"/>
+<wire x1="57.132" y1="35.56" x2="58.342" y2="36.77" width="0.3" layer="1"/>
+<wire x1="58.342" y1="36.77" x2="61.595" y2="36.77" width="0.3" layer="1"/>
 </signal>
 <signal name="N$20">
 <contactref element="IC5" pad="8"/>
 <contactref element="R17" pad="1"/>
 <contactref element="SJ2" pad="1"/>
-<wire x1="59.055" y1="42.86" x2="61.595" y2="41.97" width="0" layer="19" extent="1-1"/>
-<wire x1="56.515" y1="42.672" x2="59.055" y2="42.86" width="0" layer="19" extent="1-1"/>
+<wire x1="56.515" y1="42.672" x2="58.867" y2="42.672" width="0.3" layer="1"/>
+<wire x1="58.867" y1="42.672" x2="59.055" y2="42.86" width="0.3" layer="1"/>
+<wire x1="59.055" y1="42.86" x2="60.705" y2="42.86" width="0.3" layer="1"/>
+<wire x1="60.705" y1="42.86" x2="61.595" y2="41.97" width="0.3" layer="1"/>
 </signal>
 <signal name="N$21">
 <contactref element="C17" pad="-"/>
 <contactref element="R17" pad="2"/>
 <contactref element="SJ2" pad="2"/>
-<wire x1="56.515" y1="41.148" x2="59.055" y2="40.96" width="0" layer="19" extent="1-1"/>
-<wire x1="57.785" y1="38.1" x2="59.055" y2="40.96" width="0" layer="19" extent="1-1"/>
+<wire x1="56.515" y1="41.148" x2="56.703" y2="40.96" width="0.3" layer="1"/>
+<wire x1="56.703" y1="40.96" x2="56.811" y2="40.96" width="0.3" layer="1"/>
+<wire x1="56.811" y1="40.96" x2="59.055" y2="40.96" width="0.3" layer="1"/>
+<wire x1="57.132" y1="38.1" x2="56.811" y2="38.421" width="0.3" layer="1"/>
+<wire x1="56.811" y1="38.421" x2="56.811" y2="40.96" width="0.3" layer="1"/>
 </signal>
 <signal name="5V">
 <contactref element="IC5" pad="6"/>
@@ -2914,7 +2894,7 @@ Based on the following sources:
 <contactref element="IC2" pad="3"/>
 <contactref element="IC6" pad="3"/>
 <contactref element="C23" pad="2"/>
-<wire x1="64.135" y1="41.97" x2="64.135" y2="44.72" width="0" layer="19" extent="1-1"/>
+<wire x1="64.135" y1="41.97" x2="64.135" y2="44.72" width="0.3" layer="1"/>
 <wire x1="20.701" y1="4.826" x2="64.135" y2="41.97" width="0" layer="19" extent="1-1"/>
 <wire x1="20.701" y1="2.286" x2="20.701" y2="4.826" width="0" layer="19" extent="1-1"/>
 <wire x1="12.7" y1="2.54" x2="20.701" y2="2.286" width="0" layer="19" extent="1-1"/>
@@ -2924,24 +2904,29 @@ Based on the following sources:
 <signal name="N$23">
 <contactref element="IC5" pad="5"/>
 <contactref element="C16" pad="+"/>
-<wire x1="67.945" y1="39.37" x2="65.405" y2="41.97" width="0" layer="19" extent="1-1"/>
+<wire x1="65.405" y1="41.97" x2="67.945" y2="39.43" width="0.3" layer="1"/>
+<wire x1="67.945" y1="39.43" x2="67.945" y2="39.37" width="0.3" layer="1"/>
 </signal>
 <signal name="N$24">
 <contactref element="C16" pad="-"/>
 <contactref element="C15" pad="1"/>
 <contactref element="JP3" pad="1"/>
-<wire x1="70.485" y1="39.37" x2="67.945" y2="44.45" width="0" layer="19" extent="1-1"/>
-<wire x1="67.945" y1="35.29" x2="70.485" y2="39.37" width="0" layer="19" extent="1-1"/>
+<wire x1="70.485" y1="39.37" x2="67.945" y2="36.83" width="0.3" layer="1"/>
+<wire x1="67.945" y1="36.83" x2="67.945" y2="35.29" width="0.3" layer="1"/>
+<wire x1="70.485" y1="39.37" x2="67.945" y2="41.91" width="0.3" layer="1"/>
+<wire x1="67.945" y1="41.91" x2="67.945" y2="44.45" width="0.3" layer="1"/>
 </signal>
 <signal name="N$25">
 <contactref element="C15" pad="2"/>
 <contactref element="R16" pad="2"/>
-<wire x1="67.945" y1="33.29" x2="69.85" y2="33.34" width="0" layer="19" extent="1-1"/>
+<wire x1="70.1675" y1="33.4035" x2="70.054" y2="33.29" width="0.3" layer="1"/>
+<wire x1="70.054" y1="33.29" x2="67.945" y2="33.29" width="0.3" layer="1"/>
 </signal>
 <signal name="N$22">
 <contactref element="C18" pad="1"/>
 <contactref element="IC5" pad="7"/>
-<wire x1="62.865" y1="41.97" x2="61.595" y2="44.72" width="0" layer="19" extent="1-1"/>
+<wire x1="62.865" y1="41.97" x2="62.865" y2="43.45" width="0.3" layer="1"/>
+<wire x1="62.865" y1="43.45" x2="61.595" y2="44.72" width="0.3" layer="1"/>
 </signal>
 <signal name="AUDIO">
 <contactref element="IC5" pad="3"/>
@@ -2950,15 +2935,17 @@ Based on the following sources:
 <contactref element="IC3" pad="2"/>
 <contactref element="SJ1" pad="2"/>
 <contactref element="U$2" pad="2"/>
-<wire x1="67.845" y1="55.526" x2="87.6759" y2="78.1205" width="0" layer="19" extent="1-1"/>
-<wire x1="75.664" y1="73.661" x2="67.845" y2="55.526" width="0" layer="19" extent="1-1"/>
+<wire x1="87.6759" y1="78.1205" x2="90.157" y2="78.1205" width="0.4" layer="1"/>
+<wire x1="90.157" y1="78.1205" x2="90.198" y2="78.1615" width="0.4" layer="1"/>
+<wire x1="78.946" y1="73.157" x2="87.6759" y2="78.1205" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$27">
 <contactref element="IC3" pad="1"/>
 <contactref element="SJ1" pad="1"/>
 <contactref element="SJ4" pad="2"/>
-<wire x1="87.6759" y1="76.8505" x2="75.5145" y2="85.1725" width="0" layer="19" extent="1-1"/>
-<wire x1="75.664" y1="75.185" x2="75.5145" y2="85.1725" width="0" layer="19" extent="1-1"/>
+<wire x1="87.6759" y1="76.8505" x2="89.985" y2="76.8505" width="0.4" layer="1"/>
+<wire x1="89.985" y1="76.8505" x2="90.198" y2="76.6375" width="0.4" layer="1"/>
+<wire x1="75.5145" y1="85.1725" x2="87.6759" y2="76.8505" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$28">
 <contactref element="IC3" pad="3"/>
@@ -3035,35 +3022,35 @@ Based on the following sources:
 <contactref element="R15" pad="2"/>
 <contactref element="IC7" pad="3"/>
 <contactref element="IC7" pad="10"/>
-<wire x1="-25.503" y1="-129.1591" x2="-28.043" y2="-135.3059" width="0" layer="19" extent="1-1"/>
-<wire x1="43.9175" y1="86.9995" x2="-25.503" y2="-129.1591" width="0" layer="19" extent="1-1"/>
+<wire x1="-13.096" y1="-129.1591" x2="-15.636" y2="-135.3059" width="0" layer="19" extent="1-1"/>
+<wire x1="43.9175" y1="86.9995" x2="-13.096" y2="-129.1591" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$48">
 <contactref element="IC8" pad="3"/>
 <contactref element="R35" pad="2"/>
 <contactref element="R36" pad="1"/>
 <contactref element="C30" pad="+"/>
-<wire x1="-27.07" y1="-122.764" x2="-30.394" y2="-122.764" width="0" layer="19" extent="1-1"/>
-<wire x1="-31.6345" y1="-111.01" x2="-30.394" y2="-122.764" width="0" layer="19" extent="1-1"/>
-<wire x1="-28.097" y1="-106.427" x2="-31.6345" y2="-111.01" width="0" layer="19" extent="1-1"/>
+<wire x1="-41.81" y1="-116.875" x2="-46.6895" y2="-119.143" width="0" layer="19" extent="1-1"/>
+<wire x1="-37.5475" y1="-127.0445" x2="-41.81" y2="-116.875" width="0" layer="19" extent="1-1"/>
+<wire x1="-27.07" y1="-122.764" x2="-37.5475" y2="-127.0445" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$49">
 <contactref element="IC8" pad="2"/>
 <contactref element="R34" pad="2"/>
 <contactref element="R37" pad="2"/>
 <contactref element="C31" pad="1"/>
-<wire x1="-22.2225" y1="-116.234" x2="-19.946" y2="-122.764" width="0" layer="19" extent="1-1"/>
-<wire x1="-15.375" y1="-117.2135" x2="-22.2225" y2="-116.234" width="0" layer="19" extent="1-1"/>
-<wire x1="-29.367" y1="-106.427" x2="-22.2225" y2="-116.234" width="0" layer="19" extent="1-1"/>
+<wire x1="-43.08" y1="-116.875" x2="-42.4245" y2="-120.4785" width="0" layer="19" extent="1-1"/>
+<wire x1="-19.946" y1="-122.764" x2="-42.4245" y2="-120.4785" width="0" layer="19" extent="1-1"/>
+<wire x1="-15.375" y1="-117.2135" x2="-19.946" y2="-122.764" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$50">
 <contactref element="R34" pad="1"/>
 <contactref element="IC8" pad="1"/>
 <contactref element="C31" pad="2"/>
 <contactref element="R39" pad="2"/>
-<wire x1="-20.2225" y1="-116.234" x2="-30.394" y2="-127.0085" width="0" layer="19" extent="1-1"/>
-<wire x1="-17.275" y1="-117.2135" x2="-20.2225" y2="-116.234" width="0" layer="19" extent="1-1"/>
-<wire x1="-30.637" y1="-106.427" x2="-20.2225" y2="-116.234" width="0" layer="19" extent="1-1"/>
+<wire x1="-44.4245" y1="-120.4785" x2="-44.3745" y2="-122.764" width="0" layer="19" extent="1-1"/>
+<wire x1="-44.35" y1="-116.875" x2="-44.4245" y2="-120.4785" width="0" layer="19" extent="1-1"/>
+<wire x1="-17.275" y1="-117.2135" x2="-44.35" y2="-116.875" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$51">
 <contactref element="R37" pad="1"/>
@@ -3074,18 +3061,18 @@ Based on the following sources:
 <contactref element="C29" pad="+"/>
 <contactref element="R38" pad="2"/>
 <contactref element="JP4" pad="2"/>
-<wire x1="-14.722" y1="-122.764" x2="-29.0945" y2="-117.54" width="0" layer="19" extent="1-1"/>
-<wire x1="-22.4925" y1="-101.868" x2="-29.0945" y2="-117.54" width="0" layer="19" extent="1-1"/>
+<wire x1="-30.727" y1="-111.9895" x2="-34.6385" y2="-122.764" width="0" layer="19" extent="1-1"/>
+<wire x1="-22.4925" y1="-101.868" x2="-30.727" y2="-111.9895" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$53">
 <contactref element="R39" pad="1"/>
 <contactref element="C32" pad="-"/>
-<wire x1="-19.626" y1="-111.01" x2="-32.294" y2="-127.0085" width="0" layer="19" extent="1-1"/>
+<wire x1="-42.4745" y1="-122.764" x2="-42.1545" y2="-127.335" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$54">
 <contactref element="C32" pad="+"/>
 <contactref element="R40" pad="1"/>
-<wire x1="-22.166" y1="-111.01" x2="-27.07" y2="-127.0085" width="0" layer="19" extent="1-1"/>
+<wire x1="-27.07" y1="-127.0085" x2="-44.6945" y2="-127.335" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VSS">
 <contactref element="IC7" pad="7"/>
@@ -3096,12 +3083,22 @@ Based on the following sources:
 <signal name="RXEN">
 <contactref element="IC7" pad="13"/>
 <contactref element="IC7" pad="5"/>
-<wire x1="-29.313" y1="-129.1591" x2="-25.503" y2="-135.3059" width="0" layer="19" extent="1-1"/>
+<wire x1="-13.096" y1="-135.3059" x2="-13.096" y2="-133.5025" width="0.3" layer="1"/>
+<wire x1="-13.096" y1="-133.5025" x2="-13.3865" y2="-133.212" width="0.3" layer="1"/>
+<wire x1="-13.3865" y1="-133.212" x2="-16.325" y2="-133.212" width="0.3" layer="1"/>
+<wire x1="-16.325" y1="-133.212" x2="-16.906" y2="-132.631" width="0.3" layer="1"/>
+<wire x1="-16.906" y1="-132.631" x2="-16.906" y2="-129.1591" width="0.3" layer="1"/>
 </signal>
 <signal name="TXEN">
 <contactref element="IC7" pad="6"/>
 <contactref element="IC7" pad="12"/>
-<wire x1="-28.043" y1="-129.1591" x2="-24.233" y2="-135.3059" width="0" layer="19" extent="1-1"/>
+<wire x1="-15.636" y1="-129.1591" x2="-15.636" y2="-131.6155" width="0.3" layer="1"/>
+<wire x1="-14.5395" y1="-132.712" x2="-13.1793875" y2="-132.712" width="0.3" layer="1"/>
+<wire x1="-11.9063875" y1="-133.985" x2="-11.8745" y2="-133.985" width="0.3" layer="1"/>
+<wire x1="-13.1793875" y1="-132.712" x2="-11.9063875" y2="-133.985" width="0.3" layer="1"/>
+<wire x1="-11.8745" y1="-133.985" x2="-11.826" y2="-134.0335" width="0.3" layer="1"/>
+<wire x1="-11.826" y1="-134.0335" x2="-11.826" y2="-135.3059" width="0.3" layer="1"/>
+<wire x1="-15.636" y1="-131.6155" x2="-14.5395" y2="-132.712" width="0.3" layer="1"/>
 </signal>
 <signal name="MIC">
 <contactref element="IC7" pad="8"/>
