@@ -6,6 +6,8 @@
 #include "arm_math.h"
 
 #define DSP_DECIMATED
+#define DSP_DECIMATION_RATE	(2)
+#define 	DSP_DECIMATED_NO_INTERPOLATION
 
 #define	ADC_DMA_CHANNELS	(2)
 #define ADC_BUFFER_LEN		(512)
@@ -24,8 +26,8 @@
 
 #define INT_GAIN			(10)
 
-#define FtoQ31(x) 			(q31_t)(x * 2147483648.0f)
-#define Q31toF(x) 			(float)(x / 2147483648.0f)
+#define FtoQ31(x) 			(q31_t)(x * 2147483648.0f) //2147483648.0f
+#define Q31toF(x) 			(float)(x / 2147483648.0f)	//2147483648.0f
 //#define q31ToPwm(x)			(uint16_t)((x >> 21) + PWM_HALF)
 //#define adcToQ31(x)			(q31_t)((x - ADC_HALF) << 20)
 inline uint16_t q31toPwm(q31_t input)	{return ((input >> 21) + PWM_HALF);}

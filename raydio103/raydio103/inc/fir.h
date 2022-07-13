@@ -2,7 +2,8 @@
 
 #include "arm_math.h"
 
-#define FIR_NUM_TAPS	32
+#define FIR_NUM_TAPS		(32)
+#define FIR_NUM_TAPS_INTER	(8)
 
 extern arm_fir_decimate_instance_q31	firInstanceDecI;
 extern arm_fir_decimate_instance_q31	firInstanceDecQ;

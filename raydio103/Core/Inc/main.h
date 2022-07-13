@@ -95,6 +95,8 @@ void Error_Handler(void);
 #define AUDIO_PWM_GPIO_Port GPIOA
 #define TX_Q_PWMA11_Pin GPIO_PIN_11
 #define TX_Q_PWMA11_GPIO_Port GPIOA
+#define PIN_LCD_CS_2_Pin GPIO_PIN_12
+#define PIN_LCD_CS_2_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

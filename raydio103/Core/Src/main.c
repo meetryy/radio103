@@ -107,12 +107,13 @@ void everythingElse(void){
 	uint8_t	exRead = read8(1);
 	uint8_t encBtn = (exRead >> 2) & 0x01;
 
-
 	bool encA = (exRead >> 1) & 0x01;
 	bool encB = (exRead) & 0x01;
 
 	encInputProcess(0, encA, encB);
 	write8(0, 0x0ff * (encoder[0].phaseState >> 1));
+
+
 		//HAL_UART_Transmit_DMA(&huart1, str, sizeof(str)-1);
 	//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
 		//ST7920_Clear();
@@ -184,13 +185,41 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
 
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
   HAL_Delay(1000);
+
+  HAL_GPIO_WritePin(PIN_LCD_CS_2_GPIO_Port, PIN_LCD_CS_2_Pin, GPIO_PIN_RESET);
+
+
+	ST7920_Init();
+	ST7920_GraphicMode(1);
+	ST7920_Clear();
+	//SetPixel(10, 10);
+
+	GLCD_Font_PrintNew(0, 0, "1425030", FONT_BIG);
+	GLCD_Font_PrintNew(69, 6, "5", FONT_MID);
+	gfxDrawSmeter(78);
+	GLCD_Font_PrintNew(80, 0, "USB", FONT_REGULAR);
+	GLCD_Font_PrintNew(98, 0, "12:35", FONT_REGULAR);
+	GLCD_Font_PrintNew(80, 10, "2K7", FONT_REGULAR);
+	GLCD_Font_PrintNew(104, 10, "10.7", FONT_REGULAR);
+	GLCD_Font_PrintNew(80, 20, "S+40", FONT_REGULAR);
+	GLCD_Font_PrintNew(104, 20, "RX-A", FONT_REGULAR);
+
+	GLCD_Font_PrintNew(1, 55, "MONITR", FONT_REGULAR);
+	GLCD_Font_PrintNew(46, 55, "TONE", FONT_REGULAR);
+	GLCD_Font_PrintNew(92, 55, "TESTNG", FONT_REGULAR);
+
+
+
+	ST7920_Update();
+
+	HAL_Delay(10);
+
 
   expanderInit();
   HAL_Delay(10);
@@ -421,7 +450,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_2EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -673,7 +702,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOB, PIN_LCD_CS_Pin|PIN_LCD_DC_Pin|GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(PIN_CS_EXT_GPIO_Port, PIN_CS_EXT_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, PIN_CS_EXT_Pin|PIN_LCD_CS_2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : LED_BUILTIN_Pin */
   GPIO_InitStruct.Pin = LED_BUILTIN_Pin;
@@ -695,6 +724,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(PIN_CS_EXT_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PIN_LCD_CS_2_Pin */
+  GPIO_InitStruct.Pin = PIN_LCD_CS_2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(PIN_LCD_CS_2_GPIO_Port, &GPIO_InitStruct);
 
 }
 

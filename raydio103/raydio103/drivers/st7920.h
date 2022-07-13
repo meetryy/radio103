@@ -3,6 +3,9 @@
 
 #include "stdint.h"
 
+#define LCD_W	(128)
+enum fontName {FONT_REGULAR, FONT_BIG, FONT_MID, FONT_NR};
+
 // A replacement for SPI_TRANSMIT
 void SendByteSPI(uint8_t byte);
 
@@ -80,6 +83,11 @@ void ToggleRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h);
 void ClearPixel(uint8_t x, uint8_t y);
 void ClearFilledCircle(int16_t x0, int16_t y0, int16_t r);
 void GLCD_ICON_Print(uint8_t x,uint8_t y,const uint8_t * ICON);
+void GLCD_Font_PrintBig(uint8_t x, uint8_t y, char * String);
+void gfxDrawPoints(void);
+void gfxDrawSmeter(int percent);
+
+void GLCD_Font_PrintNew(uint8_t x, uint8_t y, char *String, int fontID);
 
 //Debug
 void GLCD_Test(void);

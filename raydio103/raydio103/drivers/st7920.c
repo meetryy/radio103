@@ -12,7 +12,7 @@
 #include "st7920.h"
 #include "font.h"
 
-#define CS_PIN 	GPIO_PIN_6
+#define CS_PIN 	GPIO_PIN_12
 #define CS_PORT GPIOA
 
 uint8_t startRow, startCol, endRow, endCol; // coordinates of the dirty rectangle
@@ -827,26 +827,183 @@ void GLCD_Font_New(uint8_t x, uint8_t y, char * String)
 }
 
 
-//Print Fonted String x=0-15 y=0-7
+
+typedef struct {
+	const int W;
+	const int H;
+	const int asciiShift;
+	const uint8_t* dataPtr;
+	const uint16_t* dataPtrLong;
+} fontInfo_t;
+
+
+const fontInfo_t fontInfo[FONT_NR] = {
+		// regular
+		{
+		.dataPtr = &font,
+		.dataPtrLong = 0,
+		.W = 5,
+		.H = 8,
+		.asciiShift = (32 * 5)
+		},
+
+		// big
+		{
+		.dataPtr = 0,
+		.dataPtrLong = &fontBig,
+		.W = 9,
+		.H = 16,
+		.asciiShift = (48 * 9)
+		},
+
+		// mid
+		{
+		.dataPtr =  0,
+		.dataPtrLong = &fontMid,
+		.W = 6,
+		.H = 11,
+		.asciiShift = (48 * 6)
+		}
+
+};
+
+void gfxDrawPoints(void){
+	SetPixel(20, 16);
+	SetPixel(21, 15);
+	SetPixel(21, 16);
+	SetPixel(22, 16);
+
+
+
+
+}
+
+const uint8_t smBitmap[] = {
+	0x1E, // start & end
+	0x3F, // all black
+	0x33, // notch
+	0x2D, // bar end
+	0x21, // empty
+};
+
+enum {SM_STARTEND, SM_FULL, SM_NOTCH, SM_TIP, SM_EMPTY};
+
+void gfxDrawSmeter(int percent){
+
+	uint8_t x = 1;
+	uint8_t y = 23;
+	uint8_t meterH = 6;
+	uint8_t meterW = 76;
+	uint8_t barLen = meterW * percent / 100;
+
+	int shiftX = x;
+	int charCount = 0;
+
+
+	int line = y / 8;
+	int shiftY = y % 8;
+	uint32_t shiftedColumn = 0;
+	int takesLines = 2;
+
+	uint8_t bitmap = 0;
+	for(int i = 0; i < meterW; i++){
+			if (i == (meterW - 1)) bitmap = smBitmap[SM_STARTEND];
+			else if (i == 0) bitmap = smBitmap[SM_STARTEND];
+			else if (i < barLen){
+				if (!(i % 8)) 	bitmap = smBitmap[SM_NOTCH];
+				else			bitmap = smBitmap[SM_FULL];
+			}
+			else if (i == barLen) bitmap = smBitmap[SM_TIP];
+			else bitmap = smBitmap[SM_EMPTY];
+
+			shiftedColumn = bitmap << shiftY;
+
+			for (int li = 0; li < takesLines; li++){
+				 GLCD_Buf[i + (LCD_W * (li + line)) + shiftX] = (shiftedColumn >> (8*li)) & 0xFF;
+			}
+	}
+
+
+}
+
+void GLCD_Font_PrintNew(uint8_t x, uint8_t y, char *String, int fontID)
+{
+	int shiftX = x;
+	int charCount = 0;
+
+	int fontW = fontInfo[fontID].W;
+	int fontWspace = fontInfo[fontID].W + 1;
+	int asciiShift = fontInfo[fontID].asciiShift;
+
+	int line = y / 8;
+	int shiftY = y % 8;
+	int takesLines = fontInfo[fontID].H / 8 + (shiftY>0);
+	uint32_t shiftedColumn = 0;
+
+	int i;
+	while(*String)
+	{
+		uint32_t dataPointer = (*String) * fontW - asciiShift;
+		for(i=0; i < fontW; i++){
+			if (fontInfo[fontID].dataPtrLong == 0)
+				shiftedColumn = fontInfo[fontID].dataPtr[dataPointer + i] << shiftY;
+			else
+				shiftedColumn = fontInfo[fontID].dataPtrLong[dataPointer + i] << shiftY;
+
+				for (int li = 0; li < takesLines; li++){
+					 GLCD_Buf[i + (charCount * fontWspace) + (LCD_W * (li + line)) + shiftX] = (shiftedColumn >> (8*li)) & 0xFF;
+				}
+		}
+
+		String++;
+		charCount++;
+
+	}
+}
+
 void GLCD_Font_Print(uint8_t x,uint8_t y,char * String)
 {
 	int shiftX = 0;
 	int shiftY = 1;
 
+	int fontW = 5;
+	int fontWspace = fontW + 1;
+	int asciiShift = 32 * fontW;
+
 	int i;
 	while(*String)
 	{
-		for(i=0;i<8;i++)
-			GLCD_Buf[i+(x*8)+(y*128)+shiftX/*+shiftY*32*/]=Font[(*String)*8+i-33*8];
+		for(i=0; i<fontW; i++)
+			GLCD_Buf[i + (x * fontWspace) +  + (y * LCD_W) + shiftX] = font[(*String) * fontW + i - asciiShift];
+
 		String++;
 		x++;
-		/*
-		if(x>15)
-		{
-			x=0;
-			y++;
+
+	}
+}
+
+
+
+//Print Fonted String x=0-15 y=0-7
+void GLCD_Font_PrintBig(uint8_t x, uint8_t y, char * String)
+{
+	int shiftX = 0;
+	int shiftY = 1;
+
+	int fontW = 9;
+	int fontWspace = fontW + 1;
+	int asciiShift = 48 * fontW;
+
+	int i;
+	while(*String)
+	{
+		for(i=0; i<fontW; i++){
+			GLCD_Buf[i + (x * fontWspace) + (y * LCD_W) + shiftX] 			= fontBig[(*String) * fontW + i - asciiShift] & 0xFF;
+			GLCD_Buf[i + (x * fontWspace) + (y * LCD_W + LCD_W) + shiftX] 	= (fontBig[(*String) * fontW + i - asciiShift] >> 8) & 0xFF;
 		}
-		*/
+		String++;
+		x++;
+
 	}
 }
 
