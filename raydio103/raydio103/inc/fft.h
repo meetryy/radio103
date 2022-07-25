@@ -6,7 +6,7 @@
 
 #define FFT_LEN			(128)
 #define FFT_USEFUL_BINS	(FFT_LEN/2)
-#define FFT_HZ_PER_BIN	(AUDIO_BUFFER_HALF/FFT_LEN)
+#define FFT_HZ_PER_BIN	(DSP_SAMPLING_FREQ/FFT_USEFUL_BINS)
 
 extern q31_t magnitudes[FFT_LEN/2];
 

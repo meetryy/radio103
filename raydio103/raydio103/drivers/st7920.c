@@ -63,92 +63,6 @@ void ST7920_SendData (uint8_t data)
 	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);  // PUll the CS LOW
 }
 
-
-uint8_t		buf[2048] = {0};
-uint16_t	bufPtr = 0;
-
-
-void ST7920_SendData2 (uint8_t data)
-{
-
-	//ST7920_SendCmd(0x03);
-	//ST7920_SendCmd(0x40);
-
-
-
-	for(int j=0;j<32;j++) {
-
-
-		ST7920_SendCmd(0x80 | j); // 6-bit (0..63)
-		ST7920_SendCmd(0x80 | 0); // 4-bit (0..15)
-
-	    //SPI.beginTransaction(SPISettings(SPI_SPEED, MSBFIRST, SPI_MODE3));
-
-		int  b=0x55;
-	    //SPI.transfer(0xFA); // data
-	    buf[bufPtr] = 0xFA; bufPtr++;
-
-	    for(int i=0; i<8;i++) {  // 16 bytes from line #0+
-	      int b = 0x55;
-
-	      buf[bufPtr] = (b & 0xF0); bufPtr++;
-	      buf[bufPtr] = (b << 4); bufPtr++;
-
-	    }
-
-	      b=0xFF;
-
-	    for(int i=0;i<16;i++) {  // 16 bytes from line #32+
-
-	      buf[bufPtr] = (b & 0xF0); bufPtr++;
-		  buf[bufPtr] = (b << 4); bufPtr++;
-	    }
-
-
-	    HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);  // PUll the CS high
-	     	HAL_SPI_Transmit(&hspi1, (uint8_t*)&buf, 32, 2);
-	     HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);  // PUll the CS LOW
-	     bufPtr = 0;
-
-
-	    //
-	  }
-
-
-
-
-
-}
-
-
-void ST7920_SendString(int row, int col, char* string)
-{
-    switch (row)
-    {
-        case 0:
-            col |= 0x80;
-            break;
-        case 1:
-            col |= 0x90;
-            break;
-        case 2:
-            col |= 0x88;
-            break;
-        case 3:
-            col |= 0x98;
-            break;
-        default:
-            col |= 0x80;
-            break;
-    }
-
-    ST7920_SendCmd(col);
-
-    while (*string)
-    	{
-    		ST7920_SendData(*string++);
-    	}
-}
 // switch to graphic mode or normal mode::: enable = 1 -> graphic mode enable = 0 -> normal mode
 
 void ST7920_GraphicMode (int enable)   // 1-enable, 0-disable
@@ -190,12 +104,12 @@ void ST7920_DrawBitmap(const unsigned char* graphic, bool half)
 
 	uint16_t Index=0;
 	uint8_t Temp,Db;
-	int Ystart = 0+half*64;
-	int Yend = 64+half*64;
+	//int Ystart = 0+half*64;
+	//int Yend = 64+half*64;
 
 
 
-	for(y=Ystart;y<Yend;y++)
+	for(y=0;y<60;y++)
 	{
 		for(x=0;x<8;x++)
 		{
@@ -251,11 +165,7 @@ bool lastHalf;
 // Update the display with the selected graphics
 void ST7920_Update(void)
 {
-
-	ST7920_DrawBitmap(GLCD_Buf, lastHalf);
-	//ST7920_Switch(lastHalf);
-	//lastHalf = !lastHalf;
-
+	ST7920_DrawBitmap(GLCD_Buf, 0);
 }
 
 
@@ -321,9 +231,6 @@ void ST7920_Clear()
 
 void ST7920_Init (void)
 {
-	//HAL_GPIO_WritePin(RST_PORT, RST_PIN, GPIO_PIN_RESET);  // RESET=0
-	//HAL_Delay(10);   // wait for 10ms
-	//HAL_GPIO_WritePin(RST_PORT, RST_PIN, GPIO_PIN_SET);  // RESET=1
 
 	HAL_Delay(50);   //wait for >40 ms
 
@@ -348,7 +255,7 @@ void ST7920_Init (void)
     HAL_Delay(1);  // 1ms delay
 
     ST7920_SendCmd(LCD_GFXMODE);  // D=1, C=0, B=0
-    HAL_Delay(1);  // 1ms delay
+    HAL_Delay(1);  // 1ms dela
 
 
 }
@@ -382,452 +289,7 @@ void ClearPixel(uint8_t x, uint8_t y)
     if (endCol <= x)  { endCol = x + 1; }
   }
 }
-
-// Toggle Pixel
-void TogglePixel(uint8_t x, uint8_t y)
-{
-  if (y < numRows && x < numCols)
-  {
-		if((GLCD_Buf[(x)+((y/8)*128)]>>y%8)&0x01)
-			ClearPixel(x,y);
-		else
-			SetPixel(x,y);
-  }
-}
-/* draw a line
- * start point (X0, Y0)
- * end point (X1, Y1)
- */
-void DrawLine(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
-{
-  int dx = (x1 >= x0) ? x1 - x0 : x0 - x1;
-  int dy = (y1 >= y0) ? y1 - y0 : y0 - y1;
-  int sx = (x0 < x1) ? 1 : -1;
-  int sy = (y0 < y1) ? 1 : -1;
-  int err = dx - dy;
-
-  for (;;)
-  {
-    SetPixel(x0, y0);
-    if (x0 == x1 && y0 == y1) break;
-    int e2 = err + err;
-    if (e2 > -dy)
-    {
-      err -= dy;
-      x0 += sx;
-    }
-    if (e2 < dx)
-    {
-      err += dx;
-      y0 += sy;
-    }
-  }
-}
-
-/* Draw rectangle
- * start point (x,y)
- * w -> width
- * h -> height
- */
-void DrawRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h)
-{
-	/* Check input parameters */
-	if (
-		x >= numCols ||
-		y >= numRows
-	) {
-		/* Return error */
-		return;
-	}
-
-	/* Check width and height */
-	if ((x + w) >= numCols) {
-		w = numCols - x;
-	}
-	if ((y + h) >= numRows) {
-		h = numRows - y;
-	}
-
-	/* Draw 4 lines */
-	DrawLine(x, y, x + w, y);         /* Top line */
-	DrawLine(x, y + h, x + w, y + h); /* Bottom line */
-	DrawLine(x, y, x, y + h);         /* Left line */
-	DrawLine(x + w, y, x + w, y + h); /* Right line */
-}
-
-/* Draw filled rectangle
- * Start point (x,y)
- * w -> width
- * h -> height
- */
-void DrawFilledRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h)
-{
-	uint8_t i;
-
-	/* Check input parameters */
-	if (
-		x >= numCols ||
-		y >= numRows
-	) {
-		/* Return error */
-		return;
-	}
-
-	/* Check width and height */
-	if ((x + w) >= numCols) {
-		w = numCols - x;
-	}
-	if ((y + h) >= numRows) {
-		h = numRows - y;
-	}
-
-	/* Draw lines */
-	for (i = 0; i <= h; i++) {
-		/* Draw lines */
-		DrawLine(x, y + i, x + w, y + i);
-	}
-}
-
-/* draw circle
- * centre (x0,y0)
- * radius = radius
- */
-void DrawCircle(uint8_t x0, uint8_t y0, uint8_t radius)
-{
-  int f = 1 - (int)radius;
-  int ddF_x = 1;
-
-  int ddF_y = -2 * (int)radius;
-  int x = 0;
-
-  SetPixel(x0, y0 + radius);
-  SetPixel(x0, y0 - radius);
-  SetPixel(x0 + radius, y0);
-  SetPixel(x0 - radius, y0);
-
-  int y = radius;
-  while(x < y)
-  {
-    if(f >= 0)
-    {
-      y--;
-      ddF_y += 2;
-      f += ddF_y;
-    }
-    x++;
-    ddF_x += 2;
-    f += ddF_x;
-    SetPixel(x0 + x, y0 + y);
-    SetPixel(x0 - x, y0 + y);
-    SetPixel(x0 + x, y0 - y);
-    SetPixel(x0 - x, y0 - y);
-    SetPixel(x0 + y, y0 + x);
-    SetPixel(x0 - y, y0 + x);
-    SetPixel(x0 + y, y0 - x);
-    SetPixel(x0 - y, y0 - x);
-  }
-}
-
-// Draw Filled Circle
-void DrawFilledCircle(int16_t x0, int16_t y0, int16_t r)
-{
-	int16_t f = 1 - r;
-	int16_t ddF_x = 1;
-	int16_t ddF_y = -2 * r;
-	int16_t x = 0;
-	int16_t y = r;
-
-    SetPixel(x0, y0 + r);
-    SetPixel(x0, y0 - r);
-    SetPixel(x0 + r, y0);
-    SetPixel(x0 - r, y0);
-    DrawLine(x0 - r, y0, x0 + r, y0);
-
-    while (x < y) {
-        if (f >= 0) {
-            y--;
-            ddF_y += 2;
-            f += ddF_y;
-        }
-        x++;
-        ddF_x += 2;
-        f += ddF_x;
-
-        DrawLine(x0 - x, y0 + y, x0 + x, y0 + y);
-        DrawLine(x0 + x, y0 - y, x0 - x, y0 - y);
-
-        DrawLine(x0 + y, y0 + x, x0 - y, y0 + x);
-        DrawLine(x0 + y, y0 - x, x0 - y, y0 - x);
-    }
-}
-
-// Clear Filled Circle
-void ClearFilledCircle(int16_t x0, int16_t y0, int16_t r)
-{
-	int16_t f = 1 - r;
-	int16_t ddF_x = 1;
-	int16_t ddF_y = -2 * r;
-	int16_t x = 0;
-	int16_t y = r;
-
-    ClearPixel(x0, y0 + r);
-    ClearPixel(x0, y0 - r);
-    ClearPixel(x0 + r, y0);
-    ClearPixel(x0 - r, y0);
-    ClearLine(x0 - r, y0, x0 + r, y0);
-
-    while (x < y) {
-        if (f >= 0) {
-            y--;
-            ddF_y += 2;
-            f += ddF_y;
-        }
-        x++;
-        ddF_x += 2;
-        f += ddF_x;
-
-        ClearLine(x0 - x, y0 + y, x0 + x, y0 + y);
-        ClearLine(x0 + x, y0 - y, x0 - x, y0 - y);
-
-        ClearLine(x0 + y, y0 + x, x0 - y, y0 + x);
-        ClearLine(x0 + y, y0 - x, x0 - y, y0 - x);
-    }
-}
-
-// Draw Traingle with coordimates (x1, y1), (x2, y2), (x3, y3)
-void DrawTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t x3, uint16_t y3)
-{
-	/* Draw lines */
-	DrawLine(x1, y1, x2, y2);
-	DrawLine(x2, y2, x3, y3);
-	DrawLine(x3, y3, x1, y1);
-}
-
-// Draw Filled Traingle with coordimates (x1, y1), (x2, y2), (x3, y3)
-void DrawFilledTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t x3, uint16_t y3)
-{
-	int16_t deltax = 0, deltay = 0, x = 0, y = 0, xinc1 = 0, xinc2 = 0,
-	yinc1 = 0, yinc2 = 0, den = 0, num = 0, numadd = 0, numpixels = 0,
-	curpixel = 0;
-
-#define ABS(x)   ((x) > 0 ? (x) : -(x))
-
-	deltax = ABS(x2 - x1);
-	deltay = ABS(y2 - y1);
-	x = x1;
-	y = y1;
-
-	if (x2 >= x1) {
-		xinc1 = 1;
-		xinc2 = 1;
-	} else {
-		xinc1 = -1;
-		xinc2 = -1;
-	}
-
-	if (y2 >= y1) {
-		yinc1 = 1;
-		yinc2 = 1;
-	} else {
-		yinc1 = -1;
-		yinc2 = -1;
-	}
-
-	if (deltax >= deltay){
-		xinc1 = 0;
-		yinc2 = 0;
-		den = deltax;
-		num = deltax / 2;
-		numadd = deltay;
-		numpixels = deltax;
-	} else {
-		xinc2 = 0;
-		yinc1 = 0;
-		den = deltay;
-		num = deltay / 2;
-		numadd = deltax;
-		numpixels = deltay;
-	}
-
-	for (curpixel = 0; curpixel <= numpixels; curpixel++)
-	{
-		DrawLine(x, y, x3, y3);
-
-		num += numadd;
-		if (num >= den) {
-			num -= den;
-			x += xinc1;
-			y += yinc1;
-		}
-		x += xinc2;
-		y += yinc2;
-	}
-}
-
-//Clear Line
-void ClearLine(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
-{
-  int dx = (x1 >= x0) ? x1 - x0 : x0 - x1;
-  int dy = (y1 >= y0) ? y1 - y0 : y0 - y1;
-  int sx = (x0 < x1) ? 1 : -1;
-  int sy = (y0 < y1) ? 1 : -1;
-  int err = dx - dy;
-
-  for (;;)
-  {
-    ClearPixel(x0, y0);
-    if (x0 == x1 && y0 == y1) break;
-    int e2 = err + err;
-    if (e2 > -dy)
-    {
-      err -= dy;
-      x0 += sx;
-    }
-    if (e2 < dx)
-    {
-      err += dx;
-      y0 += sy;
-    }
-  }
-}
-
-//Toggle Line
-void ToggleLine(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
-{
-  int dx = (x1 >= x0) ? x1 - x0 : x0 - x1;
-  int dy = (y1 >= y0) ? y1 - y0 : y0 - y1;
-  int sx = (x0 < x1) ? 1 : -1;
-  int sy = (y0 < y1) ? 1 : -1;
-  int err = dx - dy;
-
-  for (;;)
-  {
-    TogglePixel(x0, y0);
-    if (x0 == x1 && y0 == y1) break;
-    int e2 = err + err;
-    if (e2 > -dy)
-    {
-      err -= dy;
-      x0 += sx;
-    }
-    if (e2 < dx)
-    {
-      err += dx;
-      y0 += sy;
-    }
-  }
-}
-
-
-uint16_t character[] = {
-		//0xFFFF, 0x5555, 0xAAAA, 0xFFFF, 0x5555, 0xAAAA,0xFFFF, 0x5555, 0xAAAA, 0xFFFF, 0x5555, 0xAAAA,0xFFFF, 0x5555, 0xAAAA, 0xFFFF, 0x5555, 0xAAAA
-		0x00, 0x00, 0x00, 0xF8, 0x08, 0x08, 0x08, 0x08, 0x08, 0xF0, 0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x3F, 0x01, 0x01, 0x03, 0x07, 0x19, 0x30, 0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-
-
-};
-
-int fontW = 14;
-int fontH = 14;
-
-void GLCD_Font_New(uint8_t x, uint8_t y, char * String)
-{
-	/*
-	for (int i=0; i<8; i++){
-		//GLCD_Buf[128*i+1] = 0x80;
-		for (int j=1; j<5; j++){
-			int o = 0x00;
-			if (i%2)
-				o = 0xff;
-			GLCD_Buf[128*i+j] = o;
-		}
-	}
-
-*/
-
-	int tileY = y/8;
-	int Yshift = (y % 8);
-
-	for (int i=0; i < fontW; i++){
-		//uint32_t fullCol = (character[i]) | character[i+fontH]  << 8 | character[i+fontH*2]  << 16;
-
-		uint32_t fullCol = (character[i]) | character[i+fontH]  << 8 | character[i+fontH*2]  << 16;
-
-		int pixLeft = fontH;
-		int tileCount = 0;
-		while (pixLeft > 0){
-
-			//int pixInThisTile = 8;
-			//if (fontH < 8) pixInThisTile = fontH;
-			//if (tileCount == 0) pixInThisTile = 8 - Yshift;
-			//if (pixLeft < 8) pixInThisTile = pixLeft;
-
-			uint32_t a = (fullCol << (Yshift)) >> (8 * tileCount);
-
-			GLCD_Buf[x + i + 128 * tileCount +  128 * tileY ] = a;
-			pixLeft -= 8 - Yshift*(tileCount == 0);
-			tileCount++;
-		}
-
-
-
-		//int a = (fullCol << Yshift);
-
-		//for (int tile=0; tile<8; tile++){
-			//uint32_t b = a >> (8 * tile) & 0xFF;
-
-			//uint32_t a = (fullCol << (Yshift)) >> (8 * tileCount);
-			//GLCD_Buf[x + i + 128*tileCount +  1280*tileY] = a;
-			//GLCD_Buf[10 + i + 128 * tileY + 128*2] = b;
-		//}
-
-
-	}
-/*
-	GLCD_Buf[1] = 0x0f;
-	GLCD_Buf[2] = 0x0f;
-	GLCD_Buf[3] = 0xf0;
-	GLCD_Buf[4] = 0xf0;
-
-	int X = x;
-	int Y = y;
-	int YshiftInBox = (y % 8);
-	int boxY = y / 8;
-	int boxX = x;
-
-	for (int charX = 0; charX <fontW; charX++){
-		int YpixLeft = fontH;
-		//int YposInBox = YshiftInBox;
-		//int boxN = 0;
-		int YtoFiliInBox = 0;
-		int charYshift = YshiftInBox;
-
-		while (YpixLeft > 0){
-
-			if (YpixLeft > 8) YtoFiliInBox = 8 - YshiftInBox;
-			else YtoFiliInBox = YpixLeft;
-
-			//YtoFiliInBox = 8 - YshiftInBox;
-			GLCD_Buf[(boxX)+(boxY*128)] |= (character[charX] << (charYshift)) & 0xFF;
-			YpixLeft -= YtoFiliInBox;
-			if (YpixLeft > 0) {
-				//boxN++;
-				boxY++;
-				charYshift += YtoFiliInBox;
-				YshiftInBox = 0;
-			}
-		}
-
-		boxX++;
-		boxY = y / 8;
-		YshiftInBox = (y % 8);
-	}
-*/
-}
-
-
-
+
 typedef struct {
 	const int W;
 	const int H;
@@ -835,7 +297,6 @@ typedef struct {
 	const uint8_t* dataPtr;
 	const uint16_t* dataPtrLong;
 } fontInfo_t;
-
 
 const fontInfo_t fontInfo[FONT_NR] = {
 		// regular
@@ -860,9 +321,9 @@ const fontInfo_t fontInfo[FONT_NR] = {
 		{
 		.dataPtr =  0,
 		.dataPtrLong = &fontMid,
-		.W = 6,
+		.W = 5,
 		.H = 11,
-		.asciiShift = (48 * 6)
+		.asciiShift = (48 * 5)
 		}
 
 };
@@ -872,10 +333,6 @@ void gfxDrawPoints(void){
 	SetPixel(21, 15);
 	SetPixel(21, 16);
 	SetPixel(22, 16);
-
-
-
-
 }
 
 const uint8_t smBitmap[] = {
@@ -926,25 +383,119 @@ void gfxDrawSmeter(int percent){
 
 }
 
+#include <stdlib.h>
+
+char txt[16];
+int 	freqHz = 14250000;
+
+int 	benchTimes = 1;
+int		benchStart = 0;
+float 	benchTimeUs = 0;
+
+int		demoFFTbins[128];
+
+void gfxDrawFFT(void){
+	uint8_t x = 0;
+	uint8_t y = 25;
+	uint8_t meterH = 24;
+	uint8_t meterW = 128;
+
+	int shiftX = x;
+
+	int line = y / 8;
+	int shiftY = y % 8;
+
+	uint32_t shiftedColumn = 0;
+	int takesLines = 4; // FIXME: too much? add correct calculation
+
+	uint32_t bitmap = 0;
+	for(int i = 0; i < meterW; i++){
+			// i is bin index
+			int binH = demoFFTbins[i] * meterH / 100;
+			bitmap = 0xFFFFFFFF << (meterH - binH);
+			shiftedColumn = bitmap << shiftY;
+
+			for (int li = 0; li < takesLines; li++){
+				 GLCD_Buf[i + (LCD_W * (li + line)) + shiftX] = (shiftedColumn >> (8 * li)) & 0xFF;
+			}
+	}
+}
+
+int sm = 0;
+void gfxDemoDraw(void){
+
+		for (int j = 0; j < 128; j++) {
+			demoFFTbins[j] = (50*((j>64)&&(j<(64+24))));//rand() % 100;
+		}
+
+		//GLCD_Font_PrintNew(0, 0, "1425030", FONT_BIG);
+		GLCD_Font_PrintNew(69, 6, "5", FONT_MID);
+
+		GLCD_Font_PrintNew(80, 0, "USB", FONT_REGULAR);
+		GLCD_Font_PrintNew(98, 0, "12:35", FONT_REGULAR);
+		GLCD_Font_PrintNew(80, 10, "2K7", FONT_REGULAR);
+		GLCD_Font_PrintNew(104, 10, "10.7", FONT_REGULAR);
+		GLCD_Font_PrintNew(80, 20, "S+40", FONT_REGULAR);
+		GLCD_Font_PrintNew(104, 20, "RX-A", FONT_REGULAR);
+
+		GLCD_Font_PrintNew(1, 55, "MONITR", FONT_REGULAR);
+		GLCD_Font_PrintNew(46, 55, "TONE", FONT_REGULAR);
+		GLCD_Font_PrintNew(92, 55, "TESTNG", FONT_REGULAR);
+
+		sprintf(txt, "%u", freqHz/10);
+		GLCD_Font_PrintNew(0, 0, txt, FONT_BIG);
+
+		sprintf(txt, "%u", freqHz  % 10);
+		GLCD_Font_PrintNew(70, 6, txt, FONT_MID);
+		freqHz++;
+
+		gfxDrawFFT();
+
+		gfxDrawSmeter(sm);
+
+		sm = rand()%100;
+
+}
+
+
+void gfxDemo(void){
+	while(1){
+
+		for (int j = 0; j < 128; j++) {
+			demoFFTbins[j] = rand() % 100;
+		}
+
+		benchStart = HAL_GetTick();
+		for (int i=0; i < benchTimes; i++)
+			gfxDemoDraw();
+
+		int benchMs = HAL_GetTick() - benchStart;
+		benchTimeUs = 1000.0f * (float)benchMs / (float)benchTimes;
+		sprintf(txt, "%u US", (int)benchTimeUs);
+		GLCD_Font_PrintNew(0, 33, txt, FONT_REGULAR);
+
+		ST7920_Update();
+		HAL_Delay(100);
+	}
+}
+
 void GLCD_Font_PrintNew(uint8_t x, uint8_t y, char *String, int fontID)
 {
 	int shiftX = x;
 	int charCount = 0;
 
-	int fontW = fontInfo[fontID].W;
 	int fontWspace = fontInfo[fontID].W + 1;
-	int asciiShift = fontInfo[fontID].asciiShift;
 
 	int line = y / 8;
 	int shiftY = y % 8;
-	int takesLines = fontInfo[fontID].H / 8 + (shiftY>0);
+	int takesLines = fontInfo[fontID].H / 8 + (shiftY > 0);
 	uint32_t shiftedColumn = 0;
 
 	int i;
 	while(*String)
 	{
-		uint32_t dataPointer = (*String) * fontW - asciiShift;
-		for(i=0; i < fontW; i++){
+		uint32_t dataPointer = (*String) * fontInfo[fontID].W - fontInfo[fontID].asciiShift;
+		for(i=0; i < fontInfo[fontID].W; i++){
 			if (fontInfo[fontID].dataPtrLong == 0)
 				shiftedColumn = fontInfo[fontID].dataPtr[dataPointer + i] << shiftY;
 			else
@@ -983,29 +534,6 @@ void GLCD_Font_Print(uint8_t x,uint8_t y,char * String)
 }
 
 
-
-//Print Fonted String x=0-15 y=0-7
-void GLCD_Font_PrintBig(uint8_t x, uint8_t y, char * String)
-{
-	int shiftX = 0;
-	int shiftY = 1;
-
-	int fontW = 9;
-	int fontWspace = fontW + 1;
-	int asciiShift = 48 * fontW;
-
-	int i;
-	while(*String)
-	{
-		for(i=0; i<fontW; i++){
-			GLCD_Buf[i + (x * fontWspace) + (y * LCD_W) + shiftX] 			= fontBig[(*String) * fontW + i - asciiShift] & 0xFF;
-			GLCD_Buf[i + (x * fontWspace) + (y * LCD_W + LCD_W) + shiftX] 	= (fontBig[(*String) * fontW + i - asciiShift] >> 8) & 0xFF;
-		}
-		String++;
-		x++;
-
-	}
-}
 
 //Print ICON(8*8) x=0-15 y=0-7
 void GLCD_ICON_Print(uint8_t x,uint8_t y,const uint8_t * ICON)

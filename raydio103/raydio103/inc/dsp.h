@@ -14,14 +14,18 @@
 #define AUDIO_BUFFER_LEN	(ADC_BUFFER_LEN/ADC_DMA_CHANNELS) 			// buffer is [1][2][3][4][1][2][3][4]
 #define DSP_BLOCK_SIZE		(AUDIO_BUFFER_LEN/2)
 #define DSP_BLOCK_SIZE_DEC	(DSP_BLOCK_SIZE/2)
-#define	DSP_SAMPLING_FREQ	((128000000/1024/2)/ADC_DMA_CHANNELS) // /2 since buffer is I+Q
+#define	DSP_SAMPLING_FREQ	((128000000/(1 << PWM_BITS)/2)/ADC_DMA_CHANNELS) // /2 since buffer is I+Q
 
 #define ADC_BITS			(12)
-#define ADC_MAX				((1<<ADC_BITS))
+#define ADC_MAX				(1<<ADC_BITS)
 #define ADC_HALF			(ADC_MAX/2)
 
-#define PWM_BITS			11
-#define	PWM_MAX				((1 << PWM_BITS))
+#define PWM_BITS			11	// 2048
+//#define PWM_BITS			10	// 1024
+
+// FIXME: add check ((1 << PWM_BITS) == TIM1->ARR) at DSP init
+
+#define	PWM_MAX				(1 << PWM_BITS)
 #define PWM_HALF			(PWM_MAX/2)
 
 #define INT_GAIN			(10)

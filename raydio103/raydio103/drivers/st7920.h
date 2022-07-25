@@ -5,7 +5,7 @@
 
 #define LCD_W	(128)
 enum fontName {FONT_REGULAR, FONT_BIG, FONT_MID, FONT_NR};
-
+extern uint8_t GLCD_Buf[1024];
 // A replacement for SPI_TRANSMIT
 void SendByteSPI(uint8_t byte);
 
@@ -86,6 +86,7 @@ void GLCD_ICON_Print(uint8_t x,uint8_t y,const uint8_t * ICON);
 void GLCD_Font_PrintBig(uint8_t x, uint8_t y, char * String);
 void gfxDrawPoints(void);
 void gfxDrawSmeter(int percent);
+void gfxDemo(void);
 
 void GLCD_Font_PrintNew(uint8_t x, uint8_t y, char *String, int fontID);
 

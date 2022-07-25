@@ -2,10 +2,12 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+
 enum mods{MOD_LSB, MOD_USB, MOD_CW, MOD_CWN, MOD_AM, MOD_FM, MOD_NR};
 enum vfos{VFO_A, VFO_B, VFO_NR};
 enum bands{BAND_40M, BAND_30M, BAND_20M, BAND_NR};
 enum agcs{AGC_FAST, AGC_SLOW, AGC_MID, AGC_NR};
+enum stateTx {RX, TX};
 
 typedef struct{
 	// modulation-specific parameters

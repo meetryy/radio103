@@ -337,58 +337,83 @@ float Falpha = 0.02f;
 float FR = 0.7f;
 float FAn = 0;
 
-
 void agcPrasolovFloat(q31_t* source, q31_t* destination, uint16_t blockSize){
 	for (uint16_t i=0; i<blockSize; i++){
 		float input = Q31toF(source[i]);
 		input = input * FAn;
 
 		//float Anew =;
-		FAn =  FAn * (1 - Falpha * fabs(input)) + Falpha * FR;
+		FAn =  FAn * (1 - (Falpha * fabs(input))) + Falpha * FR;
 		destination[i] = FtoQ31(input);
 	}
 }
 
 
+q31_t q31Toq28(q31_t in) {return ((q31_t)in << 3);}
+q31_t q28Toq31(q31_t in) {return ((q31_t)in >> 3);}
 
 q31_t alpha = FtoQ31(0.02f);
 q31_t R = FtoQ31(0.7f);
-q31_t An = FtoQ31(0);
+q31_t An = FtoQ31(0.9f);
+q31_t aR = FtoQ31(0.7f * 0.02f);
 
 void agcPrasolovQ(q31_t* source, q31_t* destination, uint16_t blockSize){
+	/*
+	arm_scale_q31(source, An, 0, destination, blockSize);
+
+	// |in|
+	q31_t inAbs[blockSize];
+	arm_abs_q31(source, inAbs, blockSize);
+
+	// alpha*|in|
+	q31_t alphaIn[blockSize];
+	arm_scale_q31(alphaIn, alpha, 0, alphaIn, blockSize);
+
+	// (1 - alpha*|in|)
+	q31_t err[blockSize];
+
+	for (uint16_t i=0; i<blockSize; i++)
+		err[i] = Q31_1 - alphaIn[i];
+
+	// An * (1 - alpha*|in|)
+	q31_t left[blockSize];
+	arm_scale_q31(err, An, 0, left, blockSize);
+
+	// (An * (1 - alpha*|in|)) + alpha*R
+	q31_t left[blockSize];
+	arm_scale_q31(err, An, 0, left, blockSize);
+	*/
+
+
+	// FIMXE: use 4.28?
 	for (uint16_t i=0; i<blockSize; i++){
-		//float input = Q31toF(source[i]);
-		arm_mult_q31(&source[i], &An, &source[i], 1);
+		q31_t sampleIn = source[i];
+		q31_t sampleOut;
 
-		//source[i] = sourceA;
+		arm_scale_q31(&sampleIn, An, 0, &sampleOut, 1);
+		destination[i] = sampleOut;
 
-		//float Anew = An * (1 - alpha * abs(source[i])) + alpha * R;
+		// |in|
+		q31_t inAbs;
+		arm_abs_q31(&sampleIn, &inAbs, 1);
 
-		q31_t Anew = 0;
-		q31_t alphaR = 0;
-		q31_t alphaAbs = 0;
-		q31_t absSourceI = abs(source[i]);
+		// alpha*|in|
+		q31_t alphaIn;
+		arm_scale_q31(&inAbs, &alpha, 0, &alphaIn, 1);
 
-		arm_mult_q31(&alpha, &absSourceI, &alphaAbs, 1); // alpha * abs(source[i])
-		q31_t diff = Q31_1 - alphaAbs - 1;
-		q31_t left = 0;
+		// (1 - alpha*|in|)
+		q31_t err;
+		err = Q31_1 - alphaIn;
 
-		arm_mult_q31(&alpha, &R, &alphaR, 1); // alpha * R
-		arm_mult_q31(&An, &diff, &left, 1); // An * ...
-		Anew = left + alphaR;
-		An = Anew;
+		// An * (1 - alpha*|in|)
+		q31_t left;
+		arm_scale_q31(&err, &An, 0, &left, 1);
 
-		destination[i] = source[i];
+		// (An * (1 - alpha*|in|)) + alpha*R
+		q31_t newAn = left + aR;
 
-		/*
-		float input = Q31toF(source[i]);
-		input = input * An;
 
-		float Anew = An * (1 - alpha * fabs(input)) + alpha * R;
-		An = Anew;
-		destination[i] = FtoQ31(input);
-		*/
-
+		An = newAn;
 	}
 
 }

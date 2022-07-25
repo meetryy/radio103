@@ -52,6 +52,9 @@ extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 extern DMA_HandleTypeDef hdma_tim1_ch1;
+
+extern UART_HandleTypeDef huart1;
+
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/
@@ -79,14 +82,8 @@ void Error_Handler(void);
 #define ADC_SWR_F_GPIO_Port GPIOA
 #define ADC_SWR_R_Pin GPIO_PIN_5
 #define ADC_SWR_R_GPIO_Port GPIOA
-#define ADC_VIN_Pin GPIO_PIN_6
-#define ADC_VIN_GPIO_Port GPIOA
-#define ADC_RESERVED_Pin GPIO_PIN_7
-#define ADC_RESERVED_GPIO_Port GPIOA
 #define PIN_LCD_CS_Pin GPIO_PIN_0
 #define PIN_LCD_CS_GPIO_Port GPIOB
-#define PIN_LCD_DC_Pin GPIO_PIN_1
-#define PIN_LCD_DC_GPIO_Port GPIOB
 #define TX_Q_PWM_Pin GPIO_PIN_8
 #define TX_Q_PWM_GPIO_Port GPIOA
 #define PIN_CS_EXT_Pin GPIO_PIN_9
@@ -97,6 +94,8 @@ void Error_Handler(void);
 #define TX_Q_PWMA11_GPIO_Port GPIOA
 #define PIN_LCD_CS_2_Pin GPIO_PIN_12
 #define PIN_LCD_CS_2_GPIO_Port GPIOA
+#define PIN_LCD_DC_Pin GPIO_PIN_15
+#define PIN_LCD_DC_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

@@ -112,8 +112,10 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     /**ADC1 GPIO Configuration
     PA0-WKUP     ------> ADC1_IN0
     PA1     ------> ADC1_IN1
+    PA6     ------> ADC1_IN6
+    PA7     ------> ADC1_IN7
     */
-    GPIO_InitStruct.Pin = ADC_RX_I_Pin|ADC_RX_Q_Pin;
+    GPIO_InitStruct.Pin = ADC_RX_I_Pin|ADC_RX_Q_Pin|GPIO_PIN_6|GPIO_PIN_7;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -152,11 +154,8 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     PA3     ------> ADC2_IN3
     PA4     ------> ADC2_IN4
     PA5     ------> ADC2_IN5
-    PA6     ------> ADC2_IN6
-    PA7     ------> ADC2_IN7
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3|ADC_SWR_F_Pin|ADC_SWR_R_Pin
-                          |ADC_VIN_Pin|ADC_RESERVED_Pin;
+    GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3|ADC_SWR_F_Pin|ADC_SWR_R_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -186,8 +185,10 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
     /**ADC1 GPIO Configuration
     PA0-WKUP     ------> ADC1_IN0
     PA1     ------> ADC1_IN1
+    PA6     ------> ADC1_IN6
+    PA7     ------> ADC1_IN7
     */
-    HAL_GPIO_DeInit(GPIOA, ADC_RX_I_Pin|ADC_RX_Q_Pin);
+    HAL_GPIO_DeInit(GPIOA, ADC_RX_I_Pin|ADC_RX_Q_Pin|GPIO_PIN_6|GPIO_PIN_7);
 
     /* ADC1 DMA DeInit */
     HAL_DMA_DeInit(hadc->DMA_Handle);
@@ -208,11 +209,8 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
     PA3     ------> ADC2_IN3
     PA4     ------> ADC2_IN4
     PA5     ------> ADC2_IN5
-    PA6     ------> ADC2_IN6
-    PA7     ------> ADC2_IN7
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2|GPIO_PIN_3|ADC_SWR_F_Pin|ADC_SWR_R_Pin
-                          |ADC_VIN_Pin|ADC_RESERVED_Pin);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2|GPIO_PIN_3|ADC_SWR_F_Pin|ADC_SWR_R_Pin);
 
   /* USER CODE BEGIN ADC2_MspDeInit 1 */
 
@@ -330,7 +328,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
     hdma_spi1_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
     hdma_spi1_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
     hdma_spi1_tx.Init.Mode = DMA_NORMAL;
-    hdma_spi1_tx.Init.Priority = DMA_PRIORITY_LOW;
+    hdma_spi1_tx.Init.Priority = DMA_PRIORITY_MEDIUM;
     if (HAL_DMA_Init(&hdma_spi1_tx) != HAL_OK)
     {
       Error_Handler();

@@ -8,7 +8,10 @@
 #include "agc.h"
 #include "fir.h"
 #include "audio.h"
+#include "global.h"
+#include "radio.h"
 #include <stdbool.h>
+#include "metrics.h"
 
 enum dspRingH {HALF_LOWER, HALF_UPPER};
 volatile bool dspRingHalf = HALF_LOWER;
@@ -110,8 +113,6 @@ void dspStart(void){
 	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)inBuf, ADC_BUFFER_LEN); // CH3 = audio output
 
 	HAL_TIM_PWM_Start_DMA(&htim1, TIM_CHANNEL_3, (uint32_t*)outBuf, ADC_BUFFER_LEN/(ADC_DMA_CHANNELS));
-
-
 }
 
 
@@ -144,17 +145,34 @@ int start = 0;
 int end  = 0;
 //int adcBuffStart = 0;
 
-void dspPrepareInput(void){
+
+__attribute__((optimize("unroll-loops"))) void dspPrepareInput(void) {
 	int adcBuffStart = ADC_BUFFER_LEN/2 * (dspRingHalf == HALF_LOWER);
 
-	for (int i=0; i < DSP_BLOCK_SIZE; i++){
+	//__attribute__(optimize("unroll-loops"))
+	 for (int i=0; i < DSP_BLOCK_SIZE; i++){
 		int ptr = i * ADC_DMA_CHANNELS + adcBuffStart;
 		dspInI[i] = adcToQ31(inBuf[ptr]);
 		dspInQ[i] = adcToQ31(inBuf[ptr + 1]);
 	}
 }
 
-void dspPrepareOutput(void){
+/*
+void dspPrepareInputUnrolled(void){
+	int adcBuffStart = ADC_BUFFER_LEN/2 * (dspRingHalf == HALF_LOWER);
+
+	dspInI[0] = adcToQ31(inBuf[0 + adcBuffStart]);
+	dspInI[1] = adcToQ31(inBuf[0 + adcBuffStart]);
+	dspInI[2] = adcToQ31(inBuf[0 + adcBuffStart]);
+	dspInI[3] = adcToQ31(inBuf[0 + adcBuffStart]);
+	dspInI[4] = adcToQ31(inBuf[0 + adcBuffStart]);
+	dspInI[5] = adcToQ31(inBuf[0 + adcBuffStart]);
+	dspInI[6] = adcToQ31(inBuf[0 + adcBuffStart]);
+	dspInI[7] = adcToQ31(inBuf[0 + adcBuffStart]);
+}
+*/
+
+__attribute__((optimize("unroll-loops"))) void dspPrepareOutput(void){
 
 	#ifdef DSP_DECIMATED_NO_INTERPOLATION
 			int adcBuffStart = ADC_BUFFER_LEN/(ADC_DMA_CHANNELS*2) * (dspRingHalf == HALF_LOWER);
@@ -183,91 +201,110 @@ float Xinc = (LOfreq/(float)DSP_SAMPLING_FREQ)*4.0f*M_PI;
 #    define M_PI 3.14159265358979323846
 #endif
 
+uint32_t getTimeDiff(void){
+	//static uint32_t lastTime;
+	uint32_t time = __HAL_DMA_GET_COUNTER(&hdma_adc1);
+
+	//uint32_t r =  (lastTime - time);
+	//lastTime = time;
+	return time;
+}
+
+void setTime(int i){
+	//metricsSet(i, __HAL_DMA_GET_COUNTER(&hdma_adc1));
+	metrics.metric[i].time = __HAL_DMA_GET_COUNTER(&hdma_adc1);
+}
+
+//__attribute__ ((section(".RamFunc")))
 void dspProc(void){
 	if (!dspProcDone){
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, 1);
+		setTime(METRIC_DSP_START);
+		if(radio.txState == RX){
+		// receive
 
-		// fill dspInI[], dspInQ
-		dspPrepareInput();
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, 1);
 
-		// process FFT
-		fftProcess(dspOut);
+			// fill dspInI[], dspInQ
+			dspPrepareInput();
 
-		q31_t processingBufferI[DSP_BLOCK_SIZE_DEC];
-		q31_t processingBufferQ[DSP_BLOCK_SIZE_DEC];
+			setTime(METRIC_DSP_PREP_IN);
 
-		// main filter
-	#ifdef DSP_DECIMATED
-		arm_fir_decimate_q31(&firInstanceDecI, dspInI, dspOut, DSP_BLOCK_SIZE);
-		arm_fir_decimate_q31(&firInstanceDecQ, dspInQ, processingBufferQ, DSP_BLOCK_SIZE);
+			// process FFT
+			//fftProcess(dspOut);
+			setTime(METRIC_DSP_FFT);
 
-	#else
-		arm_fir_q31(&firInstanceI, dspInI, dspOut, DSP_BLOCK_SIZE);
-		arm_fir_q31(&firInstanceQ, dspInQ, dspOut, DSP_BLOCK_SIZE);
-	#endif
+			q31_t processingBufferI[DSP_BLOCK_SIZE_DEC];
+			q31_t processingBufferQ[DSP_BLOCK_SIZE_DEC];
 
-		agcPrasolovFloat(dspOut, dspOut, DSP_BLOCK_SIZE_DEC);
-		softClip(dspOut, dspOut, DSP_BLOCK_SIZE_DEC);
+			// main filter
+		#ifdef DSP_DECIMATED
+			arm_fir_decimate_q31(&firInstanceDecI, dspInI, dspOut, DSP_BLOCK_SIZE);
+			arm_fir_decimate_q31(&firInstanceDecQ, dspInQ, processingBufferQ, DSP_BLOCK_SIZE);
 
-		for (int z=0; z < DSP_BLOCK_SIZE_DEC; z++){
+		#else
+			arm_fir_q31(&firInstanceI, dspInI, dspOut, DSP_BLOCK_SIZE);
+			arm_fir_q31(&firInstanceQ, dspInQ, dspOut, DSP_BLOCK_SIZE);
+		#endif
 
-			ssbLOgenX += Xinc;
-
-			if (ssbLOgenX > ((float)M_PI*2.0f))
-				ssbLOgenX -= ((float)M_PI*2.0f);
-
-			float s = arm_sin_f32(ssbLOgenX);
-			dspOut[z] = FtoQ31(s);
-
+			setTime(METRIC_DSP_FIR);
+			agcPrasolovFloat(dspOut, dspOut, DSP_BLOCK_SIZE_DEC);
+			setTime(METRIC_DSP_AGC);
+			softClip(dspOut, dspOut, DSP_BLOCK_SIZE_DEC);
+			setTime(METRIC_DSP_CLIP);
 			/*
-			ssbLOgenX += Xinc;
+			for (int z=0; z < DSP_BLOCK_SIZE_DEC; z++){
 
-			if (ssbLOgenX > Xmax)
-				ssbLOgenX -= Xmax;
+				ssbLOgenX += Xinc;
 
-			dspOut[z] = arm_sin_q31(ssbLOgenX);
-			//q31_t sin;
-			//q31_t cos;
-			 *
-			 */
+				if (ssbLOgenX > ((float)M_PI*2.0f))
+					ssbLOgenX -= ((float)M_PI*2.0f);
+
+				float s = arm_sin_f32(ssbLOgenX);
+				dspOut[z] = FtoQ31(s);
+
+
+
+			}
+	*/
+
+		#ifndef DSP_DECIMATED_NO_INTERPOLATION
+			arm_fir_interpolate_q31(&firInstanceInter, processingBufferI, dspOut, DSP_BLOCK_SIZE_DEC);
+		#endif
+
+			dspPrepareOutput();
+			setTime(METRIC_DSP_PREP_OUT);
 
 		}
 
-
-	#ifndef DSP_DECIMATED_NO_INTERPOLATION
-		arm_fir_interpolate_q31(&firInstanceInter, processingBufferI, dspOut, DSP_BLOCK_SIZE_DEC);
-	#endif
-
-		dspPrepareOutput();
+		else{
+			// transmit DSP
+		}
+		setTime(METRIC_DSP_TOTAL);
 		dspProcDone = 1;
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, 0);
 	}
 }
 
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc1){
-
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9,dspRingHalf);
+		dspRingHalf = HALF_UPPER;
+		dspProcDone = 0;
+		elseDone = 0;
 }
 
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc1){
-
-
-
-}
-
-void HAL_TIM_PWM_PulseFinishedHalfCpltCallback(TIM_HandleTypeDef *htim1){
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9,dspRingHalf);
-	dspRingHalf = HALF_UPPER;
-	dspProcDone = 0;
-
-	elseDone = 0;
-};
-
-
-void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim1){
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9,dspRingHalf);
 		dspRingHalf = HALF_LOWER;
 		dspProcDone = 0;
 		elseDone = 0;
+}
+
+void HAL_TIM_PWM_PulseFinishedHalfCpltCallback(TIM_HandleTypeDef *htim1){
+
+};
+
+
+void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim1){
 
 }

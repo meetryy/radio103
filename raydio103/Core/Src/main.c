@@ -26,6 +26,9 @@
 #include "dsp.h"
 #include "agc.h"
 #include "mcp23s17.h"
+#include "metrics.h"
+#include "tools.h"
+#include "ssd1309.h"
 
 /* USER CODE END Includes */
 
@@ -91,19 +94,62 @@ static void MX_I2C2_Init(void);
 #include "si5351.h"
 #include "encoder.h"
 #include "fft.h"
-
+#include "radio.h"
 int time1 = 3000;
 
 bool elseDone = 0;
+
+
+/*
+ *
+	  for (int i=0; i<8; i++){
+		  ssd1309Update();
+		  HAL_Delay(4);
+	  }
+	  HAL_Delay(30);
+ */
 void everythingElse(void){
 
 
 
-
-
 	if (!elseDone){
-	char str[64] = "hello!\n";
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
+		ssd1309PageUpdRoutine();
+		elseDone = 1;
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
+	}
 
+	//char str[64] = "hello!\r\n";
+/*
+		 int adc_inj = HAL_ADCEx_InjectedGetValue(&hadc1, ADC_INJECTED_RANK_1);
+		if (HAL_GetTick() >= (time1 + 1000)){
+			uint8_t str[16] = "";
+			uint32_t dspLoadTicks = metrics.metric[METRIC_DSP_START].time - metrics.metric[METRIC_DSP_TOTAL].time;
+			uint32_t dspLoadTicksPerc = dspLoadTicks * 100 / DSP_BLOCK_SIZE;
+			//debugPrint("%u t = %u%%", dspLoadTicks, dspLoadTicksPerc);
+
+			debugPrint("%u %03u %03u %03u %03u %03u %03u %03u %03u%%", adc_inj,
+																metrics.metric[0].time - metrics.metric[1].time,
+																metrics.metric[1].time - metrics.metric[2].time,
+																metrics.metric[2].time - metrics.metric[3].time,
+																metrics.metric[3].time - metrics.metric[4].time,
+																metrics.metric[4].time - metrics.metric[5].time,
+																metrics.metric[5].time - metrics.metric[6].time,
+																metrics.metric[6].time - metrics.metric[7].time,
+																((metrics.metric[0].time - metrics.metric[7].time)*100/DSP_BLOCK_SIZE)
+
+
+		);
+
+
+
+
+			time1 = HAL_GetTick();
+
+
+		}
+		*/
+	/*
 	uint8_t	exRead = read8(1);
 	uint8_t encBtn = (exRead >> 2) & 0x01;
 
@@ -113,6 +159,7 @@ void everythingElse(void){
 	encInputProcess(0, encA, encB);
 	write8(0, 0x0ff * (encoder[0].phaseState >> 1));
 
+*/
 
 		//HAL_UART_Transmit_DMA(&huart1, str, sizeof(str)-1);
 	//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
@@ -132,15 +179,9 @@ void everythingElse(void){
 		// ST7920_Update();
 		//  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
 	 //ST7920_Update();
-	elseDone = 1;
 
 
-	}
 
-	if (HAL_GetTick() >= (time1 + 1000)){
-		time1 = HAL_GetTick();
-
-	}
 
 }
 
@@ -189,52 +230,27 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
-  HAL_Delay(1000);
-
-  HAL_GPIO_WritePin(PIN_LCD_CS_2_GPIO_Port, PIN_LCD_CS_2_Pin, GPIO_PIN_RESET);
-
-
-	ST7920_Init();
-	ST7920_GraphicMode(1);
-	ST7920_Clear();
-	//SetPixel(10, 10);
-
-	GLCD_Font_PrintNew(0, 0, "1425030", FONT_BIG);
-	GLCD_Font_PrintNew(69, 6, "5", FONT_MID);
-	gfxDrawSmeter(78);
-	GLCD_Font_PrintNew(80, 0, "USB", FONT_REGULAR);
-	GLCD_Font_PrintNew(98, 0, "12:35", FONT_REGULAR);
-	GLCD_Font_PrintNew(80, 10, "2K7", FONT_REGULAR);
-	GLCD_Font_PrintNew(104, 10, "10.7", FONT_REGULAR);
-	GLCD_Font_PrintNew(80, 20, "S+40", FONT_REGULAR);
-	GLCD_Font_PrintNew(104, 20, "RX-A", FONT_REGULAR);
-
-	GLCD_Font_PrintNew(1, 55, "MONITR", FONT_REGULAR);
-	GLCD_Font_PrintNew(46, 55, "TONE", FONT_REGULAR);
-	GLCD_Font_PrintNew(92, 55, "TESTNG", FONT_REGULAR);
+  HAL_ADCEx_Calibration_Start(&hadc1);
+  HAL_Delay(100);
+  debugInit();
 
 
-
-	ST7920_Update();
-
-	HAL_Delay(10);
-
-
-  expanderInit();
-  HAL_Delay(10);
-
+  radio.txState = RX;
   dspInit();
   HAL_Delay(10);
 
   dspStart();
   time1=HAL_GetTick();
 
+  gfxDemoDraw();
+  ssd1309Init();
+
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
 
 	 dspProc();
 	 everythingElse();
@@ -303,6 +319,7 @@ static void MX_ADC1_Init(void)
   /* USER CODE END ADC1_Init 0 */
 
   ADC_ChannelConfTypeDef sConfig = {0};
+  ADC_InjectionConfTypeDef sConfigInjected = {0};
 
   /* USER CODE BEGIN ADC1_Init 1 */
 
@@ -337,6 +354,30 @@ static void MX_ADC1_Init(void)
   sConfig.Channel = ADC_CHANNEL_1;
   sConfig.Rank = ADC_REGULAR_RANK_2;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Injected Channel
+  */
+  sConfigInjected.InjectedChannel = ADC_CHANNEL_6;
+  sConfigInjected.InjectedRank = ADC_INJECTED_RANK_1;
+  sConfigInjected.InjectedNbrOfConversion = 2;
+  sConfigInjected.InjectedSamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  sConfigInjected.ExternalTrigInjecConv = ADC_INJECTED_SOFTWARE_START;
+  sConfigInjected.AutoInjectedConv = ENABLE;
+  sConfigInjected.InjectedDiscontinuousConvMode = DISABLE;
+  sConfigInjected.InjectedOffset = 0;
+  if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Injected Channel
+  */
+  sConfigInjected.InjectedChannel = ADC_CHANNEL_7;
+  sConfigInjected.InjectedRank = ADC_INJECTED_RANK_2;
+  if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK)
   {
     Error_Handler();
   }
@@ -448,9 +489,9 @@ static void MX_SPI1_Init(void)
   hspi1.Init.Direction = SPI_DIRECTION_2LINES;
   hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi1.Init.CLKPhase = SPI_PHASE_2EDGE;
+  hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -699,10 +740,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(LED_BUILTIN_GPIO_Port, LED_BUILTIN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, PIN_LCD_CS_Pin|PIN_LCD_DC_Pin|GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, PIN_LCD_CS_Pin|GPIO_PIN_15|GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, PIN_CS_EXT_Pin|PIN_LCD_CS_2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, PIN_CS_EXT_Pin|PIN_LCD_CS_2_Pin|PIN_LCD_DC_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : LED_BUILTIN_Pin */
   GPIO_InitStruct.Pin = LED_BUILTIN_Pin;
@@ -711,8 +752,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED_BUILTIN_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PIN_LCD_CS_Pin PIN_LCD_DC_Pin PB8 PB9 */
-  GPIO_InitStruct.Pin = PIN_LCD_CS_Pin|PIN_LCD_DC_Pin|GPIO_PIN_8|GPIO_PIN_9;
+  /*Configure GPIO pins : PIN_LCD_CS_Pin PB15 PB8 PB9 */
+  GPIO_InitStruct.Pin = PIN_LCD_CS_Pin|GPIO_PIN_15|GPIO_PIN_8|GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -731,6 +772,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(PIN_LCD_CS_2_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PIN_LCD_DC_Pin */
+  GPIO_InitStruct.Pin = PIN_LCD_DC_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(PIN_LCD_DC_GPIO_Port, &GPIO_InitStruct);
 
 }
 

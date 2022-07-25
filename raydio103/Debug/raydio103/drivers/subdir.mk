@@ -7,16 +7,19 @@
 C_SRCS += \
 ../raydio103/drivers/mcp23s17.c \
 ../raydio103/drivers/si5351.c \
+../raydio103/drivers/ssd1309.c \
 ../raydio103/drivers/st7920.c 
 
 OBJS += \
 ./raydio103/drivers/mcp23s17.o \
 ./raydio103/drivers/si5351.o \
+./raydio103/drivers/ssd1309.o \
 ./raydio103/drivers/st7920.o 
 
 C_DEPS += \
 ./raydio103/drivers/mcp23s17.d \
 ./raydio103/drivers/si5351.d \
+./raydio103/drivers/ssd1309.d \
 ./raydio103/drivers/st7920.d 
 
 
@@ -27,7 +30,7 @@ raydio103/drivers/%.o raydio103/drivers/%.su: ../raydio103/drivers/%.c raydio103
 clean: clean-raydio103-2f-drivers
 
 clean-raydio103-2f-drivers:
-	-$(RM) ./raydio103/drivers/mcp23s17.d ./raydio103/drivers/mcp23s17.o ./raydio103/drivers/mcp23s17.su ./raydio103/drivers/si5351.d ./raydio103/drivers/si5351.o ./raydio103/drivers/si5351.su ./raydio103/drivers/st7920.d ./raydio103/drivers/st7920.o ./raydio103/drivers/st7920.su
+	-$(RM) ./raydio103/drivers/mcp23s17.d ./raydio103/drivers/mcp23s17.o ./raydio103/drivers/mcp23s17.su ./raydio103/drivers/si5351.d ./raydio103/drivers/si5351.o ./raydio103/drivers/si5351.su ./raydio103/drivers/ssd1309.d ./raydio103/drivers/ssd1309.o ./raydio103/drivers/ssd1309.su ./raydio103/drivers/st7920.d ./raydio103/drivers/st7920.o ./raydio103/drivers/st7920.su
 
 .PHONY: clean-raydio103-2f-drivers
 
