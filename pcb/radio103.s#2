@@ -22509,12 +22509,14 @@ Based on the following sources:
 <part name="D8" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="BAT54S" device="" package3d_urn="urn:adsk.eagle:package:43389/2"/>
 <part name="GND56" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R44" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2"/>
+<part name="IC9" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="78*" device="Z" package3d_urn="urn:adsk.eagle:package:16416/2" technology="L08"/>
+<part name="IC10" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="78*" device="Z" package3d_urn="urn:adsk.eagle:package:16416/2" technology="L05"/>
 </parts>
 <sheets>
 <sheet>
 <description>cpu</description>
 <plain>
-<text x="-83.82" y="99.06" size="1.778" layer="91">SWR FWD?</text>
+<text x="-69.85" y="97.79" size="1.778" layer="97" rot="R90">SWR FWD?</text>
 </plain>
 <instances>
 <instance part="U$1" gate="G$1" x="50.8" y="128.27" smashed="yes"/>
@@ -24411,6 +24413,7 @@ Based on the following sources:
 <sheet>
 <description>power</description>
 <plain>
+<text x="38.1" y="-77.47" size="1.778" layer="97">78M08 DPAK?</text>
 </plain>
 <instances>
 <instance part="U$3" gate="G$1" x="20.32" y="20.32" smashed="yes">
@@ -24457,6 +24460,14 @@ Based on the following sources:
 </instance>
 <instance part="GND29" gate="1" x="77.47" y="-30.48" smashed="yes">
 <attribute name="VALUE" x="74.93" y="-33.02" size="1.778" layer="96"/>
+</instance>
+<instance part="IC9" gate="A1" x="25.4" y="-63.5" smashed="yes">
+<attribute name="NAME" x="17.78" y="-57.785" size="1.778" layer="95"/>
+<attribute name="VALUE" x="17.78" y="-60.325" size="1.778" layer="96"/>
+</instance>
+<instance part="IC10" gate="A1" x="25.4" y="-86.36" smashed="yes">
+<attribute name="NAME" x="17.78" y="-80.645" size="1.778" layer="95"/>
+<attribute name="VALUE" x="17.78" y="-83.185" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>

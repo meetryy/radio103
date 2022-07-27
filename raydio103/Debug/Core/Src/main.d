@@ -27,22 +27,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- ../Core/Inc/global.h D:/raydio103/raydio103/raydio103/inc/dsp.h \
- D:/raydio103/raydio103/Drivers/CMSIS/DSP/Include/arm_math.h \
- ../Drivers/CMSIS/Include/core_cm4.h \
- D:/raydio103/raydio103/raydio103/inc/agc.h \
- D:/raydio103/raydio103/raydio103/inc/dsp.h \
- D:/raydio103/raydio103/raydio103/drivers/mcp23s17.h \
- D:/raydio103/raydio103/raydio103/inc/metrics.h \
- D:/raydio103/raydio103/raydio103/inc/tools.h \
- D:/raydio103/raydio103/raydio103/inc/global.h \
- D:/raydio103/raydio103/raydio103/drivers/ssd1309.h \
- D:/raydio103/raydio103/raydio103/drivers/st7920.h \
- D:/raydio103/raydio103/raydio103/drivers/si5351.h \
- D:/raydio103/raydio103/raydio103/inc/encoder.h \
- D:/raydio103/raydio103/raydio103/inc/fft.h \
- D:/raydio103/raydio103/raydio103/inc/radio.h
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -73,19 +58,3 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
-../Core/Inc/global.h:
-D:/raydio103/raydio103/raydio103/inc/dsp.h:
-D:/raydio103/raydio103/Drivers/CMSIS/DSP/Include/arm_math.h:
-../Drivers/CMSIS/Include/core_cm4.h:
-D:/raydio103/raydio103/raydio103/inc/agc.h:
-D:/raydio103/raydio103/raydio103/inc/dsp.h:
-D:/raydio103/raydio103/raydio103/drivers/mcp23s17.h:
-D:/raydio103/raydio103/raydio103/inc/metrics.h:
-D:/raydio103/raydio103/raydio103/inc/tools.h:
-D:/raydio103/raydio103/raydio103/inc/global.h:
-D:/raydio103/raydio103/raydio103/drivers/ssd1309.h:
-D:/raydio103/raydio103/raydio103/drivers/st7920.h:
-D:/raydio103/raydio103/raydio103/drivers/si5351.h:
-D:/raydio103/raydio103/raydio103/inc/encoder.h:
-D:/raydio103/raydio103/raydio103/inc/fft.h:
-D:/raydio103/raydio103/raydio103/inc/radio.h:

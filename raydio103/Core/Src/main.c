@@ -22,13 +22,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-#include "global.h"
-#include "dsp.h"
-#include "agc.h"
-#include "mcp23s17.h"
-#include "metrics.h"
-#include "tools.h"
-#include "ssd1309.h"
 
 /* USER CODE END Includes */
 
@@ -86,105 +79,6 @@ static void MX_I2C2_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-
-#include "dsp.h"
-
-#include <stdbool.h>
-#include "st7920.h"
-#include "si5351.h"
-#include "encoder.h"
-#include "fft.h"
-#include "radio.h"
-int time1 = 3000;
-
-bool elseDone = 0;
-
-
-/*
- *
-	  for (int i=0; i<8; i++){
-		  ssd1309Update();
-		  HAL_Delay(4);
-	  }
-	  HAL_Delay(30);
- */
-void everythingElse(void){
-
-
-
-	if (!elseDone){
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
-		ssd1309PageUpdRoutine();
-		elseDone = 1;
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
-	}
-
-	//char str[64] = "hello!\r\n";
-/*
-		 int adc_inj = HAL_ADCEx_InjectedGetValue(&hadc1, ADC_INJECTED_RANK_1);
-		if (HAL_GetTick() >= (time1 + 1000)){
-			uint8_t str[16] = "";
-			uint32_t dspLoadTicks = metrics.metric[METRIC_DSP_START].time - metrics.metric[METRIC_DSP_TOTAL].time;
-			uint32_t dspLoadTicksPerc = dspLoadTicks * 100 / DSP_BLOCK_SIZE;
-			//debugPrint("%u t = %u%%", dspLoadTicks, dspLoadTicksPerc);
-
-			debugPrint("%u %03u %03u %03u %03u %03u %03u %03u %03u%%", adc_inj,
-																metrics.metric[0].time - metrics.metric[1].time,
-																metrics.metric[1].time - metrics.metric[2].time,
-																metrics.metric[2].time - metrics.metric[3].time,
-																metrics.metric[3].time - metrics.metric[4].time,
-																metrics.metric[4].time - metrics.metric[5].time,
-																metrics.metric[5].time - metrics.metric[6].time,
-																metrics.metric[6].time - metrics.metric[7].time,
-																((metrics.metric[0].time - metrics.metric[7].time)*100/DSP_BLOCK_SIZE)
-
-
-		);
-
-
-
-
-			time1 = HAL_GetTick();
-
-
-		}
-		*/
-	/*
-	uint8_t	exRead = read8(1);
-	uint8_t encBtn = (exRead >> 2) & 0x01;
-
-	bool encA = (exRead >> 1) & 0x01;
-	bool encB = (exRead) & 0x01;
-
-	encInputProcess(0, encA, encB);
-	write8(0, 0x0ff * (encoder[0].phaseState >> 1));
-
-*/
-
-		//HAL_UART_Transmit_DMA(&huart1, str, sizeof(str)-1);
-	//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
-		//ST7920_Clear();
-/*
-	 for (int i=0; i<FFT_LEN/2; i++){
-		 ClearLine(i, 63, i, 0);
-		 int h = 63 - magnitudes[i];
-		 if (h < 0) h = 0;
-		 DrawLine(i, 63, i, h);
-	 }
-*/
-
-		//char txt[10];
-		//sprintf(txt,"%.3f", gaine);
-		//GLCD_Font_Print(1, 1, txt);
-		// ST7920_Update();
-		//  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
-	 //ST7920_Update();
-
-
-
-
-}
-
 /* USER CODE END 0 */
 
 /**
@@ -230,20 +124,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  HAL_ADCEx_Calibration_Start(&hadc1);
-  HAL_Delay(100);
-  debugInit();
 
-
-  radio.txState = RX;
-  dspInit();
-  HAL_Delay(10);
-
-  dspStart();
-  time1=HAL_GetTick();
-
-  gfxDemoDraw();
-  ssd1309Init();
+  schedInit();
 
   while (1)
   {
@@ -251,9 +133,8 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
+	  schedMainLoop();
 
-	 dspProc();
-	 everythingElse();
 
 
   }
@@ -491,7 +372,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;

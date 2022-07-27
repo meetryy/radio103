@@ -4,7 +4,7 @@
 #include "global.h"
 #include "main.h"
 #include "arm_math.h"
-#include "fft.h"
+//#include "fft.h"
 #include "agc.h"
 #include "fir.h"
 #include "audio.h"
@@ -15,7 +15,7 @@
 
 enum dspRingH {HALF_LOWER, HALF_UPPER};
 volatile bool dspRingHalf = HALF_LOWER;
-volatile bool dspProcDone = 0;
+bool dspProcDone = 0;
 
 uint16_t  inBuf[ADC_BUFFER_LEN] = {0};
 uint16_t  outBuf[ADC_BUFFER_LEN/ADC_DMA_CHANNELS] = {0};
@@ -96,7 +96,7 @@ void dspInit(void){
 	arm_fir_init_q31(&firInstanceQ, FIR_NUM_TAPS, firCoeffs, firStateQ, DSP_BLOCK_SIZE);
 #endif
 
-	 fftInit();
+	// fftInit();
 	//arm_fir_init_q31(&S1, NUM_TAPS, firCoeffs32, firState1, DSP_BLOCK_SIZE);
 	//arm_fir_init_q31(&S2, NUM_TAPS, firCoeffs32, firState2, DSP_BLOCK_SIZE);
 
@@ -134,7 +134,6 @@ float	adcToNormalized(uint16_t input){
 	return (float)((float)(input - ADC_HALF)/(float)ADC_MAX);
 }
 */
-
 
 q31_t dspInI[DSP_BLOCK_SIZE];
 q31_t dspInQ[DSP_BLOCK_SIZE];
@@ -215,10 +214,21 @@ void setTime(int i){
 	metrics.metric[i].time = __HAL_DMA_GET_COUNTER(&hdma_adc1);
 }
 
+arm_cfft_instance_q31 fftS;
+
+
+volatile q31_t fftBuf[FFT_LEN*2];
+volatile q31_t magnitudes[FFT_USEFUL_BINS];
+
+int dspStartTime = 0;
+int dspEndTime = 0;
+int dspLoad = 0;
+
 //__attribute__ ((section(".RamFunc")))
 void dspProc(void){
 	if (!dspProcDone){
 		setTime(METRIC_DSP_START);
+		dspStartTime = __HAL_DMA_GET_COUNTER(&hdma_adc1);
 		if(radio.txState == RX){
 		// receive
 
@@ -231,7 +241,15 @@ void dspProc(void){
 
 			// process FFT
 			//fftProcess(dspOut);
-			setTime(METRIC_DSP_FFT);
+			arm_copy_q31(inBuf, fftBuf, FFT_LEN*2);
+			arm_cfft_q31(&fftS, fftBuf, 0, 1);
+			setTime(METRIC_DSP_FFT1);
+
+			// FIXME do we need this one? arm_cmplx_mag_q31(pSrc, pDst, numSamples)
+			arm_cmplx_mag_q31(fftBuf, magnitudes, FFT_LEN);
+
+			arm_scale_q31(magnitudes, 2126008812, -24, magnitudes, FFT_LEN);
+			setTime(METRIC_DSP_FFT2);
 
 			q31_t processingBufferI[DSP_BLOCK_SIZE_DEC];
 			q31_t processingBufferQ[DSP_BLOCK_SIZE_DEC];
@@ -280,6 +298,8 @@ void dspProc(void){
 			// transmit DSP
 		}
 		setTime(METRIC_DSP_TOTAL);
+		dspEndTime = __HAL_DMA_GET_COUNTER(&hdma_adc1);
+		dspLoad = (dspStartTime - dspEndTime)*100/DSP_BLOCK_SIZE;
 		dspProcDone = 1;
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, 0);
 	}

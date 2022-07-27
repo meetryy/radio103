@@ -31,9 +31,8 @@ raydio103/src/dsp.o: ../raydio103/src/dsp.c ../Core/Inc/global.h \
  D:/raydio103/raydio103/raydio103/inc/dsp.h \
  D:/raydio103/raydio103/Drivers/CMSIS/DSP/Include/arm_math.h \
  ../Drivers/CMSIS/Include/core_cm4.h ../Core/Inc/main.h \
- D:/raydio103/raydio103/raydio103/inc/fft.h \
- D:/raydio103/raydio103/raydio103/inc/dsp.h \
  D:/raydio103/raydio103/raydio103/inc/agc.h \
+ D:/raydio103/raydio103/raydio103/inc/dsp.h \
  D:/raydio103/raydio103/raydio103/inc/fir.h \
  D:/raydio103/raydio103/raydio103/inc/audio.h \
  D:/raydio103/raydio103/raydio103/inc/radio.h \
@@ -72,9 +71,8 @@ D:/raydio103/raydio103/raydio103/inc/dsp.h:
 D:/raydio103/raydio103/Drivers/CMSIS/DSP/Include/arm_math.h:
 ../Drivers/CMSIS/Include/core_cm4.h:
 ../Core/Inc/main.h:
-D:/raydio103/raydio103/raydio103/inc/fft.h:
-D:/raydio103/raydio103/raydio103/inc/dsp.h:
 D:/raydio103/raydio103/raydio103/inc/agc.h:
+D:/raydio103/raydio103/raydio103/inc/dsp.h:
 D:/raydio103/raydio103/raydio103/inc/fir.h:
 D:/raydio103/raydio103/raydio103/inc/audio.h:
 D:/raydio103/raydio103/raydio103/inc/radio.h:

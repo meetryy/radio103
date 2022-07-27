@@ -11,8 +11,10 @@ C_SRCS += \
 ../raydio103/src/encoder.c \
 ../raydio103/src/fft.c \
 ../raydio103/src/fir.c \
+../raydio103/src/gfx.c \
 ../raydio103/src/metrics.c \
 ../raydio103/src/radio.c \
+../raydio103/src/schedule.c \
 ../raydio103/src/tools.c 
 
 OBJS += \
@@ -22,8 +24,10 @@ OBJS += \
 ./raydio103/src/encoder.o \
 ./raydio103/src/fft.o \
 ./raydio103/src/fir.o \
+./raydio103/src/gfx.o \
 ./raydio103/src/metrics.o \
 ./raydio103/src/radio.o \
+./raydio103/src/schedule.o \
 ./raydio103/src/tools.o 
 
 C_DEPS += \
@@ -33,8 +37,10 @@ C_DEPS += \
 ./raydio103/src/encoder.d \
 ./raydio103/src/fft.d \
 ./raydio103/src/fir.d \
+./raydio103/src/gfx.d \
 ./raydio103/src/metrics.d \
 ./raydio103/src/radio.d \
+./raydio103/src/schedule.d \
 ./raydio103/src/tools.d 
 
 
@@ -45,7 +51,7 @@ raydio103/src/%.o raydio103/src/%.su: ../raydio103/src/%.c raydio103/src/subdir.
 clean: clean-raydio103-2f-src
 
 clean-raydio103-2f-src:
-	-$(RM) ./raydio103/src/agc.d ./raydio103/src/agc.o ./raydio103/src/agc.su ./raydio103/src/audio.d ./raydio103/src/audio.o ./raydio103/src/audio.su ./raydio103/src/dsp.d ./raydio103/src/dsp.o ./raydio103/src/dsp.su ./raydio103/src/encoder.d ./raydio103/src/encoder.o ./raydio103/src/encoder.su ./raydio103/src/fft.d ./raydio103/src/fft.o ./raydio103/src/fft.su ./raydio103/src/fir.d ./raydio103/src/fir.o ./raydio103/src/fir.su ./raydio103/src/metrics.d ./raydio103/src/metrics.o ./raydio103/src/metrics.su ./raydio103/src/radio.d ./raydio103/src/radio.o ./raydio103/src/radio.su ./raydio103/src/tools.d ./raydio103/src/tools.o ./raydio103/src/tools.su
+	-$(RM) ./raydio103/src/agc.d ./raydio103/src/agc.o ./raydio103/src/agc.su ./raydio103/src/audio.d ./raydio103/src/audio.o ./raydio103/src/audio.su ./raydio103/src/dsp.d ./raydio103/src/dsp.o ./raydio103/src/dsp.su ./raydio103/src/encoder.d ./raydio103/src/encoder.o ./raydio103/src/encoder.su ./raydio103/src/fft.d ./raydio103/src/fft.o ./raydio103/src/fft.su ./raydio103/src/fir.d ./raydio103/src/fir.o ./raydio103/src/fir.su ./raydio103/src/gfx.d ./raydio103/src/gfx.o ./raydio103/src/gfx.su ./raydio103/src/metrics.d ./raydio103/src/metrics.o ./raydio103/src/metrics.su ./raydio103/src/radio.d ./raydio103/src/radio.o ./raydio103/src/radio.su ./raydio103/src/schedule.d ./raydio103/src/schedule.o ./raydio103/src/schedule.su ./raydio103/src/tools.d ./raydio103/src/tools.o ./raydio103/src/tools.su
 
 .PHONY: clean-raydio103-2f-src
 

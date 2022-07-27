@@ -147,14 +147,16 @@ void cmd_Vcomh(uint8_t value){
 	writeCmd(value);		// Default => 52 (0.78*VCC)
 }
 
-#include "st7920.h"
+#include "gfx.h"
 
 int currPage = 0;
-
+bool lcdUpdateAllowed = 0;
+bool lcdDmaDone = 1;
 
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi1){
 	displaySetCmd();
 	displayDeselect();
+	lcdDmaDone = 1;
 }
 
 /*
@@ -167,25 +169,31 @@ void HAL_SPI_TxRxHalfCpltCallback(SPI_HandleTypeDef *hspi1);
 
 void ssd1309PageUpdRoutine(void){
 	//ssd1309StartDMAPage(currPage);
+	if (lcdUpdateAllowed) {
+		// don't update LCD this iteration, let gfx driver update framebuffer
+		return;
+	}
+
 	cmd_PageStartAddress(currPage);
 	cmd_ColumnStartAddress(0);
 
-	displaySetData();
-	displaySelect();
+	if (lcdDmaDone){
+		displaySetData();
+		displaySelect();
+		lcdDmaDone = 0;
+		HAL_SPI_Transmit_DMA(DISP_SPI_HANDLE, &GLCD_Buf[128*currPage], SSD1309_COL);
 
-	HAL_SPI_Transmit_DMA(DISP_SPI_HANDLE, &GLCD_Buf[128*currPage], SSD1309_COL);
+		currPage++;
+			if (currPage > 7){
+				currPage = 0;
+				lcdUpdateAllowed = 1;
+			}
 
-	currPage++;
-	if (currPage > 7){
-		currPage = 0;
-		gfxDemoDraw();
 	}
+
+
+
 }
-
-void ssd1309StartDMAPage(int page){
-
-}
-
 
 
 void ssd1309Update(void){
@@ -206,6 +214,9 @@ void ssd1309Update(void){
 
 }
 
+#define	LCD_ROTATE_180	(0)
+#define	LCD_INVERT		(0)
+
 void ssd1309Init(void){
 	displayDeselect();
 	HAL_Delay(100);
@@ -216,14 +227,14 @@ void ssd1309Init(void){
 	cmd_DisplayOffset(0);				// Shift Mapping RAM Counter (0~63)
 	cmd_StartLine(0);					// Set Mapping RAM Display Start Line (0~63)
 	cmd_AddressingMode(0);				// Set Page Addressing Mode
-	cmd_SegmentRemap(false);			// standard segment mapping
-	cmd_ComRemap(true);				// standard col mapping
+	cmd_SegmentRemap(LCD_ROTATE_180);			// standard segment mapping
+	cmd_ComRemap(!LCD_ROTATE_180);				// standard col mapping
 	cmd_ComPins(1);						// default com pins
 	cmd_ContrastControl(10);			// Set SEG Output Current //Brightness
 	cmd_PrechargePeriod(0xF1);			// Set Pre-Charge as 16 Clocks & Discharge as 1 Clocks
 	cmd_Vcomh(55);						// Set VCOM Deselect Level //55
 	cmd_EntireDisplayON(false);			// Disable Entire Display On
-	cmd_InverseDisplay(false);			// Disable Inverse Display
+	cmd_InverseDisplay(LCD_INVERT);			// Disable Inverse Display
 	ssd1309Update();					// Clear Screen
 	cmd_DisplayOn(true);				// Display On
 }

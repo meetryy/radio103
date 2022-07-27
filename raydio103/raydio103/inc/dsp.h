@@ -1,6 +1,7 @@
 #ifndef INC_DSP_H_
 #define INC_DSP_H_
 
+#include <stdbool.h>
 #include <stdint.h>
 #include "stm32f1xx_hal.h"
 #include "arm_math.h"
@@ -51,5 +52,14 @@ extern q31_t dspInI[DSP_BLOCK_SIZE];
 extern q31_t dspInQ[DSP_BLOCK_SIZE];
 
 extern q31_t dspOut[DSP_BLOCK_SIZE];
+
+#define FFT_LEN			(256)
+#define FFT_USEFUL_BINS	(FFT_LEN/2)
+#define FFT_HZ_PER_BIN	(DSP_SAMPLING_FREQ/FFT_USEFUL_BINS)
+
+extern volatile q31_t magnitudes[FFT_USEFUL_BINS];
+
+extern int dspLoad;
+extern bool dspProcDone;
 
 #endif /* INC_DSP_H_ */

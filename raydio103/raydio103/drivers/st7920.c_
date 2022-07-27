@@ -1,0 +1,259 @@
+/*
+ * ST7920_SERIAL.c
+ *
+ *  Created on: 07-Jun-2019
+ *      Author: poe
+ *
+ *	Edit By	:		Liyanboy74
+ *	Date	:	21-July-2020
+ */
+
+#include "main.h"
+#include "st7920.h"
+
+
+#define CS_PIN 	GPIO_PIN_12
+#define CS_PORT GPIOA
+
+
+uint8_t Graphic_Check = 0;
+
+//GLCD Buf
+
+
+void delay_us(uint32_t Time_us)
+{
+	//uint16_t i;
+	while(Time_us--);//for(i=0;i<0xf;i++);
+}
+
+// A replacement for SPI_TRANSMIT
+
+//SPI_HandleTypeDef hspi1;
+
+void ST7920_SendCmd (uint8_t cmd)
+{
+
+	uint8_t data[3] = {0};
+	data[0] = 0xf8 + (0<<1);
+	data[1] = cmd & 0xf0;
+	data[2] = (cmd << 4) & 0xf0;
+
+
+	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);  // PUll the CS high
+		HAL_SPI_Transmit(&hspi1, (uint8_t*)&data, 3, 2);
+		//delay_us(50);
+	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);  // PUll the CS LOW
+
+}
+
+void ST7920_SendData (uint8_t data)
+{
+
+	uint8_t dat[3] = {0};
+	dat[0] = 0xf8+(1<<1);
+	dat[1] = data&0xf0;
+	dat[2] = (data<<4)&0xf0;
+
+
+	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);  // PUll the CS high
+		HAL_SPI_Transmit(&hspi1, (uint8_t*)&dat, 3, 2);
+	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);  // PUll the CS LOW
+}
+
+// switch to graphic mode or normal mode::: enable = 1 -> graphic mode enable = 0 -> normal mode
+
+void ST7920_GraphicMode (int enable)   // 1-enable, 0-disable
+{
+	if (enable == 1)
+	{
+		ST7920_SendCmd(0x30);  // 8 bit mode
+		HAL_Delay (1);
+		ST7920_SendCmd(0x34);  // switch to Extended instructions
+		HAL_Delay (1);
+		ST7920_SendCmd(0x36);  // enable graphics
+		HAL_Delay (1);
+		Graphic_Check = 1;  // update the variable
+	}
+
+	else if (enable == 0)
+	{
+		ST7920_SendCmd(0x30);  // 8 bit mode
+		HAL_Delay (1);
+		Graphic_Check = 0;  // update the variable
+	}
+}
+
+typedef int byte;
+
+void gotoXY(byte x, byte y)
+{
+  if(y>=32 && y<64) { y-=32; x+=8; } else
+  if(y>=64 && y<64+32) { y-=32; x+=0; } else
+  if(y>=64+32 && y<64+64) { y-=64; x+=8; }
+  ST7920_SendCmd(0x80 | y); // 6-bit (0..63)
+  ST7920_SendCmd(0x80 | x); // 4-bit (0..15)
+}
+
+void ST7920_DrawBitmap(const unsigned char* graphic, bool half)
+{
+
+	uint8_t x, y;
+
+	uint16_t Index=0;
+	uint8_t Temp,Db;
+	//int Ystart = 0+half*64;
+	//int Yend = 64+half*64;
+
+
+
+	for(y=0;y<60;y++)
+	{
+		for(x=0;x<8;x++)
+		{
+			if(y<32)//Up
+			{
+				ST7920_SendCmd(0x80 | y);										//Y(0-31)
+				ST7920_SendCmd(0x80 | x);										//X(0-8)
+			}
+			else
+			{
+				ST7920_SendCmd(0x80 | y-32);//Y(0-31)
+				ST7920_SendCmd(0x88 | x);//X(0-8)
+			}
+
+			Index=((y/8)*128)+(x*16);
+			Db=y%8;
+
+			Temp=	(((graphic[Index+0]>>Db)&0x01)<<7)|
+						(((graphic[Index+1]>>Db)&0x01)<<6)|
+						(((graphic[Index+2]>>Db)&0x01)<<5)|
+						(((graphic[Index+3]>>Db)&0x01)<<4)|
+						(((graphic[Index+4]>>Db)&0x01)<<3)|
+						(((graphic[Index+5]>>Db)&0x01)<<2)|
+						(((graphic[Index+6]>>Db)&0x01)<<1)|
+						(((graphic[Index+7]>>Db)&0x01)<<0);
+			ST7920_SendData(Temp);
+
+			Temp=	(((graphic[Index+8]>>Db)&0x01)<<7)|
+						(((graphic[Index+9]>>Db)&0x01)<<6)|
+						(((graphic[Index+10]>>Db)&0x01)<<5)|
+						(((graphic[Index+11]>>Db)&0x01)<<4)|
+						(((graphic[Index+12]>>Db)&0x01)<<3)|
+						(((graphic[Index+13]>>Db)&0x01)<<2)|
+						(((graphic[Index+14]>>Db)&0x01)<<1)|
+						(((graphic[Index+15]>>Db)&0x01)<<0);
+
+			ST7920_SendData(Temp);
+		}
+
+	}
+
+}
+
+//Clear GLCD Buf
+void GLCD_Buf_Clear(void)
+{
+	uint16_t i;
+	for(i=0;i<1024;i++)GLCD_Buf[i]=0;
+}
+
+#include <stdbool.h>
+bool lastHalf;
+// Update the display with the selected graphics
+void ST7920_Update(void)
+{
+	ST7920_DrawBitmap(GLCD_Buf, 0);
+}
+
+
+
+void ST7920_Switch(bool i)
+{
+	ST7920_SendCmd(0x03);
+	ST7920_SendCmd(0x40 + 32 * i);
+}
+
+void ST7920_Clear()
+{
+	if (Graphic_Check == 1)  // if the graphic mode is set
+	{
+		uint8_t x, y;
+		for(y = 0; y < 64; y++)
+		{
+			if(y < 32)
+			{
+				ST7920_SendCmd(0x80 | y);
+				ST7920_SendCmd(0x80);
+			}
+			else
+			{
+				ST7920_SendCmd(0x80 | (y-32));
+				ST7920_SendCmd(0x88);
+			}
+			for(x = 0; x < 8; x++)
+			{
+				ST7920_SendData(0);
+				ST7920_SendData(0);
+			}
+		}
+		GLCD_Buf_Clear();
+	}
+
+	else
+	{
+		ST7920_SendCmd(0x01);   // clear the display using command
+		HAL_Delay(2); // delay >1.6 ms
+	}
+}
+
+#define LCD_CLS         0x01
+#define LCD_HOME        0x02
+#define LCD_ADDRINC     0x06
+#define LCD_DISPLAYON   0x0C
+#define LCD_DISPLAYOFF  0x08
+#define LCD_CURSORON    0x0E
+#define LCD_CURSORBLINK 0x0F
+#define LCD_BASIC       0x30
+#define LCD_EXTEND      0x34
+#define LCD_GFXMODE     0x36
+#define LCD_TXTMODE     0x34
+#define LCD_STANDBY     0x01
+#define LCD_SCROLL      0x03
+#define LCD_SCROLLADDR  0x40
+#define LCD_ADDR        0x80
+#define LCD_LINE0       0x80
+#define LCD_LINE1       0x90
+#define LCD_LINE2       0x88
+#define LCD_LINE3       0x98
+
+void ST7920_Init (void)
+{
+
+	HAL_Delay(50);   //wait for >40 ms
+
+	ST7920_SendCmd(LCD_BASIC);  // 8bit mode
+	HAL_Delay(1);
+
+	ST7920_SendCmd(LCD_BASIC);  // 8bit mode
+	HAL_Delay(1);
+
+	ST7920_SendCmd(LCD_CLS);  // D=0, C=0, B=0
+	HAL_Delay(1);
+
+	ST7920_SendCmd(LCD_ADDRINC);  // clear screen
+	HAL_Delay(1);
+
+
+	ST7920_SendCmd(LCD_DISPLAYON);  // cursor increment right no shift
+	//ST7920_SendCmd(0x07);
+	HAL_Delay(1);  // 1ms delay
+
+	ST7920_SendCmd(LCD_EXTEND);  // D=1, C=0, B=0
+    HAL_Delay(1);  // 1ms delay
+
+    ST7920_SendCmd(LCD_GFXMODE);  // D=1, C=0, B=0
+    HAL_Delay(1);  // 1ms dela
+
+
+}

@@ -116,9 +116,10 @@ int main(int argc, char *argv[])
             }
              std::cout << "0x" << std::setfill('0') << std::setw(4) << std::hex << colHex << ", " << std::tab;
              bytesTotal += 2;
+
         }
         charsTotal++;
-        std::cout << "// " << std::dec << (int)(cha+48) << " = '" << ((char)(cha + 48)) << "'" << std::endl;
+        std::cout << "// " << std::dec <<  (int)(cha+48) << " = '" << ((char)(cha + 48)) << "'" << std::endl;
     }
 
     std::cout << "};"<< std::endl;

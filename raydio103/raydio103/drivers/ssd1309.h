@@ -1,4 +1,6 @@
 #pragma once
+#include <stdbool.h>
+extern bool lcdUpdateAllowed;
 
 void ssd1309Init(void);
 void ssd1309Update(void);
