@@ -31,7 +31,8 @@ raydio103/src/fft.o: ../raydio103/src/fft.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  D:/raydio103/raydio103/Drivers/CMSIS/DSP/Include/arm_math.h \
- ../Drivers/CMSIS/Include/core_cm4.h ../Core/Inc/global.h
+ ../Drivers/CMSIS/Include/core_cm4.h ../Core/Inc/main.h \
+ ../Core/Inc/global.h
 D:/raydio103/raydio103/raydio103/inc/fft.h:
 D:/raydio103/raydio103/raydio103/inc/dsp.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -65,4 +66,5 @@ D:/raydio103/raydio103/raydio103/inc/dsp.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 D:/raydio103/raydio103/Drivers/CMSIS/DSP/Include/arm_math.h:
 ../Drivers/CMSIS/Include/core_cm4.h:
+../Core/Inc/main.h:
 ../Core/Inc/global.h:

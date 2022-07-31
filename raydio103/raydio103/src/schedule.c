@@ -11,6 +11,7 @@
 #include "global.h"
 #include "metrics.h"
 #include "ssd1309.h"
+#include "menu.h"
 
 void everythingElse(void);
 
@@ -28,6 +29,8 @@ void schedInit(void){
 	//gfxDemoDraw();
 	ssd1309Init();
 	gfxInit();
+
+
 }
 
 inline void schedMainLoop(void){
@@ -70,6 +73,8 @@ void fillDebugInfo(void){
 															);
 }
 
+uint32_t nextTime = 2000;
+
 void everythingElse(void){
 	//					VVV this makes else start only after DSP is done
 	if (!elseDone && dspProcDone){
@@ -80,14 +85,20 @@ void everythingElse(void){
 				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
 				*/
 
+			if (HAL_GetTick() >= nextTime){
+				menuMove(-1);
+				nextTime = HAL_GetTick() + 500;
+			}
+
 			setTime(METRIC_ELSE_START);
 			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
-				fillDebugInfo();
+				//fillDebugInfo();
 				ssd1309PageUpdRoutine();
 				gfxUpdateWhenPossible();
 			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
 			setTime(METRIC_ELSE_TOTAL);
 			lastElseTime = metrics.metric[METRIC_ELSE_START].time - metrics.metric[METRIC_ELSE_TOTAL].time;
+
 
 			elseDone = 1;
 	}

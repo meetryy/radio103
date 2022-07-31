@@ -231,7 +231,7 @@ void ssd1309Init(void){
 	cmd_ComRemap(!LCD_ROTATE_180);				// standard col mapping
 	cmd_ComPins(1);						// default com pins
 	cmd_ContrastControl(10);			// Set SEG Output Current //Brightness
-	cmd_PrechargePeriod(0xF1);			// Set Pre-Charge as 16 Clocks & Discharge as 1 Clocks
+	cmd_PrechargePeriod(0xF1);	 		// Set Pre-Charge as 16 Clocks & Discharge as 1 Clocks
 	cmd_Vcomh(55);						// Set VCOM Deselect Level //55
 	cmd_EntireDisplayON(false);			// Disable Entire Display On
 	cmd_InverseDisplay(LCD_INVERT);			// Disable Inverse Display

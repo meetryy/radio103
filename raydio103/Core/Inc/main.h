@@ -72,16 +72,13 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ADC_TIM_PERIOD (1024-1)
 #define LED_BUILTIN_Pin GPIO_PIN_13
 #define LED_BUILTIN_GPIO_Port GPIOC
 #define ADC_RX_I_Pin GPIO_PIN_0
 #define ADC_RX_I_GPIO_Port GPIOA
 #define ADC_RX_Q_Pin GPIO_PIN_1
 #define ADC_RX_Q_GPIO_Port GPIOA
-#define ADC_SWR_F_Pin GPIO_PIN_4
-#define ADC_SWR_F_GPIO_Port GPIOA
-#define ADC_SWR_R_Pin GPIO_PIN_5
-#define ADC_SWR_R_GPIO_Port GPIOA
 #define PIN_LCD_CS_Pin GPIO_PIN_0
 #define PIN_LCD_CS_GPIO_Port GPIOB
 #define TX_Q_PWM_Pin GPIO_PIN_8

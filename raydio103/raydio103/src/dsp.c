@@ -96,12 +96,6 @@ void dspInit(void){
 	arm_fir_init_q31(&firInstanceQ, FIR_NUM_TAPS, firCoeffs, firStateQ, DSP_BLOCK_SIZE);
 #endif
 
-	// fftInit();
-	//arm_fir_init_q31(&S1, NUM_TAPS, firCoeffs32, firState1, DSP_BLOCK_SIZE);
-	//arm_fir_init_q31(&S2, NUM_TAPS, firCoeffs32, firState2, DSP_BLOCK_SIZE);
-
-	//arm_fir_decimate_init_q31(&S1, NUM_TAPS, 2, firCoeffs32, firState1, DSP_BLOCK_SIZE);
-	//arm_fir_decimate_init_q31(&S1, NUM_TAPS, 2, firCoeffs32, firState1, DSP_BLOCK_SIZE);
 	 outStarted = 1;
 
 }
@@ -147,29 +141,14 @@ int end  = 0;
 
 __attribute__((optimize("unroll-loops"))) void dspPrepareInput(void) {
 	int adcBuffStart = ADC_BUFFER_LEN/2 * (dspRingHalf == HALF_LOWER);
-
-	//__attribute__(optimize("unroll-loops"))
-	 for (int i=0; i < DSP_BLOCK_SIZE; i++){
+	for (int i=0; i < DSP_BLOCK_SIZE; i++){
 		int ptr = i * ADC_DMA_CHANNELS + adcBuffStart;
 		dspInI[i] = adcToQ31(inBuf[ptr]);
 		dspInQ[i] = adcToQ31(inBuf[ptr + 1]);
 	}
+
 }
 
-/*
-void dspPrepareInputUnrolled(void){
-	int adcBuffStart = ADC_BUFFER_LEN/2 * (dspRingHalf == HALF_LOWER);
-
-	dspInI[0] = adcToQ31(inBuf[0 + adcBuffStart]);
-	dspInI[1] = adcToQ31(inBuf[0 + adcBuffStart]);
-	dspInI[2] = adcToQ31(inBuf[0 + adcBuffStart]);
-	dspInI[3] = adcToQ31(inBuf[0 + adcBuffStart]);
-	dspInI[4] = adcToQ31(inBuf[0 + adcBuffStart]);
-	dspInI[5] = adcToQ31(inBuf[0 + adcBuffStart]);
-	dspInI[6] = adcToQ31(inBuf[0 + adcBuffStart]);
-	dspInI[7] = adcToQ31(inBuf[0 + adcBuffStart]);
-}
-*/
 
 __attribute__((optimize("unroll-loops"))) void dspPrepareOutput(void){
 
@@ -201,16 +180,11 @@ float Xinc = (LOfreq/(float)DSP_SAMPLING_FREQ)*4.0f*M_PI;
 #endif
 
 uint32_t getTimeDiff(void){
-	//static uint32_t lastTime;
 	uint32_t time = __HAL_DMA_GET_COUNTER(&hdma_adc1);
-
-	//uint32_t r =  (lastTime - time);
-	//lastTime = time;
 	return time;
 }
 
 void setTime(int i){
-	//metricsSet(i, __HAL_DMA_GET_COUNTER(&hdma_adc1));
 	metrics.metric[i].time = __HAL_DMA_GET_COUNTER(&hdma_adc1);
 }
 
@@ -237,18 +211,24 @@ void dspProc(void){
 			// fill dspInI[], dspInQ
 			dspPrepareInput();
 
+			//arm_copy_q31(dspInI, dspOut, DSP_BLOCK_SIZE);
+
+			// fill outBuf with dspOut
+			dspPrepareOutput();
+/*
 			setTime(METRIC_DSP_PREP_IN);
 
 			// process FFT
 			//fftProcess(dspOut);
-			arm_copy_q31(inBuf, fftBuf, FFT_LEN*2);
-			arm_cfft_q31(&fftS, fftBuf, 0, 1);
+			//arm_copy_q31(inBuf, fftBuf, FFT_LEN*2);
+			//arm_cfft_q31(&fftS, fftBuf, 0, 1);
 			setTime(METRIC_DSP_FFT1);
 
 			// FIXME do we need this one? arm_cmplx_mag_q31(pSrc, pDst, numSamples)
-			arm_cmplx_mag_q31(fftBuf, magnitudes, FFT_LEN);
+			//arm_cmplx_mag_q31(fftBuf, magnitudes, FFT_LEN); // output dormat is 2.30
 
-			arm_scale_q31(magnitudes, 2126008812, -24, magnitudes, FFT_LEN);
+			//arm_scale_q31(magnitudes, 2126008812, -24, magnitudes, FFT_LEN);
+			// fftMagnitudesdB[i] = 20*log10f(fftMagnitudes[i]);
 			setTime(METRIC_DSP_FFT2);
 
 			q31_t processingBufferI[DSP_BLOCK_SIZE_DEC];
@@ -269,21 +249,9 @@ void dspProc(void){
 			setTime(METRIC_DSP_AGC);
 			softClip(dspOut, dspOut, DSP_BLOCK_SIZE_DEC);
 			setTime(METRIC_DSP_CLIP);
-			/*
-			for (int z=0; z < DSP_BLOCK_SIZE_DEC; z++){
 
-				ssbLOgenX += Xinc;
+		//	arm_copy_q31(dspInI, dspOut, DSP_BLOCK_SIZE);
 
-				if (ssbLOgenX > ((float)M_PI*2.0f))
-					ssbLOgenX -= ((float)M_PI*2.0f);
-
-				float s = arm_sin_f32(ssbLOgenX);
-				dspOut[z] = FtoQ31(s);
-
-
-
-			}
-	*/
 
 		#ifndef DSP_DECIMATED_NO_INTERPOLATION
 			arm_fir_interpolate_q31(&firInstanceInter, processingBufferI, dspOut, DSP_BLOCK_SIZE_DEC);
@@ -291,7 +259,7 @@ void dspProc(void){
 
 			dspPrepareOutput();
 			setTime(METRIC_DSP_PREP_OUT);
-
+*/
 		}
 
 		else{

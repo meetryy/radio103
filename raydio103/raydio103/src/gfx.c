@@ -48,38 +48,16 @@ typedef struct {
 	const uint16_t* dataPtrLong;
 } fontInfo_t;
 
+
+
 const fontInfo_t fontInfo[FONT_NR] = {
-		// regular
-		{
-		.dataPtr = &font,
-		.dataPtrLong = 0,
-		.W = 5,
-		.H = 8,
-		.asciiShift = (32 * 5)
-		},
-
-		// big
-		{
-		.dataPtr = 0,
-		.dataPtrLong = &fontBig,
-		.W = 9,
-		.H = 16,
-		.asciiShift = (48 * 9)
-		},
-
-		// mid
-		{
-		.dataPtr =  0,
-		.dataPtrLong = &fontMid,
-		.W = 6,
-		.H = 11,
-		.asciiShift = (48 * 6)
-		}
-
+		{.dataPtr = &font,	.dataPtrLong = 0,			.W = 5,	.H = 8,		.asciiShift = (32 * 5)},	// regular
+		{.dataPtr = 0,		.dataPtrLong = &fontBig,	.W = 9,	.H = 16,	.asciiShift = (48 * 9)},	// big
+		{.dataPtr =  0,		.dataPtrLong = &fontMid,	.W = 6,	.H = 11,	.asciiShift = (48 * 6)}	// mid
 };
 
 void gfxDrawPoints(int pos){
-	//for (int i=0; i<6; i++){
+	if (pos < 6){
 		int shiftX = 8 + 10*pos;
 		int bitmaps[3] = {0x80, 0xC0, 0x80};
 
@@ -87,9 +65,7 @@ void gfxDrawPoints(int pos){
 			GLCD_Buf[j + (LCD_W) + shiftX] 		|= bitmaps[j] << 1;
 			GLCD_Buf[j + (LCD_W * 2) + shiftX] 	|= bitmaps[j] >> 7;
 		}
-
-	//}
-
+	}
 }
 
 const uint8_t smBitmap[] = {
@@ -203,8 +179,32 @@ void gfxDrawMarker(int pos){
 	}
 }
 
+void gfxDrawCategory(int cat, int catNum){
+
+	/*
+	 * uint8_t drawPos = 0;
+	for (int i = 0; i < (catNum-1); i++){
+		GLCD_Buf[drawPos + LCD_W * 7] |= 0x80;
+		drawPos += LCD_W / catNum;
+	}*/
+
+	if (cat < catNum){
+
+		uint8_t catW = LCD_W / catNum;
+		//uint8_t widgetStart = (LCD_W - catW * catNum) / 2;
+		uint8_t widgetStart = 2;
+		uint8_t catStart = catW * cat + 1;
+		uint8_t catEnd = catStart + catW - 2;
+		for (int i=0; i<LCD_W; i++){
+			if ((i % catW == 0) || ((i > catStart)  &&  (i < catEnd)))
+				GLCD_Buf[widgetStart + i + LCD_W * 7] |= 0x80;
+		}
+	}
+}
+
 int sm = 0;
 int marker = 0;
+int thiscat = 0;
 void gfxDemoDraw(void){
 
 		//for (int j = 0; j < 128; j++) {
@@ -224,9 +224,9 @@ void gfxDemoDraw(void){
 		GLCD_Font_PrintNew(80, 20, "S+40", FONT_REGULAR);
 		GLCD_Font_PrintNew(110, 20, "RXA", FONT_REGULAR);
 
-		GLCD_Font_PrintNew(1, 55, "MONITR", FONT_REGULAR);
-		GLCD_Font_PrintNew(46, 55, "TONE", FONT_REGULAR);
-		GLCD_Font_PrintNew(92, 55, "TESTNG", FONT_REGULAR);
+		GLCD_Font_PrintNew(LOWER_MENU_POS_X0, LOWER_MENU_POS_Y, "MONITR", FONT_REGULAR);
+		GLCD_Font_PrintNew(LOWER_MENU_POS_X1, LOWER_MENU_POS_Y, "TONE", FONT_REGULAR);
+		//GLCD_Font_PrintNew(92, 54, "TESTNG", FONT_REGULAR);
 
 		sprintf(txt, "%u", freqHz/10);
 		GLCD_Font_PrintNew(0, 0, txt, FONT_BIG);
@@ -237,6 +237,14 @@ void gfxDemoDraw(void){
 		GLCD_Font_PrintNew(70, 5, txt, FONT_MID);
 		freqHz++;
 
+		sprintf(txt, "%u", (uint32_t)HAL_GetTick());
+		GLCD_Font_PrintNew(LOWER_MENU_POS_X2, LOWER_MENU_POS_Y, txt, FONT_REGULAR);
+
+		uint32_t tim = ((HAL_GetTick() >> 8) & 0x01);
+		thiscat = thiscat + tim;
+		if (thiscat > 6)
+			thiscat = 0;
+		gfxDrawCategory(thiscat, 7);
 
 		gfxDrawPoints(1);
 		gfxDrawPoints(4);
@@ -312,6 +320,32 @@ void gfxDrawDebugInfo(void){
 
 }
 
+void gfxInvertPage(int page){
+	for (int i = 0; i < LCD_W; i++){
+		 GLCD_Buf[i + (LCD_W * page)] = ~ GLCD_Buf[i +  (LCD_W * page)];
+	}
+}
+
+#include "menu.h"
+// menu lines being filled outside
+void gfxDrawMenu(void){
+	//snprintf(MENU_MAX_LINE_LEN, menuLinesTxt[0], "FUCK");
+	menuFillLines(0);
+	GLCD_Font_PrintNew(0, 0, menuHeader, FONT_REGULAR);
+	gfxInvertPage(0);
+
+	for (int i=0; i<MENU_LINES; i++){
+		//snprintf(dbgText[i], 20, "%u", HAL_GetTick());
+		GLCD_Font_PrintNew(0, 9*i + 9, menuLinesTxt[i], FONT_REGULAR);
+	}
+
+	GLCD_Font_PrintNew(LOWER_MENU_POS_X0, LOWER_MENU_POS_Y, "SAVE", FONT_REGULAR);
+	GLCD_Font_PrintNew(LOWER_MENU_POS_X2, LOWER_MENU_POS_Y, "EXIT", FONT_REGULAR);
+
+}
+
+
+
 void gfxInit(void){
 	gfxClearBuffer();
 }
@@ -326,11 +360,20 @@ void gfxUpdateWhenPossible(void){
 	if (lcdUpdateAllowed){
 		setTime(METRIC_GFX_START);
 		gfxClearBuffer();
+		gfxDrawMenu();
 
-		gfxDemoDraw();
+		//gfxDemoDraw();
 
 		//gfxDrawDebugInfo();
 		lcdUpdateAllowed = 0;
 		setTime(METRIC_GFX_TOTAL);
 	}
 }
+
+// TODO: gfx add volume slider
+// TODO: gfx generic progressbar
+// TODO: gfx catgory indicator
+
+
+
+
