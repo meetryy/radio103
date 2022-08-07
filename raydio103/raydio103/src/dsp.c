@@ -198,9 +198,14 @@ int dspStartTime = 0;
 int dspEndTime = 0;
 int dspLoad = 0;
 
+uint32_t dspBlockCounter = 0;
+uint32_t dspLastBlock = 0;
+uint32_t dspBlockSkippedCounter = 0;
+
 //__attribute__ ((section(".RamFunc")))
 void dspProc(void){
 	if (!dspProcDone){
+		dspLastBlock = dspBlockCounter;
 		setTime(METRIC_DSP_START);
 		dspStartTime = __HAL_DMA_GET_COUNTER(&hdma_adc1);
 		if(radio.txState == RX){
@@ -215,13 +220,13 @@ void dspProc(void){
 
 			// fill outBuf with dspOut
 			dspPrepareOutput();
-/*
+
 			setTime(METRIC_DSP_PREP_IN);
 
 			// process FFT
 			//fftProcess(dspOut);
-			//arm_copy_q31(inBuf, fftBuf, FFT_LEN*2);
-			//arm_cfft_q31(&fftS, fftBuf, 0, 1);
+			arm_copy_q31(inBuf, fftBuf, FFT_LEN*2);
+			arm_cfft_q31(&fftS, fftBuf, 0, 1);
 			setTime(METRIC_DSP_FFT1);
 
 			// FIXME do we need this one? arm_cmplx_mag_q31(pSrc, pDst, numSamples)
@@ -245,7 +250,7 @@ void dspProc(void){
 		#endif
 
 			setTime(METRIC_DSP_FIR);
-			agcPrasolovFloat(dspOut, dspOut, DSP_BLOCK_SIZE_DEC);
+			//agcPrasolovFloat(dspOut, dspOut, DSP_BLOCK_SIZE_DEC);
 			setTime(METRIC_DSP_AGC);
 			softClip(dspOut, dspOut, DSP_BLOCK_SIZE_DEC);
 			setTime(METRIC_DSP_CLIP);
@@ -259,17 +264,24 @@ void dspProc(void){
 
 			dspPrepareOutput();
 			setTime(METRIC_DSP_PREP_OUT);
-*/
+
 		}
 
 		else{
 			// transmit DSP
 		}
+
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, 0);
+
+
 		setTime(METRIC_DSP_TOTAL);
 		dspEndTime = __HAL_DMA_GET_COUNTER(&hdma_adc1);
 		dspLoad = (dspStartTime - dspEndTime)*100/DSP_BLOCK_SIZE;
+
+		if (dspBlockCounter > (dspLastBlock))
+			dspBlockSkippedCounter++;
+
 		dspProcDone = 1;
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, 0);
 	}
 }
 
@@ -278,6 +290,7 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc1){
 		dspRingHalf = HALF_UPPER;
 		dspProcDone = 0;
 		elseDone = 0;
+		dspBlockCounter++;
 }
 
 
@@ -286,6 +299,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc1){
 		dspRingHalf = HALF_LOWER;
 		dspProcDone = 0;
 		elseDone = 0;
+		dspBlockCounter++;
 }
 
 void HAL_TIM_PWM_PulseFinishedHalfCpltCallback(TIM_HandleTypeDef *htim1){

@@ -54,6 +54,8 @@ extern TIM_HandleTypeDef htim3;
 extern DMA_HandleTypeDef hdma_tim1_ch1;
 
 extern UART_HandleTypeDef huart1;
+extern RTC_HandleTypeDef hrtc;
+extern CRC_HandleTypeDef hcrc;
 
 /* USER CODE END EC */
 
@@ -72,15 +74,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define ADC_TIM_PERIOD (1024-1)
+#define ADC_TIM_PERIOD (2048-1)
+#define ADC_TIM_PSC (2-1)
 #define LED_BUILTIN_Pin GPIO_PIN_13
 #define LED_BUILTIN_GPIO_Port GPIOC
 #define ADC_RX_I_Pin GPIO_PIN_0
 #define ADC_RX_I_GPIO_Port GPIOA
 #define ADC_RX_Q_Pin GPIO_PIN_1
 #define ADC_RX_Q_GPIO_Port GPIOA
-#define PIN_LCD_CS_Pin GPIO_PIN_0
-#define PIN_LCD_CS_GPIO_Port GPIOB
 #define TX_Q_PWM_Pin GPIO_PIN_8
 #define TX_Q_PWM_GPIO_Port GPIOA
 #define PIN_CS_EXT_Pin GPIO_PIN_9

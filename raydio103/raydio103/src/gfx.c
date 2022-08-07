@@ -46,14 +46,15 @@ typedef struct {
 	const int asciiShift;
 	const uint8_t* dataPtr;
 	const uint16_t* dataPtrLong;
+	const uint32_t	columnMask;
 } fontInfo_t;
 
 
 
 const fontInfo_t fontInfo[FONT_NR] = {
-		{.dataPtr = &font,	.dataPtrLong = 0,			.W = 5,	.H = 8,		.asciiShift = (32 * 5)},	// regular
-		{.dataPtr = 0,		.dataPtrLong = &fontBig,	.W = 9,	.H = 16,	.asciiShift = (48 * 9)},	// big
-		{.dataPtr =  0,		.dataPtrLong = &fontMid,	.W = 6,	.H = 11,	.asciiShift = (48 * 6)}	// mid
+		{.dataPtr = &font,	.dataPtrLong = 0,			.W = 5,	.H = 8,		.asciiShift = (32 * 5), .columnMask = 0xFF},	// regular
+		{.dataPtr = 0,		.dataPtrLong = &fontBig,	.W = 9,	.H = 16,	.asciiShift = (48 * 9), .columnMask = 0xFFFF},	// big
+		{.dataPtr =  0,		.dataPtrLong = &fontMid,	.W = 6,	.H = 11,	.asciiShift = (48 * 6), .columnMask = 0x7FF}	// mid
 };
 
 void gfxDrawPoints(int pos){
@@ -101,6 +102,7 @@ void gfxDrawSmeter(int percent){
 	int shiftY = y % 8;
 	uint32_t shiftedColumn = 0;
 	int takesLines = 2;
+	uint32_t columnMaskInv = 0x3F;
 
 	uint8_t bitmap = 0;
 	for(int i = 0; i < meterW; i++){
@@ -116,7 +118,9 @@ void gfxDrawSmeter(int percent){
 			shiftedColumn = bitmap << shiftY;
 
 			for (int li = 0; li < takesLines; li++){
-				 GLCD_Buf[i + (LCD_W * (li + line)) + shiftX] |= (shiftedColumn >> (8*li)) & 0xFF;
+				uint32_t bufIndex = i + (LCD_W * (li + line)) + shiftX;
+				GLCD_Buf[bufIndex] &= ~((columnMaskInv << shiftY) >> (8*li));
+				GLCD_Buf[bufIndex] |= (shiftedColumn >> (8*li)) & 0xFF;
 			}
 	}
 
@@ -135,6 +139,7 @@ float 	benchTimeUs = 0;
 int		demoFFTbins[128];
 
 #include "dsp.h"
+#include "rtc.h"
 
 void gfxDrawFFT(void){
 	uint8_t x = 0;
@@ -215,7 +220,7 @@ void gfxDemoDraw(void){
 		//GLCD_Font_PrintNew(69, 6, "5", FONT_MID);
 
 		GLCD_Font_PrintNew(80, 0, "USB", FONT_REGULAR);
-		GLCD_Font_PrintNew(98, 0, "12:35", FONT_REGULAR);
+		GLCD_Font_PrintNew(98, 0, rtcTimeString, FONT_REGULAR);
 		GLCD_Font_PrintNew(80, 10, "2K7", FONT_REGULAR);
 
 		sprintf(txt, "%u%%", dspLoad);
@@ -289,6 +294,7 @@ void GLCD_Font_PrintNew(uint8_t x, uint8_t y, char *String, int fontID){
 	int shiftY = y % 8;
 	int takesLines = fontInfo[fontID].H / 8 + (shiftY > 0);
 	uint32_t shiftedColumn = 0;
+	uint32_t columnMaskInv = fontInfo[fontID].columnMask;
 
 	int i;
 	while(*String)
@@ -300,9 +306,13 @@ void GLCD_Font_PrintNew(uint8_t x, uint8_t y, char *String, int fontID){
 			else
 				shiftedColumn = fontInfo[fontID].dataPtrLong[dataPointer + i] << shiftY;
 
-				for (int li = 0; li < takesLines; li++){
-					 GLCD_Buf[i + (charCount * fontWspace) + (LCD_W * (li + line)) + shiftX] |= (shiftedColumn >> (8*li)) & 0xFF;
-				}
+			for (int li = 0; li < takesLines; li++){
+				uint32_t bufIndex = i + (charCount * fontWspace) + (LCD_W * (li + line)) + shiftX;
+				// null old byte where char was
+				GLCD_Buf[bufIndex] &= ~((columnMaskInv << shiftY) >> (8*li));
+				// draw new char
+				GLCD_Buf[bufIndex] |= (shiftedColumn >> (8*li));
+			}
 		}
 
 		String++;
@@ -344,6 +354,20 @@ void gfxDrawMenu(void){
 
 }
 
+void gfxRLEtoFramebuffer(uint8_t* RLEdata){
+	uint32_t blockCounter = 0;
+	uint32_t maxBlocks = sizeof(splashRLEData)/sizeof(splashRLEData[0])/2;
+	uint32_t bufPtr = 0;
+	for (int block = 0; block < maxBlocks; block++){
+		blockCounter++;
+		uint8_t byteNum = splashRLEData[block * 2];
+		uint8_t byteVal = splashRLEData[block * 2 + 1];
+		for (int byteCnt = 0; byteCnt < byteNum; byteCnt++){
+			GLCD_Buf[bufPtr] = byteVal;
+			bufPtr++;
+		}
+	}
+}
 
 
 void gfxInit(void){
@@ -351,23 +375,26 @@ void gfxInit(void){
 }
 
 void gfxClearBuffer(void){
+	//memset((uint32_t*)GLCD_Buf, 0, sizeof(GLCD_Buf)/4);
 	memset(GLCD_Buf, 0, sizeof(GLCD_Buf));
 }
 
-#include "metrics.h"
+void gfxCanaryBuffer(){
+	//memset(GLCD_Buf, 0x55, sizeof(GLCD_Buf));
+	for (int i=0; i< (128*8);i+=2){
+		GLCD_Buf[i] = 0x55;
+		GLCD_Buf[i+1] = 0xAA;
+	}
+}
 
 void gfxUpdateWhenPossible(void){
-	if (lcdUpdateAllowed){
-		setTime(METRIC_GFX_START);
-		gfxClearBuffer();
-		gfxDrawMenu();
+		//gfxCanaryBuffer();
+		//gfxClearBuffer();
+		//gfxRLEtoFramebuffer(0);
 
+		//gfxDrawMenu();
 		//gfxDemoDraw();
-
-		//gfxDrawDebugInfo();
-		lcdUpdateAllowed = 0;
-		setTime(METRIC_GFX_TOTAL);
-	}
+		gfxDrawDebugInfo();
 }
 
 // TODO: gfx add volume slider

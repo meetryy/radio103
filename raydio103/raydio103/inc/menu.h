@@ -14,12 +14,12 @@ enum menuItems {MENU_FLOAT_DUMMY,
 				MENU_CW_SPEED, MENU_CW_TONE, MENU_CW_MODE, MENU_CW_SWAP, MENU_CW_WEIGHT,
 				MENU_DISP_BRIGHTNESS, DISP_ROTATE, DISP_INVERSE,
 				MENU_DSP_NR_LVL, MENU_DSP_MIC_GAIN, MENU_DSP_TX_LVL,
-				// MENU_SHOW_SPLASH, MENU_BTN0_ADC, /*...*/ MENU_BTN5_ADC,
-				// MENU_SWR_F_CALIB, MENU_SWR_R_CALIB, MENU_VIN_CALIB,
-				// MENU_SMETER_9_CALIB, MENU_SMETER_20_CLIB,
-				// MENU_FONT,
-				// MENU_RTC_H, MENU_RTC_M,
-				//
+				MENU_SHOW_SPLASH,
+				MENU_BTN0_ADC, MENU_BTN1_ADC, MENU_BTN2_ADC, MENU_BTN3_ADC, MENU_BTN4_ADC, MENU_BTN5_ADC,
+				MENU_SWR_F_CALIB, MENU_SWR_R_CALIB, MENU_VIN_CALIB,
+				MENU_SMETER_9_CALIB, MENU_SMETER_20_CLIB,
+				MENU_FONT,
+				MENU_RTC_H, MENU_RTC_M,
 				MENU_CLK_XTAL,
 				MENU_NR};
 
@@ -29,14 +29,26 @@ typedef struct {
 	   float f;
 	   bool b;
 	} data;
+
+	union {
+	   int* i;
+	   float* f;
+	   bool* b;
+	} dataPtr;
+
 	uint8_t dataType;
 
 	float min;
 	float max;
 	float step;
 
-	char name[20];
-	void* funcOnUpdate;
+	const char name[20];
+	//void* funcOnUpdate;
+	union {
+		void(*i)(int);
+		void(*f)(float);
+		void(*b)(bool);
+	} funcOnUpdate;
 
 } menuItem_t;
 
@@ -48,5 +60,5 @@ void menuPreload(void);
 void menuOpen(void);
 void menuFillLines(uint8_t pos);
 void menuMove (int delta);
-void menuChange (int delta);
+void menuChangeData (int delta);
 void menuClose(void);

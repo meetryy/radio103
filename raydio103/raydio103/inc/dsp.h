@@ -11,21 +11,18 @@
 
 #define DSP_DECIMATED
 #define DSP_DECIMATION_RATE	(2)
-#define 	DSP_DECIMATED_NO_INTERPOLATION
+#define DSP_DECIMATED_NO_INTERPOLATION
 
-#define DSP_ADC_2IN
-
-#define	ADC_DMA_CHANNELS	(4)
-#define ADC_BUFFER_LEN		(1024)
-#define AUDIO_BUFFER_LEN	(ADC_BUFFER_LEN/ADC_DMA_CHANNELS) 			// buffer is [1][2][3][4][1][2][3][4]
-#define DSP_BLOCK_SIZE		(AUDIO_BUFFER_LEN/2)
-#define DSP_BLOCK_SIZE_DEC	(DSP_BLOCK_SIZE/2)
-#define	DSP_SAMPLING_FREQ	((128000000/(ADC_TIM_PERIOD + 1)/2)/ADC_DMA_CHANNELS) // /2 since buffer is I+Q
+#define	ADC_DMA_CHANNELS	(2)
+#define ADC_BUFFER_LEN		(512)
+#define AUDIO_BUFFER_LEN	(ADC_BUFFER_LEN / ADC_DMA_CHANNELS) 			// buffer is [1][2][3][4][1][2][3][4]
+#define DSP_BLOCK_SIZE		(AUDIO_BUFFER_LEN / 2)
+#define DSP_BLOCK_SIZE_DEC	(DSP_BLOCK_SIZE / DSP_DECIMATION_RATE)
+#define	DSP_SAMPLING_FREQ	((128000000/(ADC_TIM_PERIOD + 1)/(ADC_TIM_PSC + 1))/ADC_DMA_CHANNELS) // /2 since buffer is I+Q
 
 #define ADC_BITS			(12)
 #define ADC_MAX				(1<<ADC_BITS)
 #define ADC_HALF			(ADC_MAX/2)
-
 
 #if ((ADC_TIM_PERIOD + 1) % 2)
 	#error ADC_TIM_PERIOD is uneven!
@@ -70,5 +67,9 @@ extern volatile q31_t magnitudes[FFT_USEFUL_BINS];
 
 extern int dspLoad;
 extern bool dspProcDone;
+
+extern uint32_t	dspBlockCounter;
+extern uint32_t	dspLastBlock;
+extern uint32_t	dspBlockSkippedCounter;
 
 #endif /* INC_DSP_H_ */

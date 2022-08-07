@@ -1,6 +1,7 @@
 #pragma once
 #include <stdbool.h>
 #include "global.h"
+#include <stdint.h>
 
 #define DBG_UART
 
@@ -11,6 +12,8 @@ enum {COLOR_RED, COLOR_GREEN, COLOR_BLUE};
 
 //extern const UART_HandleTypeDef* dbgUartPtr;
 
+inline uint16_t sadd16(uint16_t a, uint16_t b);
+inline uint32_t sadd32(uint32_t a, uint32_t b);
 
 void dbgTx(char* text, int len);
 

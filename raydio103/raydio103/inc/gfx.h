@@ -17,3 +17,4 @@ extern volatile uint8_t 	GLCD_Buf[1024];
 extern char dbgText[7][21];
 void gfxInit(void);
 void gfxUpdateWhenPossible(void);
+void gfxRLEtoFramebuffer(uint8_t* RLEdata);

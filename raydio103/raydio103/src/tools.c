@@ -7,6 +7,13 @@
 #include <string.h>
 #include <stdint.h>
 
+inline uint16_t sadd16(uint16_t a, uint16_t b) {
+  return (a > 0xFFFF - b) ? 0xFFFF : a + b;
+}
+
+inline uint32_t sadd32(uint32_t a, uint32_t b) {
+  return (a > 0xFFFFFFFF - b) ? 0xFFFFFFFF : a + b;
+}
 
 char dbgOutBuf[256] = {0};
 volatile uint32_t lastTime = 0;

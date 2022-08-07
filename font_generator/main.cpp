@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
 
                 lastByteHex = 0xFF55;
 
-                byteCounter = 0;
+                byteCounter = 1;
                 blockCounter++;
             }
 
@@ -214,11 +214,13 @@ int main(int argc, char *argv[])
     RLEdata[blockCounter * 2] = byteCounter;
     RLEdata[blockCounter * 2 + 1] = lastByteHex;
 
-    std::cout << "max block " << blockCounter << std::endl;
+    //std::cout << "max block " << blockCounter << std::endl;
+    std::cout << std::setfill('0') << std::hex;
     for (int i=0; i<blockCounter; i++){
         //std::cout << "0x" << std::setfill('0') << /*std::setw(4) << */std::hex << RLEdata[blockCounter*2] << ", " << std::tab;
-        std::cout << RLEdata[i*2] << "," <<std::tab;
-        std::cout << "0x" << std::setfill('0') << /*std::setw(4) << */std::hex << RLEdata[i*2 + 1] << ", // block " <<  std::dec << i  << std::endl;
+        std::cout << "0x" <<RLEdata[i*2] << "," <<std::tab;
+        std::cout << "0x" << std::setfill('0') << /*std::setw(4) << */std::hex << RLEdata[i*2 + 1] << ",";
+        if (i%5 ==0)   std::cout <<  std::endl;
     }
 
     std::cout << std::dec << "// total bytes: " <<  blockCounter*2 << " (compression ratio is " << 1.0f/((float)(blockCounter*2) / (float)1024) << ")" <<std::endl;

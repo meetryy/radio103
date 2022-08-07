@@ -12,6 +12,9 @@
 #include "metrics.h"
 #include "ssd1309.h"
 #include "menu.h"
+#include "rtc.h"
+#include "eeprom.h"
+#include "adc.h"
 
 void everythingElse(void);
 
@@ -29,16 +32,25 @@ void schedInit(void){
 	//gfxDemoDraw();
 	ssd1309Init();
 	gfxInit();
+	//rtcSetTime(12, 30);
+	eepTest();
+	adcInjInit();
+ 	adcInjRead();
 
 
 }
 
-inline void schedMainLoop(void){
+void schedMainLoop(void){
 	 dspProc();
 	 everythingElse();
-
 }
 
+inline void schedRun(void){
+	schedInit();
+	while (1){
+		schedMainLoop();
+	}
+}
 
 bool elseDone = 0;
 
@@ -66,19 +78,27 @@ void fillDebugInfo(void){
 
 	snprintf(dbgText[2], 21,  "OUT DSP  GFX ELSE");
 	snprintf(dbgText[3], 21,  "%03u %03u%% %03u %03u%%",	metrics.metric[6].time - metrics.metric[7].time,
-															((metrics.metric[0].time - metrics.metric[7].time)*100/DSP_BLOCK_SIZE),
+															((metrics.metric[0].time - metrics.metric[7].time)*100/DSP_BLOCK_SIZE/2),
 															gfxTicks,
 															//lastElseTime*100/DSP_BLOCK_SIZE,
-															lastElseTime*100/DSP_BLOCK_SIZE
+															lastElseTime*100/DSP_BLOCK_SIZE/2
 															);
+
+	snprintf(dbgText[4], 21,  "%u / %u HZ", DSP_SAMPLING_FREQ, DSP_SAMPLING_FREQ/4);
+	snprintf(dbgText[5], 21,  "%u / %u", dspBlockCounter, dspBlockSkippedCounter);
+	snprintf(dbgText[6], 21,  "%u / %u", elseLastBlock, elseSkippedCounter);
+
 }
 
 uint32_t nextTime = 2000;
 
+uint32_t elseSkippedCounter = 0;
+uint32_t elseLastBlock = 0;
 void everythingElse(void){
-	//					VVV this makes else start only after DSP is done
+	//					VVV this makes errthang else start only after DSP is done
 	if (!elseDone && dspProcDone){
-/*
+		elseLastBlock = dspBlockCounter;
+		/*
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
 				for (int i=0; i<500; i++)
 					__NOP();
@@ -86,21 +106,36 @@ void everythingElse(void){
 				*/
 
 			if (HAL_GetTick() >= nextTime){
-				menuMove(-1);
+				//menuMove(-1);
+				//menuChangeData(rand() % 8 - 8);
 				nextTime = HAL_GetTick() + 500;
+				//rtcUpdateTimeString();
 			}
 
 			setTime(METRIC_ELSE_START);
 			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 1);
-				//fillDebugInfo();
+				fillDebugInfo();
 				ssd1309PageUpdRoutine();
-				gfxUpdateWhenPossible();
+
+				if (lcdUpdateAllowed){
+					setTime(METRIC_GFX_START);
+						gfxUpdateWhenPossible();
+					setTime(METRIC_GFX_TOTAL);
+				}
+
+
+				adcInjCycleUpdate();
 			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, 0);
 			setTime(METRIC_ELSE_TOTAL);
 			lastElseTime = metrics.metric[METRIC_ELSE_START].time - metrics.metric[METRIC_ELSE_TOTAL].time;
 
 
+
+			if (dspBlockCounter > elseLastBlock)
+				elseSkippedCounter++;
+
 			elseDone = 1;
+
 	}
 
 
