@@ -168,6 +168,7 @@ void HAL_SPI_TxRxHalfCpltCallback(SPI_HandleTypeDef *hspi1);
 */
 
 void ssd1309PageUpdRoutine(void){
+	/*
 	//ssd1309StartDMAPage(currPage);
 	if (lcdUpdateAllowed) {
 		// don't update LCD this iteration, let gfx driver update framebuffer
@@ -190,12 +191,13 @@ void ssd1309PageUpdRoutine(void){
 			}
 
 	}
+*/
 
-
+	HAL_SPI_Transmit_DMA(DISP_SPI_HANDLE, &GLCD_Buf[0], SSD1309_COL*8);
 
 }
 
-
+/*
 void ssd1309Update(void){
 	unsigned char i,j;
 	cmd_PageStartAddress(currPage);
@@ -213,6 +215,7 @@ void ssd1309Update(void){
 
 
 }
+*/
 
 #define	LCD_ROTATE_180	(0)
 #define	LCD_INVERT		(0)
@@ -235,6 +238,6 @@ void ssd1309Init(void){
 	cmd_Vcomh(55);						// Set VCOM Deselect Level //55
 	cmd_EntireDisplayON(false);			// Disable Entire Display On
 	cmd_InverseDisplay(LCD_INVERT);			// Disable Inverse Display
-	ssd1309Update();					// Clear Screen
+	//ssd1309Update();					// Clear Screen
 	cmd_DisplayOn(true);				// Display On
 }

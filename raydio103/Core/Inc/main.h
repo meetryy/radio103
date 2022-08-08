@@ -74,8 +74,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define ADC_TIM_PERIOD (2048-1)
-#define ADC_TIM_PSC (2-1)
+#define ADC_TIM_PERIOD (1024-1)
+#define ADC_TIM_PSC (1-1)
 #define LED_BUILTIN_Pin GPIO_PIN_13
 #define LED_BUILTIN_GPIO_Port GPIOC
 #define ADC_RX_I_Pin GPIO_PIN_0

@@ -561,13 +561,13 @@ Source: http://www.national.com/packaging/mkt/mtc16.pdf</description>
 <wire x1="-10.16" y1="3.048" x2="-7.112" y2="3.048" width="0.1524" layer="21"/>
 </package>
 <package name="SSD1309_2.42_OLED">
-<pad name="GND" x="7.62" y="41.148" drill="0.9" shape="square"/>
-<pad name="VCC" x="5.08" y="41.148" drill="0.9"/>
-<pad name="SCK" x="2.54" y="41.148" drill="0.9"/>
-<pad name="SDA" x="0" y="41.148" drill="0.9"/>
-<pad name="RES" x="-2.54" y="41.148" drill="0.9"/>
-<pad name="DC" x="-5.08" y="41.148" drill="0.9"/>
-<pad name="CS" x="-7.62" y="41.148" drill="0.9"/>
+<pad name="GND" x="7.62" y="42.226" drill="0.9" shape="square"/>
+<pad name="VCC" x="5.08" y="42.226" drill="0.9"/>
+<pad name="SCK" x="2.54" y="42.226" drill="0.9"/>
+<pad name="SDA" x="0" y="42.226" drill="0.9"/>
+<pad name="RES" x="-2.54" y="42.226" drill="0.9"/>
+<pad name="DC" x="-5.08" y="42.226" drill="0.9"/>
+<pad name="CS" x="-7.62" y="42.226" drill="0.9"/>
 <wire x1="35.5" y1="0" x2="35.5" y2="43.5" width="0.1524" layer="21"/>
 <wire x1="35.5" y1="43.5" x2="-35.5" y2="43.5" width="0.1524" layer="21"/>
 <wire x1="-35.5" y1="43.5" x2="-35.5" y2="0" width="0.1524" layer="21"/>
@@ -576,10 +576,14 @@ Source: http://www.national.com/packaging/mkt/mtc16.pdf</description>
 <circle x="-33.5" y="2" radius="1.25" width="0.1524" layer="21"/>
 <circle x="33.5" y="2" radius="1.25" width="0.1524" layer="21"/>
 <circle x="33.5" y="41.5" radius="1.25" width="0.1524" layer="21"/>
-<wire x1="-28.575" y1="37.719" x2="-28.575" y2="8.255" width="0.1524" layer="21"/>
-<wire x1="-28.575" y1="8.255" x2="28.575" y2="8.255" width="0.1524" layer="21"/>
-<wire x1="28.575" y1="8.255" x2="28.575" y2="37.719" width="0.1524" layer="21"/>
-<wire x1="28.575" y1="37.719" x2="-28.575" y2="37.719" width="0.1524" layer="21"/>
+<wire x1="-30.7" y1="40" x2="-30.7" y2="1.2" width="0.1524" layer="21"/>
+<wire x1="-30.7" y1="1.2" x2="30.7" y2="1.2" width="0.1524" layer="21"/>
+<wire x1="30.7" y1="1.2" x2="30.7" y2="40" width="0.1524" layer="21"/>
+<wire x1="30.7" y1="40" x2="-30.7" y2="40" width="0.1524" layer="21"/>
+<wire x1="-28.5" y1="38.5" x2="-28.5" y2="9" width="0.1524" layer="21"/>
+<wire x1="-28.5" y1="9" x2="28.5" y2="9" width="0.1524" layer="21"/>
+<wire x1="28.5" y1="9" x2="28.5" y2="38.5" width="0.1524" layer="21"/>
+<wire x1="28.5" y1="38.5" x2="-28.5" y2="38.5" width="0.1524" layer="21"/>
 </package>
 </packages>
 </library>
@@ -2933,7 +2937,7 @@ Based on the following sources:
 <attribute name="VALUE" x="28.575" y="17.78" size="1.27" layer="28" rot="MR0"/>
 </element>
 <element name="JP3" library="pinhead" library_urn="urn:adsk.eagle:library:325" package="1X02" package3d_urn="urn:adsk.eagle:package:22435/2" value="" x="33.02" y="32.385" smashed="yes" rot="MR0">
-<attribute name="NAME" x="35.6362" y="34.2138" size="1.27" layer="26" ratio="10" rot="MR0"/>
+<attribute name="NAME" x="35.0012" y="34.2138" size="1.27" layer="26" ratio="10" rot="MR0"/>
 <attribute name="POPULARITY" value="98" x="33.02" y="32.385" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="VALUE" x="35.56" y="29.21" size="1.27" layer="28" rot="MR0"/>
 </element>
@@ -3087,7 +3091,7 @@ Based on the following sources:
 <attribute name="SPICEPREFIX" value="R" x="21.59" y="-62.865" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="VALUE" x="22.225" y="-65.405" size="1.27" layer="28" rot="MR0"/>
 </element>
-<element name="U$4" library="ub0baa" package="SSD1309_2.42_OLED" value="SSD1309_2.4_OLED" x="36.195" y="15.875" smashed="yes" rot="MR0"/>
+<element name="U$4" library="ub0baa" package="SSD1309_2.42_OLED" value="SSD1309_2.4_OLED" x="35.56" y="53.975" smashed="yes" rot="MR180"/>
 <element name="BT1" library="SparkFun-Batteries" package="BATTCON_12MM" value="" x="137.795" y="15.875" smashed="yes" rot="MR0">
 <attribute name="NAME" x="137.795" y="9.398" size="0.6096" layer="26" font="vector" ratio="20" rot="MR180" align="bottom-center"/>
 <attribute name="PROD_ID" value="BATT-08044" x="137.795" y="15.875" size="1.778" layer="28" rot="MR0" display="off"/>
@@ -3137,14 +3141,14 @@ Based on the following sources:
 <attribute name="SPICEPREFIX" value="R" x="31.75" y="-88.9" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="VALUE" x="32.385" y="-91.44" size="1.27" layer="28" rot="MR0"/>
 </element>
-<element name="S2" library="switch-omron" library_urn="urn:adsk.eagle:library:377" package="B3F-10XX" package3d_urn="urn:adsk.eagle:package:27496/1" value="" x="27.305" y="5.715" smashed="yes">
-<attribute name="MF" value="" x="27.305" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="MPN" value="B3F-1000" x="27.305" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="24.765" y="9.525" size="1.27" layer="25"/>
-<attribute name="OC_FARNELL" value="176432" x="27.305" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="OC_NEWARK" value="36M3542" x="27.305" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="POPULARITY" value="72" x="27.305" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="24.765" y="0.635" size="1.27" layer="27"/>
+<element name="S2" library="switch-omron" library_urn="urn:adsk.eagle:library:377" package="B3F-10XX" package3d_urn="urn:adsk.eagle:package:27496/1" value="" x="37.465" y="5.715" smashed="yes">
+<attribute name="MF" value="" x="37.465" y="5.715" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="B3F-1000" x="37.465" y="5.715" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="34.925" y="9.525" size="1.27" layer="25"/>
+<attribute name="OC_FARNELL" value="176432" x="37.465" y="5.715" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="36M3542" x="37.465" y="5.715" size="1.778" layer="27" display="off"/>
+<attribute name="POPULARITY" value="72" x="37.465" y="5.715" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="34.925" y="0.635" size="1.27" layer="27"/>
 </element>
 <element name="R26" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="31.75" y="-104.775" smashed="yes" rot="MR0">
 <attribute name="NAME" x="32.385" y="-103.505" size="1.27" layer="26" rot="MR0"/>
@@ -3152,14 +3156,14 @@ Based on the following sources:
 <attribute name="SPICEPREFIX" value="R" x="41.91" y="-93.345" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="VALUE" x="32.385" y="-107.315" size="1.27" layer="28" rot="MR0"/>
 </element>
-<element name="S3" library="switch-omron" library_urn="urn:adsk.eagle:library:377" package="B3F-10XX" package3d_urn="urn:adsk.eagle:package:27496/1" value="" x="40.005" y="5.715" smashed="yes">
-<attribute name="MF" value="" x="40.005" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="MPN" value="B3F-1000" x="40.005" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="37.465" y="9.525" size="1.27" layer="25"/>
-<attribute name="OC_FARNELL" value="176432" x="40.005" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="OC_NEWARK" value="36M3542" x="40.005" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="POPULARITY" value="72" x="40.005" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="37.465" y="0.635" size="1.27" layer="27"/>
+<element name="S3" library="switch-omron" library_urn="urn:adsk.eagle:library:377" package="B3F-10XX" package3d_urn="urn:adsk.eagle:package:27496/1" value="" x="59.055" y="5.715" smashed="yes">
+<attribute name="MF" value="" x="59.055" y="5.715" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="B3F-1000" x="59.055" y="5.715" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="56.515" y="9.525" size="1.27" layer="25"/>
+<attribute name="OC_FARNELL" value="176432" x="59.055" y="5.715" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="36M3542" x="59.055" y="5.715" size="1.778" layer="27" display="off"/>
+<attribute name="POPULARITY" value="72" x="59.055" y="5.715" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="56.515" y="0.635" size="1.27" layer="27"/>
 </element>
 <element name="R27" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="31.75" y="-120.65" smashed="yes" rot="MR0">
 <attribute name="NAME" x="32.385" y="-119.38" size="1.27" layer="26" rot="MR0"/>
@@ -3167,14 +3171,14 @@ Based on the following sources:
 <attribute name="SPICEPREFIX" value="R" x="41.91" y="-109.22" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="VALUE" x="32.385" y="-123.19" size="1.27" layer="28" rot="MR0"/>
 </element>
-<element name="S4" library="switch-omron" library_urn="urn:adsk.eagle:library:377" package="B3F-10XX" package3d_urn="urn:adsk.eagle:package:27496/1" value="" x="52.705" y="5.715" smashed="yes">
-<attribute name="MF" value="" x="52.705" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="MPN" value="B3F-1000" x="52.705" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="50.165" y="9.525" size="1.27" layer="25"/>
-<attribute name="OC_FARNELL" value="176432" x="52.705" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="OC_NEWARK" value="36M3542" x="52.705" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="POPULARITY" value="72" x="52.705" y="5.715" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="50.165" y="0.635" size="1.27" layer="27"/>
+<element name="S4" library="switch-omron" library_urn="urn:adsk.eagle:library:377" package="B3F-10XX" package3d_urn="urn:adsk.eagle:package:27496/1" value="" x="83.82" y="6.35" smashed="yes">
+<attribute name="MF" value="" x="83.82" y="6.35" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="B3F-1000" x="83.82" y="6.35" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="81.28" y="10.16" size="1.27" layer="25"/>
+<attribute name="OC_FARNELL" value="176432" x="83.82" y="6.35" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="36M3542" x="83.82" y="6.35" size="1.778" layer="27" display="off"/>
+<attribute name="POPULARITY" value="72" x="83.82" y="6.35" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="81.28" y="1.27" size="1.27" layer="27"/>
 </element>
 <element name="R28" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="" x="31.75" y="-136.525" smashed="yes" rot="MR0">
 <attribute name="NAME" x="32.385" y="-135.255" size="1.27" layer="26" rot="MR0"/>
@@ -3565,28 +3569,20 @@ Based on the following sources:
 <wire x1="-9.16" y1="-6.985" x2="-9.16" y2="-10.16" width="0" layer="19" extent="16-16"/>
 <wire x1="12.6238" y1="3.4544" x2="-9.16" y2="-6.985" width="0" layer="19" extent="16-16"/>
 <wire x1="19.1262" y1="3.4544" x2="12.6238" y2="3.4544" width="0" layer="19" extent="1-1"/>
-<wire x1="24.0538" y1="3.4544" x2="19.1262" y2="3.4544" width="0" layer="19" extent="1-1"/>
-<wire x1="30.5562" y1="3.4544" x2="24.0538" y2="3.4544" width="0" layer="19" extent="1-1"/>
-<wire x1="36.7538" y1="3.4544" x2="30.5562" y2="3.4544" width="0" layer="19" extent="1-1"/>
-<wire x1="43.2562" y1="3.4544" x2="36.7538" y2="3.4544" width="0" layer="19" extent="1-1"/>
-<wire x1="49.4538" y1="3.4544" x2="43.2562" y2="3.4544" width="0" layer="19" extent="1-1"/>
-<wire x1="55.9562" y1="3.4544" x2="49.4538" y2="3.4544" width="0" layer="19" extent="1-1"/>
-<wire x1="32.385" y1="23.175" x2="30.5562" y2="3.4544" width="0" layer="19" extent="16-16"/>
-<wire x1="36.83" y1="24.705" x2="32.385" y2="23.175" width="0" layer="19" extent="16-16"/>
-<wire x1="39.37" y1="24.705" x2="36.83" y2="24.705" width="0" layer="19" extent="16-16"/>
+<wire x1="34.2138" y1="3.4544" x2="19.1262" y2="3.4544" width="0" layer="19" extent="1-1"/>
+<wire x1="40.7162" y1="3.4544" x2="34.2138" y2="3.4544" width="0" layer="19" extent="1-1"/>
+<wire x1="55.8038" y1="3.4544" x2="40.7162" y2="3.4544" width="0" layer="19" extent="1-1"/>
+<wire x1="62.3062" y1="3.4544" x2="55.8038" y2="3.4544" width="0" layer="19" extent="1-1"/>
+<wire x1="80.5688" y1="4.0894" x2="62.3062" y2="3.4544" width="0" layer="19" extent="1-1"/>
+<wire x1="87.0712" y1="4.0894" x2="80.5688" y2="4.0894" width="0" layer="19" extent="1-1"/>
+<wire x1="43.18" y1="11.749" x2="55.8038" y2="3.4544" width="0" layer="19" extent="1-1"/>
+<wire x1="39.37" y1="24.705" x2="43.18" y2="11.749" width="0" layer="19" extent="16-16"/>
+<wire x1="36.83" y1="24.705" x2="39.37" y2="24.705" width="0" layer="19" extent="16-16"/>
+<wire x1="32.385" y1="23.175" x2="36.83" y2="24.705" width="0" layer="19" extent="16-16"/>
 <wire x1="31.75" y1="32.385" x2="36.83" y2="24.705" width="0" layer="19" extent="16-16"/>
 <wire x1="38.1" y1="34.655" x2="31.75" y2="32.385" width="0" layer="19" extent="16-16"/>
 <wire x1="40.64" y1="34.655" x2="38.1" y2="34.655" width="0" layer="19" extent="16-16"/>
-<wire x1="28.575" y1="57.023" x2="38.1" y2="34.655" width="0" layer="19" extent="16-16"/>
-<wire x1="26.289" y1="84.836" x2="28.575" y2="57.023" width="0" layer="19" extent="1-1"/>
-<wire x1="26.289" y1="87.376" x2="26.289" y2="84.836" width="0" layer="19" extent="1-1"/>
-<wire x1="34.925" y1="85.09" x2="26.289" y2="84.836" width="0" layer="19" extent="1-1"/>
-<wire x1="37.236" y1="90.881" x2="34.925" y2="85.09" width="0" layer="19" extent="16-16"/>
-<wire x1="44.831" y1="87.376" x2="37.236" y2="90.881" width="0" layer="19" extent="16-16"/>
-<wire x1="44.831" y1="84.836" x2="44.831" y2="87.376" width="0" layer="19" extent="1-1"/>
-<wire x1="5.715" y1="77.47" x2="26.289" y2="84.836" width="0" layer="19" extent="1-1"/>
-<wire x1="3.175" y1="77.47" x2="5.715" y2="77.47" width="0" layer="19" extent="1-1"/>
-<wire x1="85.725" y1="18.535" x2="55.9562" y2="3.4544" width="0" layer="19" extent="1-1"/>
+<wire x1="85.725" y1="18.535" x2="87.0712" y2="4.0894" width="0" layer="19" extent="1-1"/>
 <wire x1="88.225" y1="33.035" x2="85.725" y2="18.535" width="0" layer="19" extent="1-1"/>
 <wire x1="85.725" y1="44.57" x2="88.225" y2="33.035" width="0" layer="19" extent="1-1"/>
 <wire x1="88.225" y1="59.07" x2="85.725" y2="44.57" width="0" layer="19" extent="1-1"/>
@@ -3612,6 +3608,14 @@ Based on the following sources:
 <wire x1="147.005" y1="67.31" x2="139.495" y2="72.035" width="0" layer="19" extent="16-16"/>
 <wire x1="146.955" y1="64.77" x2="147.005" y2="67.31" width="0" layer="19" extent="16-16"/>
 <wire x1="137.795" y1="15.875" x2="137.525" y2="58.42" width="0" layer="19" extent="16-16"/>
+<wire x1="44.831" y1="84.836" x2="40.64" y2="34.655" width="0" layer="19" extent="16-16"/>
+<wire x1="44.831" y1="87.376" x2="44.831" y2="84.836" width="0" layer="19" extent="1-1"/>
+<wire x1="37.236" y1="90.881" x2="44.831" y2="87.376" width="0" layer="19" extent="16-16"/>
+<wire x1="34.925" y1="85.09" x2="37.236" y2="90.881" width="0" layer="19" extent="16-16"/>
+<wire x1="26.289" y1="84.836" x2="34.925" y2="85.09" width="0" layer="19" extent="1-1"/>
+<wire x1="26.289" y1="87.376" x2="26.289" y2="84.836" width="0" layer="19" extent="1-1"/>
+<wire x1="5.715" y1="77.47" x2="26.289" y2="84.836" width="0" layer="19" extent="1-1"/>
+<wire x1="3.175" y1="77.47" x2="5.715" y2="77.47" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="3V3">
 <contactref element="U1" pad="16"/>
@@ -3648,8 +3652,8 @@ Based on the following sources:
 <wire x1="21.225" y1="-83.185" x2="30.8" y2="-88.9" width="0" layer="19" extent="16-16"/>
 <wire x1="20.64" y1="-74.93" x2="21.225" y2="-83.185" width="0" layer="19" extent="16-16"/>
 <wire x1="-11.16" y1="-10.16" x2="20.64" y2="-74.93" width="0" layer="19" extent="16-16"/>
-<wire x1="31.115" y1="57.023" x2="-11.16" y2="-10.16" width="0" layer="19" extent="16-16"/>
-<wire x1="8.255" y1="77.47" x2="31.115" y2="57.023" width="0" layer="19" extent="1-1"/>
+<wire x1="40.64" y1="11.749" x2="-11.16" y2="-10.16" width="0" layer="19" extent="16-16"/>
+<wire x1="8.255" y1="77.47" x2="40.64" y2="11.749" width="0" layer="19" extent="1-1"/>
 <wire x1="34.925" y1="90.881" x2="8.255" y2="77.47" width="0" layer="19" extent="16-16"/>
 <wire x1="34.925" y1="97.079" x2="34.925" y2="90.881" width="0" layer="19" extent="16-16"/>
 <wire x1="125.095" y1="83.0834" x2="34.925" y2="90.881" width="0" layer="19" extent="16-16"/>
@@ -3666,13 +3670,13 @@ Based on the following sources:
 </signal>
 <signal name="SCL">
 <contactref element="U$2" pad="SCL"/>
-<contactref element="U$1" pad="B8"/>
-<wire x1="41.275" y1="62.23" x2="131.445" y2="67.31" width="0" layer="19" extent="1-1"/>
+<contactref element="U$1" pad="B10"/>
+<wire x1="15.875" y1="77.47" x2="131.445" y2="67.31" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SDA">
 <contactref element="U$2" pad="SDA"/>
-<contactref element="U$1" pad="B9"/>
-<wire x1="43.815" y1="62.23" x2="128.905" y2="67.31" width="0" layer="19" extent="1-1"/>
+<contactref element="U$1" pad="B11"/>
+<wire x1="13.335" y1="77.47" x2="128.905" y2="67.31" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$1">
 <contactref element="U1" pad="10"/>
@@ -3958,20 +3962,22 @@ Based on the following sources:
 <contactref element="U$4" pad="SDA"/>
 <contactref element="U$1" pad="B5"/>
 <contactref element="IC12" pad="14"/>
-<wire x1="36.195" y1="57.023" x2="-21.59" y2="-331.5716" width="0" layer="19" extent="1-1"/>
-<wire x1="33.655" y1="62.23" x2="36.195" y2="57.023" width="0" layer="19" extent="1-1"/>
+<wire x1="35.56" y1="11.749" x2="-21.59" y2="-331.5716" width="0" layer="19" extent="1-1"/>
+<wire x1="33.655" y1="62.23" x2="35.56" y2="11.749" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="LCD_CS">
 <contactref element="U$4" pad="CS"/>
+<contactref element="U$1" pad="A12"/>
+<wire x1="27.94" y1="11.749" x2="23.495" y2="62.23" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SPI_SCK">
 <contactref element="U$4" pad="SCK"/>
 <contactref element="U$1" pad="B3"/>
 <contactref element="IC12" pad="11"/>
-<wire x1="33.655" y1="57.023" x2="-17.78" y2="-331.5716" width="0" layer="19" extent="1-1"/>
-<wire x1="28.575" y1="62.23" x2="33.655" y2="57.023" width="0" layer="19" extent="1-1"/>
+<wire x1="38.1" y1="11.749" x2="-17.78" y2="-331.5716" width="0" layer="19" extent="1-1"/>
+<wire x1="28.575" y1="62.23" x2="38.1" y2="11.749" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="ONBOARD_LED">
+<signal name="LED_BUILTIN">
 <contactref element="U$1" pad="C13"/>
 </signal>
 <signal name="VIN">
@@ -4000,15 +4006,15 @@ Based on the following sources:
 <wire x1="38.735" y1="77.47" x2="112.395" y2="76.9366" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="ADC_BTN">
-<contactref element="U$1" pad="A3"/>
 <contactref element="S1" pad="1"/>
 <contactref element="S1" pad="2"/>
 <contactref element="R25" pad="1"/>
 <contactref element="R26" pad="2"/>
-<wire x1="32.7" y1="-88.9" x2="30.8" y2="-104.775" width="0" layer="19" extent="1-1"/>
-<wire x1="12.6238" y1="7.9756" x2="32.7" y2="-88.9" width="0" layer="19" extent="1-1"/>
-<wire x1="19.1262" y1="7.9756" x2="12.6238" y2="7.9756" width="0" layer="19" extent="1-1"/>
-<wire x1="33.655" y1="77.47" x2="19.1262" y2="7.9756" width="0" layer="19" extent="1-1"/>
+<contactref element="U$1" pad="A2"/>
+<wire x1="19.1262" y1="7.9756" x2="36.195" y2="77.47" width="0" layer="19" extent="1-1"/>
+<wire x1="12.6238" y1="7.9756" x2="19.1262" y2="7.9756" width="0" layer="19" extent="1-1"/>
+<wire x1="32.7" y1="-88.9" x2="19.1262" y2="7.9756" width="0" layer="19" extent="16-16"/>
+<wire x1="30.8" y1="-104.775" x2="32.7" y2="-88.9" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="SPI_MISO">
 <contactref element="U$1" pad="B4"/>
@@ -4055,6 +4061,8 @@ Based on the following sources:
 </signal>
 <signal name="LCD_DC">
 <contactref element="U$4" pad="DC"/>
+<contactref element="U$1" pad="A15"/>
+<wire x1="30.48" y1="11.749" x2="26.035" y2="62.23" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="TX_I_PWM">
 <contactref element="U$1" pad="A8"/>
@@ -4062,16 +4070,10 @@ Based on the following sources:
 <signal name="TX_Q_PWM">
 <contactref element="U$1" pad="A11"/>
 </signal>
-<signal name="ADC_SWR_F">
-<contactref element="U$1" pad="A4"/>
-</signal>
-<signal name="ADC_SWR_R">
-<contactref element="U$1" pad="A5"/>
-</signal>
 <signal name="ADC_VIN">
-<contactref element="U$1" pad="A6"/>
 <contactref element="R33" pad="2"/>
-<wire x1="26.035" y1="77.47" x2="29.53" y2="-156.845" width="0" layer="19" extent="1-1"/>
+<contactref element="U$1" pad="A5"/>
+<wire x1="28.575" y1="77.47" x2="29.53" y2="-156.845" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="N$36">
 <contactref element="R19" pad="1"/>
@@ -4124,8 +4126,8 @@ Based on the following sources:
 <contactref element="R26" pad="1"/>
 <contactref element="R27" pad="2"/>
 <wire x1="32.7" y1="-104.775" x2="30.8" y2="-120.65" width="0" layer="19" extent="1-1"/>
-<wire x1="24.0538" y1="7.9756" x2="32.7" y2="-104.775" width="0" layer="19" extent="1-1"/>
-<wire x1="30.5562" y1="7.9756" x2="24.0538" y2="7.9756" width="0" layer="19" extent="1-1"/>
+<wire x1="34.2138" y1="7.9756" x2="32.7" y2="-104.775" width="0" layer="19" extent="1-1"/>
+<wire x1="40.7162" y1="7.9756" x2="34.2138" y2="7.9756" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$44">
 <contactref element="S3" pad="1"/>
@@ -4133,8 +4135,8 @@ Based on the following sources:
 <contactref element="R27" pad="1"/>
 <contactref element="R28" pad="2"/>
 <wire x1="32.7" y1="-120.65" x2="30.8" y2="-136.525" width="0" layer="19" extent="1-1"/>
-<wire x1="36.7538" y1="7.9756" x2="32.7" y2="-120.65" width="0" layer="19" extent="1-1"/>
-<wire x1="43.2562" y1="7.9756" x2="36.7538" y2="7.9756" width="0" layer="19" extent="1-1"/>
+<wire x1="55.8038" y1="7.9756" x2="32.7" y2="-120.65" width="0" layer="19" extent="1-1"/>
+<wire x1="62.3062" y1="7.9756" x2="55.8038" y2="7.9756" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$45">
 <contactref element="S4" pad="1"/>
@@ -4142,8 +4144,8 @@ Based on the following sources:
 <contactref element="R28" pad="1"/>
 <contactref element="R29" pad="2"/>
 <wire x1="30.8" y1="-140.97" x2="32.7" y2="-136.525" width="0" layer="19" extent="1-1"/>
-<wire x1="49.4538" y1="7.9756" x2="32.7" y2="-136.525" width="0" layer="19" extent="1-1"/>
-<wire x1="55.9562" y1="7.9756" x2="49.4538" y2="7.9756" width="0" layer="19" extent="1-1"/>
+<wire x1="80.5688" y1="8.6106" x2="32.7" y2="-136.525" width="0" layer="19" extent="1-1"/>
+<wire x1="87.0712" y1="8.6106" x2="80.5688" y2="8.6106" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$46">
 <contactref element="SW1" pad="D"/>
@@ -4333,6 +4335,17 @@ Based on the following sources:
 </signal>
 <signal name="EXP_CS">
 <contactref element="IC12" pad="12"/>
+<contactref element="U$1" pad="A9"/>
+<wire x1="15.875" y1="62.23" x2="-19.05" y2="-331.5716" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="ADC_SWR_F">
+<contactref element="U$1" pad="A3"/>
+</signal>
+<signal name="ADC_SWR_R">
+<contactref element="U$1" pad="A4"/>
+</signal>
+<signal name="ADC_RESERVED">
+<contactref element="U$1" pad="A6"/>
 </signal>
 </signals>
 <mfgpreviewcolors>

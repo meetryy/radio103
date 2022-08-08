@@ -267,7 +267,7 @@ void dspProc(void){
 
 		}
 
-		else{
+		else {
 			// transmit DSP
 		}
 

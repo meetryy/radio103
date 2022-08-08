@@ -388,13 +388,13 @@ void gfxCanaryBuffer(){
 }
 
 void gfxUpdateWhenPossible(void){
-		//gfxCanaryBuffer();
+		gfxCanaryBuffer();
 		//gfxClearBuffer();
 		//gfxRLEtoFramebuffer(0);
 
 		//gfxDrawMenu();
 		//gfxDemoDraw();
-		gfxDrawDebugInfo();
+		//gfxDrawDebugInfo();
 }
 
 // TODO: gfx add volume slider

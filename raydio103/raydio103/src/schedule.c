@@ -36,8 +36,6 @@ void schedInit(void){
 	eepTest();
 	adcInjInit();
  	adcInjRead();
-
-
 }
 
 void schedMainLoop(void){
@@ -142,7 +140,6 @@ void everythingElse(void){
 	// int adc_inj = HAL_ADCEx_InjectedGetValue(&hadc1, ADC_INJECTED_RANK_1);
 	// encInputProcess(0, encA, encB);
 }
-
 
 
 
